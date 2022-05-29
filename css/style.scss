@@ -6,7 +6,7 @@
 
 // $container-width: 600px;
 // $player-width: 350px;
-// $player-height: 100px;
+$player-height: 100px;
 
 #container {
     width: 800px;
@@ -16,8 +16,20 @@
 
 
 #another-player-container {
-    height: 100px;
+    height: $player-height;
+    font-size: 0;
+    line-height: 0;
     background-color: aquamarine;
+}
+
+.player {
+    display: inline-block;
+    width: 120px;
+    height: $player-height;
+    vertical-align: top;
+    font-size: 18px;
+    line-height: 24px;
+    background-color: azure;
 }
 
 #battle-field {
