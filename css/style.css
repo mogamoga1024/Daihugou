@@ -4,7 +4,7 @@
 }
 
 #container {
-  width: 700px;
+  width: 800px;
   margin: 30px auto 0;
   background-color: aliceblue;
 }
@@ -44,14 +44,244 @@
   background-color: lavender;
 }
 
-#player-container {
-  background-color: aquamarine;
+#player {
+  height: 250px;
+  background-color: azure;
 }
 
-#player {
-  width: 500px;
-  height: 120px;
+#player-card-list {
+  position: relative;
   margin: 0 auto;
-  background-color: azure;
+}
+
+#player-card1 {
+  position: absolute;
+  top: 0;
+  left: 0px;
+  width: 150px;
+}
+
+#player-card2 {
+  position: absolute;
+  top: 0;
+  left: 25px;
+  width: 150px;
+}
+
+#player-card3 {
+  position: absolute;
+  top: 0;
+  left: 50px;
+  width: 150px;
+}
+
+#player-card4 {
+  position: absolute;
+  top: 0;
+  left: 75px;
+  width: 150px;
+}
+
+#player-card5 {
+  position: absolute;
+  top: 0;
+  left: 100px;
+  width: 150px;
+}
+
+#player-card6 {
+  position: absolute;
+  top: 0;
+  left: 125px;
+  width: 150px;
+}
+
+#player-card7 {
+  position: absolute;
+  top: 0;
+  left: 150px;
+  width: 150px;
+}
+
+#player-card8 {
+  position: absolute;
+  top: 0;
+  left: 175px;
+  width: 150px;
+}
+
+#player-card9 {
+  position: absolute;
+  top: 0;
+  left: 200px;
+  width: 150px;
+}
+
+#player-card10 {
+  position: absolute;
+  top: 0;
+  left: 225px;
+  width: 150px;
+}
+
+#player-card11 {
+  position: absolute;
+  top: 0;
+  left: 250px;
+  width: 150px;
+}
+
+#player-card12 {
+  position: absolute;
+  top: 0;
+  left: 275px;
+  width: 150px;
+}
+
+#player-card13 {
+  position: absolute;
+  top: 0;
+  left: 300px;
+  width: 150px;
+}
+
+#player-card14 {
+  position: absolute;
+  top: 0;
+  left: 325px;
+  width: 150px;
+}
+
+#player-card15 {
+  position: absolute;
+  top: 0;
+  left: 350px;
+  width: 150px;
+}
+
+#player-card16 {
+  position: absolute;
+  top: 0;
+  left: 375px;
+  width: 150px;
+}
+
+#player-card17 {
+  position: absolute;
+  top: 0;
+  left: 400px;
+  width: 150px;
+}
+
+#player-card18 {
+  position: absolute;
+  top: 0;
+  left: 425px;
+  width: 150px;
+}
+
+#player-card19 {
+  position: absolute;
+  top: 0;
+  left: 450px;
+  width: 150px;
+}
+
+#player-card20 {
+  position: absolute;
+  top: 0;
+  left: 475px;
+  width: 150px;
+}
+
+#player-card21 {
+  position: absolute;
+  top: 0;
+  left: 500px;
+  width: 150px;
+}
+
+#player-card22 {
+  position: absolute;
+  top: 0;
+  left: 525px;
+  width: 150px;
+}
+
+#player-card23 {
+  position: absolute;
+  top: 0;
+  left: 550px;
+  width: 150px;
+}
+
+#player-card24 {
+  position: absolute;
+  top: 0;
+  left: 575px;
+  width: 150px;
+}
+
+#player-card25 {
+  position: absolute;
+  top: 0;
+  left: 600px;
+  width: 150px;
+}
+
+#player-card26 {
+  position: absolute;
+  top: 0;
+  left: 625px;
+  width: 150px;
+}
+
+#player-card27 {
+  position: absolute;
+  top: 0;
+  left: 650px;
+  width: 150px;
+}
+
+#player-card28 {
+  position: absolute;
+  top: 0;
+  left: 675px;
+  width: 150px;
+}
+
+#player-card29 {
+  position: absolute;
+  top: 0;
+  left: 700px;
+  width: 150px;
+}
+
+#player-card30 {
+  position: absolute;
+  top: 0;
+  left: 725px;
+  width: 150px;
+}
+
+#player-card31 {
+  position: absolute;
+  top: 0;
+  left: 750px;
+  width: 150px;
+}
+
+#player-card32 {
+  position: absolute;
+  top: 0;
+  left: 775px;
+  width: 150px;
+}
+
+#player-card33 {
+  position: absolute;
+  top: 0;
+  left: 800px;
+  width: 150px;
 }
 /*# sourceMappingURL=style.css.map */

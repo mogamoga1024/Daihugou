@@ -5,7 +5,7 @@
 }
 
 #container {
-    width: 700px;
+    width: 800px;
     margin: 30px auto 0;
     background-color: aliceblue;
 }
@@ -37,17 +37,32 @@
     background-color: lavender;
 }
 
-#player-container {
-    background-color: aquamarine;
-}
+// #player-container {
+//     background-color: aquamarine;
+// }
 
 #player {
-    width: 500px;
-    height: 120px;
-    margin: 0 auto;
+    // width: 500px;
+    height: 250px;
+    // margin: 0 auto;
     background-color: azure;
 }
 
 #player-card-list {
-    
+    position: relative;
+    margin: 0 auto;
 }
+
+// 仮に3人対戦があるとして
+// ひとりが54/3で18枚
+// 通常7渡し&Joker変換ありの7渡しで18+4+2で24枚
+// 実装上のケースでありえなくとも、24枚分のトランプの重なりが表現できるようにしている。
+@for $i from 1 through 33 {
+    #player-card#{$i} {
+        position: absolute;
+        top: 0;
+        left: 25px * ($i - 1);
+        width: 150px;
+    }
+}
+
