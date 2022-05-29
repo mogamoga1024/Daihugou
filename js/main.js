@@ -7,7 +7,10 @@ const App = {
                 new Player("CPU1"),
                 new Player("CPU2"),
                 new Player("CPU3"),
-            ]
+            ],
+            playerCardList: [
+
+            ],
         }
     },
     created() {
