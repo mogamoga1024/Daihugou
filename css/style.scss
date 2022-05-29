@@ -4,9 +4,7 @@
     padding: 0;
 }
 
-// $container-width: 600px;
-// $player-width: 350px;
-$player-height: 100px;
+$player-width: 120px;
 
 #container {
     width: 700px;
@@ -14,20 +12,26 @@ $player-height: 100px;
     background-color: aliceblue;
 }
 
-
 #another-player-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    height: $player-height;
     background-color: aquamarine;
 }
 
 .player {
-    width: 120px;
-    height: $player-height;
+    width: $player-width;
     background-color: azure;
+}
+
+.rank {
+    margin-left: 8px;
+}
+
+.card-back {
+    width: $player-width * 0.5;
+    vertical-align: text-bottom;
 }
 
 #battle-field {

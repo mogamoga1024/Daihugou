@@ -22,14 +22,21 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  height: 100px;
   background-color: aquamarine;
 }
 
 .player {
   width: 120px;
-  height: 100px;
   background-color: azure;
+}
+
+.rank {
+  margin-left: 8px;
+}
+
+.card-back {
+  width: 60px;
+  vertical-align: text-bottom;
 }
 
 #battle-field {
