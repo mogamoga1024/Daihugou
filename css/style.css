@@ -4,46 +4,23 @@
 }
 
 #container {
-  width: 600px;
+  width: 800px;
   margin: 30px auto 0;
   background-color: aliceblue;
 }
 
-#upper-side-player {
-  margin: 0 auto;
-  width: 350px;
-  height: 100px;
-  background-color: aquamarine;
-}
-
-#left-side-player {
-  display: inline-block;
-  vertical-align: top;
-  width: 100px;
-  height: 350px;
-  background-color: aquamarine;
-}
-
-#right-side-player {
-  display: inline-block;
-  vertical-align: top;
-  width: 100px;
-  height: 350px;
-  background-color: aquamarine;
-}
-
-#lower-side-player {
-  margin: 0 auto;
-  width: 350px;
+#another-player-container {
   height: 100px;
   background-color: aquamarine;
 }
 
 #battle-field {
-  display: inline-block;
-  vertical-align: top;
-  width: 400px;
-  height: 350px;
-  background-color: azure;
+  height: 200px;
+  background-color: coral;
+}
+
+#player-container {
+  height: 100px;
+  background-color: aquamarine;
 }
 /*# sourceMappingURL=style.css.map */
