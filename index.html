@@ -27,7 +27,7 @@
                     <span>{{player.name}}</span><span class="rank">{{player.rank}}</span>
                 </div>
                 <div id="player-card-list">
-                    <img v-for="i in 14" id="player-card" src="./assets/card/heart/card_heart_13.png">
+                    <img v-for="card in playerCardList" id="player-card" :src="card.imagePath">
                 </div>
             </div>
         </div>
@@ -35,6 +35,7 @@
     
     <script src="js/suit.js"></script>
     <script src="js/card.js"></script>
+    <script src="js/joker.js"></script>
     <script src="js/cardFactory.js"></script>
     <script src="js/rank.js"></script>
     <script src="js/player.js"></script>
