@@ -1,18 +1,16 @@
 
 class Card {
     suit = Suit.None;
-    number = 0;
+    numberName = 0;
     power = 0;
     imagePath = "";
+    name = "";
 
-    constructor(suit, number, power, imagePath) {
+    constructor(suit, numberName, name, power, imagePath) {
         this.suit = suit;
-        this.number = number;
+        this.numberName = numberName;
         this.power = power;
+        this.name = name;
         this.imagePath = imagePath;
-    }
-
-    toString() {
-
     }
 }
