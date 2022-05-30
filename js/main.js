@@ -7,16 +7,11 @@ const App = {
                 new Player("CPU1"),
                 new Player("CPU2"),
                 new Player("CPU3"),
-            ],
-            playerCardList: [
-                CardFactory.createCard("s1"),
-                CardFactory.createCard("s2"),
-                CardFactory.createCard("dT"),
-            ],
+            ]
         }
     },
     created() {
-
+        Dearler.dealCardList([this.player, ...this.anotherPlayerList]);
     },
     mounted() {
 
