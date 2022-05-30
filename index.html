@@ -17,7 +17,7 @@
                         <span>{{player.name}}</span><span class="rank">{{player.rank}}</span>
                     </div>
                     <div>
-                        <img class="card-back" src="./assets/card/card_back.png">×13
+                        <img class="card-back" src="./assets/card/card_back.png">×{{player.cardList.length}}
                     </div>
                 </div>
             </div>
@@ -27,16 +27,18 @@
                     <span>{{player.name}}</span><span class="rank">{{player.rank}}</span>
                 </div>
                 <div id="player-card-list">
-                    <img v-for="card in playerCardList" id="player-card" :src="card.imagePath">
+                    <img v-for="card in player.cardList" id="player-card" :src="card.imagePath">
                 </div>
             </div>
         </div>
     </div>
     
+    <script src="js/common.js"></script>
     <script src="js/suit.js"></script>
     <script src="js/card.js"></script>
     <script src="js/joker.js"></script>
     <script src="js/cardFactory.js"></script>
+    <script src="js/dealer.js"></script>
     <script src="js/rank.js"></script>
     <script src="js/player.js"></script>
     <script src="js/main.js"></script>
