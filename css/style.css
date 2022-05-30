@@ -1,0 +1,71 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#container {
+  width: 800px;
+  margin: 30px auto 0;
+  background-color: aliceblue;
+}
+
+#another-player-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: aquamarine;
+}
+
+.another-player {
+  width: 120px;
+  background-color: azure;
+}
+
+.rank {
+  margin-left: 8px;
+}
+
+.card-back {
+  width: 60px;
+  vertical-align: text-bottom;
+}
+
+#battle-field {
+  height: 200px;
+  background-color: lavender;
+}
+
+#player {
+  height: 250px;
+  background-color: azure;
+}
+
+#player-card-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#player-card {
+  width: 150px;
+  margin-left: -150px;
+}
+
+#player-card:first-child {
+  margin-left: 0;
+}
+/*# sourceMappingURL=style.css.map */
