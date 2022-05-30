@@ -25,6 +25,10 @@
             <div id="player">
                 <div>
                     <span>{{player.name}}</span><span class="rank">{{player.rank}}</span>
+                    <div id="player-button-container">
+                        <button>パス</button>
+                        <button>カードを出す</button>
+                    </div>
                 </div>
                 <div id="player-card-list">
                     <img v-for="card in player.cardList" id="player-card" :src="card.imagePath">
