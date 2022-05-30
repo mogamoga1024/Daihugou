@@ -1,0 +1,59 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    width: 800px;
+    margin: 30px auto 0;
+    background-color: aliceblue;
+}
+
+#another-player-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: aquamarine;
+}
+
+.another-player {
+    width: 120px;
+    background-color: azure;
+}
+
+.rank {
+    margin-left: 8px;
+}
+
+.card-back {
+    width: 60px;
+    vertical-align: text-bottom;
+}
+
+#battle-field {
+    height: 200px;
+    background-color: lavender;
+}
+
+#player {
+    height: 250px;
+    background-color: azure;
+}
+
+#player-card-list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#player-card {
+    width: 150px;
+    margin-left: -150px;
+}
+
+#player-card:first-child {
+    margin-left: 0;
+}
+
