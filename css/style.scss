@@ -79,6 +79,7 @@
         width: 150px;
         margin-left: -150px;
         z-index: $i;
+        -webkit-user-drag: none;
     }
 }
 
