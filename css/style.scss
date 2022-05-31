@@ -6,7 +6,7 @@
 
 #container {
     width: 800px;
-    margin: 30px auto 0;
+    margin: 20px auto 0;
     background-color: aliceblue;
 }
 
@@ -38,7 +38,7 @@
 }
 
 #player {
-    height: 300px;
+    height: 340px;
     background-color: azure;
 }
 
@@ -57,16 +57,32 @@
 
 #player-card-list {
     display: flex;
+    margin-top: 35px;
     justify-content: space-around;
     align-items: center;
+
+    .selected {
+        $translateY: translateY(-35px);
+
+        translate: $translateY;
+        -webkit-transform: $translateY;
+        -moz-transform: $translateY;
+        -ms-transform: $translateY;
+        -o-transform: $translateY;
+    }
 }
 
-#player-card {
-    width: 150px;
-    margin-left: -150px;
+// 四人対戦での最大カード枚数 + 7渡しの最大枚数
+// 14 + 4
+@for $i from 0 through 17 {
+    #player-card#{$i} {
+        width: 150px;
+        margin-left: -150px;
+        z-index: $i;
+    }
 }
 
-#player-card:first-child {
+#player-card0 {
     margin-left: 0;
 }
 

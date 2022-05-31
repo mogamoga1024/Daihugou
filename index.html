@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div id="player-card-list">
-                    <img v-for="card in player.cardList" id="player-card" :src="card.imagePath">
+                    <img v-for="(card, index) in player.cardList" :id="'player-card' + index" :src="card.imagePath">
                 </div>
             </div>
         </div>
