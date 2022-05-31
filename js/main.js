@@ -20,6 +20,11 @@ const App = {
         cardClick(index) {
             const card = this.player.cardList[index];
             card.isSelected = !card.isSelected;
+        },
+        selectedCardReset() {
+            this.player.cardList.forEach(c => {
+                c.isSelected = false;
+            });
         }
     }
 };
