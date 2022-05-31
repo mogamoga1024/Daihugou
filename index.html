@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div id="battle-field"></div>
-            <div id="player">
+            <div id="player" @click="selectedCardReset">
                 <div>
                     <span>{{player.name}}</span><span class="rank">{{player.rank}}</span>
                     <div id="player-button-container">
@@ -35,7 +35,7 @@
                         :id="'player-card' + index"
                         :src="card.imagePath"
                         :class="{'selected': card.isSelected}"
-                        @click="cardClick(index)"
+                        @click.stop="cardClick(index)"
                     >
                 </div>
             </div>
