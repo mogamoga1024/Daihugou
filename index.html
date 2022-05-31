@@ -31,7 +31,12 @@
                     </div>
                 </div>
                 <div id="player-card-list">
-                    <img v-for="(card, index) in player.cardList" :id="'player-card' + index" :src="card.imagePath">
+                    <img v-for="(card, index) in player.cardList"
+                        :id="'player-card' + index"
+                        :src="card.imagePath"
+                        :class="{'selected': card.isSelected}"
+                        @click="cardClick(index)"
+                    >
                 </div>
             </div>
         </div>

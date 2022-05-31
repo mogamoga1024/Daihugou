@@ -15,6 +15,12 @@ const App = {
     },
     mounted() {
 
+    },
+    methods: {
+        cardClick(index) {
+            const card = this.player.cardList[index];
+            card.isSelected = !card.isSelected;
+        }
     }
 };
 
