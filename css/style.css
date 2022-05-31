@@ -5,7 +5,7 @@
 
 #container {
   width: 800px;
-  margin: 30px auto 0;
+  margin: 20px auto 0;
   background-color: aliceblue;
 }
 
@@ -45,7 +45,7 @@
 }
 
 #player {
-  height: 300px;
+  height: 340px;
   background-color: azure;
 }
 
@@ -72,6 +72,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin-top: 35px;
   -ms-flex-pack: distribute;
       justify-content: space-around;
   -webkit-box-align: center;
@@ -79,12 +80,123 @@
           align-items: center;
 }
 
-#player-card {
-  width: 150px;
-  margin-left: -150px;
+#player-card-list .selected {
+  translate: translateY(-35px);
+  -webkit-transform: translateY(-35px);
+  -moz-transform: translateY(-35px);
+  -ms-transform: translateY(-35px);
+  -o-transform: translateY(-35px);
 }
 
-#player-card:first-child {
+#player-card0 {
+  width: 150px;
+  margin-left: -150px;
+  z-index: 0;
+}
+
+#player-card1 {
+  width: 150px;
+  margin-left: -150px;
+  z-index: 1;
+}
+
+#player-card2 {
+  width: 150px;
+  margin-left: -150px;
+  z-index: 2;
+}
+
+#player-card3 {
+  width: 150px;
+  margin-left: -150px;
+  z-index: 3;
+}
+
+#player-card4 {
+  width: 150px;
+  margin-left: -150px;
+  z-index: 4;
+}
+
+#player-card5 {
+  width: 150px;
+  margin-left: -150px;
+  z-index: 5;
+}
+
+#player-card6 {
+  width: 150px;
+  margin-left: -150px;
+  z-index: 6;
+}
+
+#player-card7 {
+  width: 150px;
+  margin-left: -150px;
+  z-index: 7;
+}
+
+#player-card8 {
+  width: 150px;
+  margin-left: -150px;
+  z-index: 8;
+}
+
+#player-card9 {
+  width: 150px;
+  margin-left: -150px;
+  z-index: 9;
+}
+
+#player-card10 {
+  width: 150px;
+  margin-left: -150px;
+  z-index: 10;
+}
+
+#player-card11 {
+  width: 150px;
+  margin-left: -150px;
+  z-index: 11;
+}
+
+#player-card12 {
+  width: 150px;
+  margin-left: -150px;
+  z-index: 12;
+}
+
+#player-card13 {
+  width: 150px;
+  margin-left: -150px;
+  z-index: 13;
+}
+
+#player-card14 {
+  width: 150px;
+  margin-left: -150px;
+  z-index: 14;
+}
+
+#player-card15 {
+  width: 150px;
+  margin-left: -150px;
+  z-index: 15;
+}
+
+#player-card16 {
+  width: 150px;
+  margin-left: -150px;
+  z-index: 16;
+}
+
+#player-card17 {
+  width: 150px;
+  margin-left: -150px;
+  z-index: 17;
+}
+
+#player-card0 {
   margin-left: 0;
 }
 /*# sourceMappingURL=style.css.map */
