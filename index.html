@@ -7,46 +7,12 @@
     <title>大富豪</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/vue-router@4"></script>
+    <script src="https://unpkg.com/http-vue-loader"></script>
 </head>
 <body>
     <div id="app">
-        <div id="container">
-            <div id="another-player-container">
-                <div class="another-player" v-for="player in anotherPlayerList">
-                    <div>
-                        <span>{{player.name}}</span><span class="rank">{{player.rank}}</span>
-                    </div>
-                    <div>
-                        <img class="card-back" src="./assets/card/card_back.png">×{{player.cardList.length}}
-                    </div>
-                </div>
-            </div>
-            <div id="battle-field">
-                <div id="battle-field-card-container" :style="{width: battleFieldCardContainerWidth + 'px'}">
-                    <img v-for="card in battleFieldCardList"
-                        class="battle-field-card"
-                        :src="card.imagePath"
-                    >
-                </div>
-            </div>
-            <div id="player" @click="selectedCardReset">
-                <div>
-                    <span>{{player.name}}</span><span class="rank">{{player.rank}}</span>
-                    <div id="player-button-container">
-                        <button>パス</button>
-                        <button @click.stop="outputCardList">カードを出す</button>
-                    </div>
-                </div>
-                <div id="player-card-list">
-                    <img v-for="(card, index) in player.cardList"
-                        :id="'player-card' + index"
-                        :src="card.imagePath"
-                        :class="{'selected': card.isSelected}"
-                        @click.stop="cardClick(index)"
-                    >
-                </div>
-            </div>
-        </div>
+        <router-view></router-view>
     </div>
     
     <script src="js/common.js"></script>

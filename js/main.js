@@ -1,62 +1,17 @@
 
-const App = {
-    data() {
-        return {
-            player: new Player("YOU"),
-            anotherPlayerList: [
-                new Player("CPU1"),
-                new Player("CPU2"),
-                new Player("CPU3"),
-            ],
-            battleFieldCardList: [
-                // CardFactory.createCard("s1"),
-                // CardFactory.createCard("s2"),
-                // CardFactory.createCard("dK"),
-                // CardFactory.createCard("s1"),
-                // CardFactory.createCard("s2"),
-            ]
-        }
-    },
-    created() {
-        Dearler.dealCardList([this.player, ...this.anotherPlayerList]);
-    },
-    mounted() {
+const router = VueRouter.createRouter({
+    history: VueRouter.createWebHashHistory(),
+    routes: [
+        { path: '/', component: httpVueLoader('./js/components/gameComponent.vue') },
+    ]
+});
 
-    },
-    computed: {
-        battleFieldCardContainerWidth() {
-            // 値はテキトー
-            return Math.min(100 + 80 * (this.battleFieldCardList.length - 1), 800);
-        }
-    },
-    methods: {
-        cardClick(index) {
-            const card = this.player.cardList[index];
-            card.isSelected = !card.isSelected;
-        },
-        selectedCardReset() {
-            this.player.cardList.forEach(c => {
-                c.isSelected = false;
-            });
-        },
-        outputCardList() {
-            const selectedCardList = [];
-            const tmpCardList = [];
+// const App = new Vue({
+//     el: "#app",
+//     router
+// });
 
-            for (const card of this.player.cardList) {
-                if (card.isSelected) {
-                    card.isSelected = false;
-                    selectedCardList.push(card);
-                }
-                else {
-                    tmpCardList.push(card);
-                }
-            }
+//Vue.createApp(App).mount("#app");
+Vue.createApp().use(router).mount("#app");
 
-            this.battleFieldCardList = selectedCardList;
-            this.player.cardList = tmpCardList;
-        }
-    }
-};
 
-Vue.createApp(App).mount("#app");
