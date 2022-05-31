@@ -25,6 +25,22 @@ const App = {
             this.player.cardList.forEach(c => {
                 c.isSelected = false;
             });
+        },
+        outputCardList() {
+            const selectedCardList = [];
+            const tmpCardList = [];
+
+            for (const card of this.player.cardList) {
+                if (card.isSelected) {
+                    card.isSelected = false;
+                    selectedCardList.push(card);
+                }
+                else {
+                    tmpCardList.push(card);
+                }
+            }
+
+            this.player.cardList = tmpCardList;
         }
     }
 };
