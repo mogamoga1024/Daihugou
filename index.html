@@ -27,7 +27,7 @@
                     <span>{{player.name}}</span><span class="rank">{{player.rank}}</span>
                     <div id="player-button-container">
                         <button>パス</button>
-                        <button>カードを出す</button>
+                        <button @click.stop="outputCardList">カードを出す</button>
                     </div>
                 </div>
                 <div id="player-card-list">
