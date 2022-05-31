@@ -6,12 +6,4 @@ const router = VueRouter.createRouter({
     ]
 });
 
-// const App = new Vue({
-//     el: "#app",
-//     router
-// });
-
-//Vue.createApp(App).mount("#app");
 Vue.createApp().use(router).mount("#app");
-
-
