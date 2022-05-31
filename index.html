@@ -21,7 +21,14 @@
                     </div>
                 </div>
             </div>
-            <div id="battle-field"></div>
+            <div id="battle-field">
+                <div id="battle-field-card-container" :style="{width: battleFieldCardContainerWidth + 'px'}">
+                    <img v-for="card in battleFieldCardList"
+                        class="battle-field-card"
+                        :src="card.imagePath"
+                    >
+                </div>
+            </div>
             <div id="player" @click="selectedCardReset">
                 <div>
                     <span>{{player.name}}</span><span class="rank">{{player.rank}}</span>

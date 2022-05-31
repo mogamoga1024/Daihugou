@@ -7,6 +7,13 @@ const App = {
                 new Player("CPU1"),
                 new Player("CPU2"),
                 new Player("CPU3"),
+            ],
+            battleFieldCardList: [
+                CardFactory.createCard("s1"),
+                CardFactory.createCard("s2"),
+                CardFactory.createCard("dK"),
+                CardFactory.createCard("s1"),
+                CardFactory.createCard("s2"),
             ]
         }
     },
@@ -15,6 +22,11 @@ const App = {
     },
     mounted() {
 
+    },
+    computed: {
+        battleFieldCardContainerWidth() {
+            return Math.min(100 + 80 * (this.battleFieldCardList.length - 1), 800);
+        }
     },
     methods: {
         cardClick(index) {
