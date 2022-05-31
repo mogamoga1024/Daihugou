@@ -25,6 +25,7 @@ const App = {
     },
     computed: {
         battleFieldCardContainerWidth() {
+            // 値はテキトー
             return Math.min(100 + 80 * (this.battleFieldCardList.length - 1), 800);
         }
     },
