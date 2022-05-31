@@ -9,11 +9,11 @@ const App = {
                 new Player("CPU3"),
             ],
             battleFieldCardList: [
-                CardFactory.createCard("s1"),
-                CardFactory.createCard("s2"),
-                CardFactory.createCard("dK"),
-                CardFactory.createCard("s1"),
-                CardFactory.createCard("s2"),
+                // CardFactory.createCard("s1"),
+                // CardFactory.createCard("s2"),
+                // CardFactory.createCard("dK"),
+                // CardFactory.createCard("s1"),
+                // CardFactory.createCard("s2"),
             ]
         }
     },
@@ -52,6 +52,7 @@ const App = {
                 }
             }
 
+            this.battleFieldCardList = selectedCardList;
             this.player.cardList = tmpCardList;
         }
     }
