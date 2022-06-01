@@ -16,7 +16,8 @@ module.exports = {
         Dearler.dealCardList(this.playerList);
     },
     async mounted() {
-        const leaderIndex = Common.randomInt(this.playerList.length);
+        //const leaderIndex = Common.randomInt(this.playerList.length);
+        const leaderIndex = 0; // debug
         await GameManager.startGame(this.playerList, leaderIndex);
     },
     computed: {

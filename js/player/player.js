@@ -12,4 +12,8 @@ class Player {
     exchangeCardList() {
         return [];
     };
+
+    outputCardList() {
+        return [];
+    }
 }

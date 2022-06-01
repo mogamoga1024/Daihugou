@@ -4,4 +4,9 @@ class Cpu extends Player {
         // TODO
         return [];
     }
+
+    outputCardList() {
+        // TODO
+        return [];
+    }
 }
