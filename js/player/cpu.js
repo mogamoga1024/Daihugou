@@ -7,6 +7,15 @@ class Cpu extends Player {
 
     outputCardList() {
         // TODO
-        return [];
+
+        // 仮
+
+        let selectedCardList = [];
+        if (this.cardList.length > 0) {
+            selectedCardList = [this.cardList[0]];
+            this.cardList = this.cardList.filter(c => selectedCardList.indexOf(c) === -1);
+        }
+
+        return selectedCardList;
     }
 }

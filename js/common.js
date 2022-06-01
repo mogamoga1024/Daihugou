@@ -17,7 +17,7 @@ class Common {
         });
     }
 
-    static sleep(time = 600) {
+    static sleep(time = 1000) {
         return new Promise(resolve => setTimeout(resolve, time));
     }
 }
