@@ -17,12 +17,12 @@
             >
         </div>
     </div>
-    <div id="player" @click="selectedCardReset">
+    <div id="player">
         <div>
             <span>{{player.name}}</span><span class="rank">{{player.rank}}</span>
             <div id="player-button-container">
                 <button>パス</button>
-                <button @click.stop="outputCardList">カードを出す</button>
+                <button @click="outputCardList">カードを出す</button>
             </div>
         </div>
         <div id="player-card-list">
@@ -30,7 +30,7 @@
                 :id="'player-card' + index"
                 :src="card.imagePath"
                 :class="{'selected': card.isSelected}"
-                @click.stop="cardClick(index)"
+                @click="cardClick(index)"
             >
         </div>
     </div>
