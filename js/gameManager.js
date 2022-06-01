@@ -28,6 +28,7 @@ class GameManager {
         const cardList = await player.outputCardList();
 
         if (cardList.length > 0) {
+            log(`場に出したカード: ${Common.cardListToString(cardList)}`)
             this.#vm.battleFieldCardList = cardList;
         }
         else {
