@@ -2,11 +2,12 @@
 module.exports = {
     data() {
         return {
-            player: new Player("YOU"),
+            player: new Human("YOU"),
+            // anotherPlayerListのPlayerはユーザー（= 画面の前の君のこと）の次のターン順になっている。
             anotherPlayerList: [
-                new Player("CPU1"),
-                new Player("CPU2"),
-                new Player("CPU3"),
+                new Cpu("CPU1"),
+                new Cpu("CPU2"),
+                new Cpu("CPU3"),
             ],
             battleFieldCardList: []
         }
@@ -15,7 +16,8 @@ module.exports = {
         Dearler.dealCardList(this.playerList);
     },
     async mounted() {
-        await GameManager.exchangeCardListScene(this.playerList);
+        const leaderIndex = Common.randomInt(this.playerList.length);
+        await GameManager.startGame(this.playerList, leaderIndex);
     },
     computed: {
         playerList() {
