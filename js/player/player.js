@@ -3,6 +3,7 @@ class Player {
     name = "";
     rank = Rank.Heimin;
     cardList = [];
+    isTurn = false;
     isRankDecided = false;
 
     constructor(name) {

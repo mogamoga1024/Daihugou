@@ -16,6 +16,10 @@ class Common {
             return a.suit.power - b.suit.power;
         });
     }
+
+    static sleep(time = 600) {
+        return new Promise(resolve => setTimeout(resolve, time));
+    }
 }
 
 const log = console.log;
