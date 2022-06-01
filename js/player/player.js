@@ -14,6 +14,11 @@ class Player {
         return [];
     };
 
+    /**
+     * 場に出すカードを返す。
+     * 副作用で手札からそのカードがなくなる。
+     * @returns 
+     */
     outputCardList() {
         return [];
     }

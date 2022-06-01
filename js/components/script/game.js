@@ -40,21 +40,7 @@ module.exports = {
             }
         },
         outputCardList() {
-            const selectedCardList = [];
-            const tmpCardList = [];
-
-            for (const card of this.player.cardList) {
-                if (card.isSelected) {
-                    card.isSelected = false;
-                    selectedCardList.push(card);
-                }
-                else {
-                    tmpCardList.push(card);
-                }
-            }
-
-            this.battleFieldCardList = selectedCardList;
-            this.player.cardList = tmpCardList;
+            this.player.outputCardListFromUI();
         },
         playerList() {
             // computedのほうだと順番が狂った。謎

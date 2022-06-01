@@ -20,6 +20,10 @@ class Common {
     static sleep(time = 1000) {
         return new Promise(resolve => setTimeout(resolve, time));
     }
+
+    static cardListToString(cardList) {
+        return cardList.map(c => c.name).join(", ");
+    }
 }
 
 const log = console.log;
