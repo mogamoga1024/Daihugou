@@ -1,9 +1,11 @@
 
 class GameManager {
     static #playerList = [];
+    static #battleFieldCardList = [];
 
-    static async startGame(playerList, leaderIndex) {
+    static async startGame(playerList, leaderIndex, battleFieldCardList) {
         this.#playerList = playerList;
+        this.#battleFieldCardList = battleFieldCardList;
         let playerIndex = leaderIndex;
 
         log("【ゲーム開始】");
@@ -24,6 +26,14 @@ class GameManager {
         player.isTurn = true;
 
         const cardList = await player.outputCardList();
+
+        if (cardList.length > 0) {
+            //this.#battleFieldCardList = cardList;
+            this.#battleFieldCardList.push(cardList[0]);
+        }
+        else {
+            log("パス");
+        }
 
         await Common.sleep(); // debug
 
