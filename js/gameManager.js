@@ -8,10 +8,10 @@ class GameManager {
 
         log("【ゲーム開始】");
 
-        while (playerList.filter(p => !p.isRankDecided) > 0) {
+        while (playerList.filter(p => !p.isRankDecided).length > 0) {
             playerIndex = await this.startTurn(playerIndex);
 
-            break; // debug
+            //break; // debug
         }
 
         log("【ゲーム終了】");
@@ -20,9 +20,18 @@ class GameManager {
     static async startTurn(playerIndex) {
         const player = this.#playerList[playerIndex];
 
+        log(`【${player.name}のターン】`);
+        player.isTurn = true;
+
         const cardList = await player.outputCardList();
 
+        await Common.sleep(); // debug
 
+        // TODO
+
+        player.isTurn = false;
+
+        return this.#nextPlayerIndex(playerIndex);
     }
 
     static #nextPlayerIndex(currentPlayerIndex) {
