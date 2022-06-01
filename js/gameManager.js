@@ -1,16 +1,16 @@
 
 class GameManager {
     static #playerList = [];
-    static #battleFieldCardList = [];
+    static #vm = null;
 
-    static async startGame(playerList, leaderIndex, battleFieldCardList) {
+    static async startGame(playerList, leaderIndex, vm) {
         this.#playerList = playerList;
-        this.#battleFieldCardList = battleFieldCardList;
+        this.#vm = vm;
         let playerIndex = leaderIndex;
 
         log("【ゲーム開始】");
 
-        while (playerList.filter(p => !p.isRankDecided).length > 0) {
+        while (this.#playerList.filter(p => !p.isRankDecided).length > 0) {
             playerIndex = await this.startTurn(playerIndex);
 
             //break; // debug
@@ -28,8 +28,7 @@ class GameManager {
         const cardList = await player.outputCardList();
 
         if (cardList.length > 0) {
-            //this.#battleFieldCardList = cardList;
-            this.#battleFieldCardList.push(cardList[0]);
+            this.#vm.battleFieldCardList = cardList;
         }
         else {
             log("パス");
@@ -58,7 +57,7 @@ class GameManager {
         return nextPlayerIndex;
     }
 
-    static async exchangeCardListScene(playerList) {
+    static async exchangeCardListScene() {
         // TODO
     }
 
