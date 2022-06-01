@@ -2,7 +2,7 @@
     <div id="another-player-container">
         <div class="another-player" v-for="player in anotherPlayerList">
             <div>
-                <span>{{player.name}}</span><span class="rank">{{player.rank}}</span>
+                <span :class="{turn: player.isTurn}">{{player.name}}</span><span class="rank">{{player.rank}}</span>
             </div>
             <div>
                 <img class="card-back" src="./assets/card/card_back.png">×{{player.cardList.length}}
@@ -19,7 +19,7 @@
     </div>
     <div id="player">
         <div>
-            <span>{{player.name}}</span><span class="rank">{{player.rank}}</span>
+            <span :class="{turn: player.isTurn}">{{player.name}}</span><span class="rank">{{player.rank}}</span>
             <div id="player-button-container">
                 <button>パス</button>
                 <button @click="outputCardList">カードを出す</button>

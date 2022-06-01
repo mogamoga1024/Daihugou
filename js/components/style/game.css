@@ -20,6 +20,11 @@
   background-color: aquamarine;
 }
 
+.turn {
+  font-weight: bold;
+  color: red;
+}
+
 .another-player {
   width: 120px;
   background-color: azure;
