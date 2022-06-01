@@ -21,8 +21,8 @@
         <div>
             <span :class="{turn: player.isTurn}">{{player.name}}</span><span class="rank">{{player.rank}}</span>
             <div id="player-button-container">
-                <button>パス</button>
-                <button @click="outputCardList">カードを出す</button>
+                <button @click="pass">パス</button>
+                <button :disabled="!canOutputCardList" @click="outputCardList">カードを出す</button>
             </div>
         </div>
         <div id="player-card-list">
