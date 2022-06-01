@@ -8,22 +8,19 @@ module.exports = {
                 new Player("CPU2"),
                 new Player("CPU3"),
             ],
-            battleFieldCardList: [
-                // CardFactory.createCard("s1"),
-                // CardFactory.createCard("s2"),
-                // CardFactory.createCard("dK"),
-                // CardFactory.createCard("s1"),
-                // CardFactory.createCard("s2"),
-            ]
+            battleFieldCardList: []
         }
     },
     created() {
-        Dearler.dealCardList([this.player, ...this.anotherPlayerList]);
+        Dearler.dealCardList(this.playerList);
     },
-    mounted() {
-
+    async mounted() {
+        await GameManager.exchangeCardListScene(this.playerList);
     },
     computed: {
+        playerList() {
+            return [this.player, ...this.anotherPlayerList];
+        },
         battleFieldCardContainerWidth() {
             // 値はテキトー
             return Math.min(100 + 80 * (this.battleFieldCardList.length - 1), 800);
