@@ -24,6 +24,12 @@ module.exports = {
         battleFieldCardContainerWidth() {
             // 値はテキトー
             return Math.min(100 + 80 * (this.battleFieldCardList.length - 1), 800);
+        },
+        canOutputCardList() {
+            for (const card of this.player.cardList) {
+                if (card.isSelected) return true;
+            }
+            return false;
         }
     },
     methods: {
@@ -40,6 +46,12 @@ module.exports = {
             }
         },
         outputCardList() {
+            this.player.outputCardListFromUI();
+        },
+        pass() {
+            this.player.cardList.forEach(c => {
+                c.isSelected = false;
+            });
             this.player.outputCardListFromUI();
         },
         playerList() {
