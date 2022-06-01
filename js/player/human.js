@@ -4,4 +4,9 @@ class Human extends Player {
         // TODO
         return [];
     }
+
+    outputCardList() {
+        // TODO
+        return [];
+    }
 }
