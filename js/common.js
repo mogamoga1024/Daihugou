@@ -17,3 +17,5 @@ class Common {
         });
     }
 }
+
+const log = console.log;
