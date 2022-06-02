@@ -25,7 +25,7 @@ class GameManager {
         log(`【${player.name}のターン】`);
         player.isTurn = true;
 
-        const cardList = await player.outputCardList();
+        const cardList = await player.outputCardList(this.#vm.battleFieldCardList);
 
         if (cardList.length > 0) {
             log(`場に出したカード: ${Common.cardListToString(cardList)}`)

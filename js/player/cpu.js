@@ -5,7 +5,7 @@ class Cpu extends Player {
         return [];
     }
 
-    outputCardList() {
+    outputCardList(battleFieldCardList) {
         // TODO
 
         // 仮

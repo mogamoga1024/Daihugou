@@ -19,7 +19,7 @@ class Player {
      * 副作用で手札からそのカードがなくなる。
      * @returns 
      */
-    outputCardList() {
+    outputCardList(battleFieldCardList) {
         return [];
     }
 }
