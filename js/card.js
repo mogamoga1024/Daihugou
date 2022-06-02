@@ -12,6 +12,8 @@ class Card {
         return this._canSelect;
     }
     set canSelect(val) {
+        if (this._canSelect === val) return;
+
         this._canSelect = val;
         if (val) {
             this.imagePath = this.imagePath.replace("_disabled.png", ".png");
