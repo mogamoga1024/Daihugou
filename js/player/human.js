@@ -34,4 +34,8 @@ class Human extends Player {
             this.resolveOutputCardList = null;
         }
     }
+
+    findCanOutputCardList(battleFieldCardList) {
+
+    }
 }
