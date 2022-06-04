@@ -49,7 +49,16 @@ class Human extends Player {
 
         // TODO Joker, 革命, 縛りは未考慮
 
+        const selectedCardList = this.cardList.filter(c => c.isSelected);
+
         if (bfHand === Hand.None) {
+            const selectedHand = Hand.cardListToHand(selectedCardList);
+            if (selectedHand === Hand.None) {
+                selectedCardList.forEach(c => {
+                    c.isSelected = false;
+                });
+            }
+
             return this.cardList;
         }
         if (bfHand === Hand.Single) {
