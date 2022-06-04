@@ -79,9 +79,16 @@ class Human extends Player {
             return outputableCardList;
         }
         if (bfHand === Hand.Stairs) {
-            // TODO
+            let tmpSuitCardList = {
+                
+            };
+            for (const card of this.cardList) {
+                if (card.power <= battleFieldCardList[0].power) continue;
+
+                
+            }
         }
 
-        throw new Error("仮にこのエラーが出たら、Handの分岐が足りない");
+        throw new Error("仮にこのエラーが出たら、Handの分岐が足りないと思われ");
     }
 }

@@ -35,7 +35,7 @@ class GameManager {
             log("パス");
         }
 
-        await Common.sleep(); // debug
+        await Common.sleep();
 
         // TODO
 
