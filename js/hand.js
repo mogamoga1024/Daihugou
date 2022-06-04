@@ -17,7 +17,7 @@ class Hand {
         
         if (cardList[0].power === cardList[1].power) {
             for (let i = 1; i < cardList.length; i++) {
-                if (cardList[i].power !== cardList[0]) return this.None;
+                if (cardList[i].power !== cardList[0].power) return this.None;
             }
             return this.Multi;
         }
