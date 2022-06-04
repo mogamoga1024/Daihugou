@@ -79,14 +79,40 @@ class Human extends Player {
             return outputableCardList;
         }
         if (bfHand === Hand.Stairs) {
-            let tmpSuitCardList = {
-                
+            let suitCardListDic = {
+                [Suit.Spade.name]: [],
+                [Suit.Club.name]: [],
+                [Suit.Diamond.name]: [],
+                [Suit.Heart.name]: []
             };
+            let outputableCardList = [];
             for (const card of this.cardList) {
                 if (card.power <= battleFieldCardList[0].power) continue;
 
-                
+                const suitCardList = suitCardListDic[card.suit.name];
+                if (suitCardList.length === 0) {
+                    suitCardList.push(card);
+                }
+                else {
+                    const prevCard = suitCardList[suitCardList.length - 1];
+                    if (card.power - prevCard.power === 1) {
+                        suitCardList.push(card);
+                    }
+                    else {
+                        if (suitCardList.length >= battleFieldCardList.length) {
+                            outputableCardList = outputableCardList.concat(suitCardList);
+                        }
+                        suitCardListDic[card.suit.name] = [card];
+                    }
+                }
             }
+            for (const key in suitCardListDic) {
+                const suitCardList = suitCardListDic[key];
+                if (suitCardList.length >= battleFieldCardList.length) {
+                    outputableCardList = outputableCardList.concat(suitCardList);
+                }
+            }
+            return Common.sortcardList(outputableCardList);
         }
 
         throw new Error("仮にこのエラーが出たら、Handの分岐が足りないと思われ");
