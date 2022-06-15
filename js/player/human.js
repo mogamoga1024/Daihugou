@@ -75,7 +75,12 @@ class Human extends Player {
                 });
             }
             
-            return this.cardList.filter(c => c.power > battleFieldCardList[0].power);
+            if (justNowSelectedCard !== null) {
+                return [justNowSelectedCard];
+            }
+            else {
+                return this.cardList.filter(c => c.power > battleFieldCardList[0].power);
+            }
         }
         if (bfHand === Hand.Multi) {
             if (selectedHand !== Hand.Single && selectedHand !== Hand.Multi) {
