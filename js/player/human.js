@@ -8,14 +8,7 @@ class Human extends Player {
     }
 
     async outputCardList(battleFieldCardList) {
-        const outputableCardList = this.findOutputableCardList(battleFieldCardList);
-
-        this.cardList.forEach(card => {
-            if (outputableCardList.indexOf(card) === -1) {
-                card.canSelect = false;
-                card.isSelected = false;
-            }
-        });
+        this.findOutputableCardList(battleFieldCardList);
 
         const selectedCardList = await new Promise(resolve => {
             this.resolveOutputCardList = resolve;
@@ -58,6 +51,7 @@ class Human extends Player {
 
         const selectedCardList = this.cardList.filter(c => c.isSelected);
         const selectedHand = Hand.cardListToHand(selectedCardList);
+        let outputableCardList = [];
 
         if (bfHand === Hand.None) {
             if (selectedHand === Hand.None) {
@@ -66,7 +60,7 @@ class Human extends Player {
                 });
             }
 
-            return this.cardList;
+            outputableCardList = this.cardList;
         }
         if (bfHand === Hand.Single) {
             if (selectedHand !== Hand.Single) {
@@ -76,10 +70,10 @@ class Human extends Player {
             }
             
             if (justNowSelectedCard !== null) {
-                return [justNowSelectedCard];
+                outputableCardList = [justNowSelectedCard];
             }
             else {
-                return this.cardList.filter(c => c.power > battleFieldCardList[0].power);
+                outputableCardList = this.cardList.filter(c => c.power > battleFieldCardList[0].power);
             }
         }
         if (bfHand === Hand.Multi) {
@@ -114,7 +108,7 @@ class Human extends Player {
             if (tmpCardList.length >= battleFieldCardList.length) {
                 outputableCardList = outputableCardList.concat(tmpCardList);
             }
-            return outputableCardList;
+            outputableCardList = outputableCardList;
         }
         if (bfHand === Hand.Stairs) {
             let suitCardListDic = {
@@ -150,9 +144,17 @@ class Human extends Player {
                     outputableCardList = outputableCardList.concat(suitCardList);
                 }
             }
-            return Common.sortcardList(outputableCardList);
+            outputableCardList = Common.sortcardList(outputableCardList);
         }
 
-        throw new Error("仮にこのエラーが出たら、Handの分岐が足りないと思われ");
+        this.cardList.forEach(card => {
+            if (outputableCardList.indexOf(card) === -1) {
+                card.canSelect = false;
+                card.isSelected = false;
+            }
+            else {
+                card.canSelect = true;
+            }
+        });
     }
 }
