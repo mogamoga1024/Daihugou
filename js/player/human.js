@@ -83,7 +83,6 @@ class Human extends Player {
                 });
             }
 
-            let outputableCardList = [];
             let tmpCardList = [];
             let prevCardPower = null;
             for (const card of this.cardList) {
@@ -117,7 +116,6 @@ class Human extends Player {
                 [Suit.Diamond.name]: [],
                 [Suit.Heart.name]: []
             };
-            let outputableCardList = [];
             for (const card of this.cardList) {
                 if (card.power <= battleFieldCardList[0].power) continue;
 
