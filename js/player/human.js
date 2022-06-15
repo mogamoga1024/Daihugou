@@ -75,7 +75,12 @@ class Human extends Player {
             let tmpCardList = [];
             let prevCardPower = null;
             for (const card of this.cardList) {
-                if (card.power <= battleFieldCardList[0].power) continue;
+                if (card.power <= battleFieldCardList[0].power) {
+                    continue;
+                }
+                else if (prevCardPower === null) {
+                    prevCardPower = card.power;
+                }
 
                 if (card.power === prevCardPower) {
                     tmpCardList.push(card);
@@ -84,7 +89,7 @@ class Human extends Player {
                     if (tmpCardList.length >= battleFieldCardList.length) {
                         outputableCardList = outputableCardList.concat(tmpCardList);
                     }
-                    tmpCardList = [];
+                    tmpCardList = [card];
                     prevCardPower = card.power;
                 }
             }
