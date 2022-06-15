@@ -9,7 +9,9 @@ module.exports = {
                 new Cpu("CPU2"),
                 new Cpu("CPU3"),
             ],
-            battleFieldCardList: []
+            battleFieldCardList: [
+                CardFactory.createCard("d3")
+            ]
         }
     },
     created() {

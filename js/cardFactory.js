@@ -33,6 +33,11 @@ class CardFactory {
         return this.#cardList.map(c => c.obj);
     }
 
+    /**
+     * name: ((s|c|d|h)([1-9]|T|J|Q|K))|Joker1|Joker2
+     * @param {string} name 
+     * @returns 
+     */
     static createCard(name) {
         this.#initCardList();
         const cardList = this.#cardList.filter(c => c.name === name).map(c => c.obj);
