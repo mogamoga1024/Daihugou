@@ -36,7 +36,7 @@ module.exports = {
     },
     methods: {
         cardClick(index) {
-            const card = this.player.cardList[index];
+            let card = this.player.cardList[index];
 
             if (!card.canSelect) return;
 
@@ -44,13 +44,14 @@ module.exports = {
                 this.player.cardList.forEach(c => {
                     c.isSelected = false;
                 });
+                card = null;
             }
             else {
                 card.isSelected = true;
             }
 
             if (this.player.isTurn) {
-                this.player.findOutputableCardList(this.battleFieldCardList);
+                this.player.findOutputableCardList(this.battleFieldCardList, card);
             }
         },
         outputCardList() {
