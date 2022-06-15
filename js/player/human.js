@@ -44,7 +44,7 @@ class Human extends Player {
         }
     }
 
-    findOutputableCardList(battleFieldCardList) {
+    findOutputableCardList(battleFieldCardList, justNowSelectedCard = null) {
         const bfHand = Hand.cardListToHand(battleFieldCardList);
 
         // TODO Joker, 革命, 縛りは未考慮
@@ -55,7 +55,7 @@ class Human extends Player {
         if (bfHand === Hand.None) {
             if (selectedHand === Hand.None) {
                 selectedCardList.forEach(c => {
-                    c.isSelected = false;
+                    c.isSelected = (c === justNowSelectedCard);
                 });
             }
 
@@ -64,7 +64,7 @@ class Human extends Player {
         if (bfHand === Hand.Single) {
             if (selectedHand !== Hand.Single) {
                 selectedCardList.forEach(c => {
-                    c.isSelected = false;
+                    c.isSelected = (c === justNowSelectedCard);
                 });
             }
             
