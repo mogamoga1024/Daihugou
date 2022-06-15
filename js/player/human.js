@@ -17,9 +17,16 @@ class Human extends Player {
             }
         });
 
-        return await new Promise(resolve => {
+        const selectedCardList = await new Promise(resolve => {
             this.resolveOutputCardList = resolve;
         });
+
+        this.cardList.forEach(card => {
+            card.canSelect = true;
+            card.isSelected = false;
+        });
+
+        return selectedCardList;
     }
 
     outputCardListFromUI() {
