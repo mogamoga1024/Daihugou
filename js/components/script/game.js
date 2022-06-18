@@ -11,7 +11,9 @@ module.exports = {
             ],
             battleFieldCardList: [
                 CardFactory.createCard("d3"),
-                CardFactory.createCard("s3"),
+                //CardFactory.createCard("s3"),
+                CardFactory.createCard("d4"),
+                CardFactory.createCard("d5"),
             ]
         }
     },
