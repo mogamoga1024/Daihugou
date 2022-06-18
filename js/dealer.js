@@ -3,7 +3,7 @@ class Dearler {
     static dealCardList(playerList) {
         playerList.forEach(p => p.cardList = []);
 
-        const allCardList = CardFactory.createCardList();
+        const allCardList = CardFactory.createAllCardList();
         const allCardListIndexs = [];
         for (let i = 0; i < allCardList.length; i++) {
             allCardListIndexs.push(i);
@@ -34,6 +34,6 @@ class Dearler {
             player.cardList.push(allCardList[index]);
         }
 
-        playerList.forEach(p => Common.sortcardList(p.cardList));
+        playerList.forEach(p => Common.sortCardList(p.cardList));
     }
 }

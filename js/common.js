@@ -8,7 +8,7 @@ class Common {
         return crypto.getRandomValues(new Uint32Array(1))[0] % max;
     }
 
-    static sortcardList(cardList) {
+    static sortCardList(cardList) {
         return cardList.sort((a, b) => {
             if (a.power !== b.power) {
                 return a.power - b.power;

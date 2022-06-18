@@ -149,7 +149,7 @@ class Human extends Player {
                     outputableCardList = outputableCardList.concat(suitCardList);
                 }
             }
-            outputableCardList = Common.sortcardList(outputableCardList);
+            outputableCardList = Common.sortCardList(outputableCardList);
         }
 
         this.cardList.forEach(card => {

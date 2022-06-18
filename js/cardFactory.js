@@ -28,7 +28,7 @@ class CardFactory {
         this.#cardList.push({name: "Joker2", obj: new Joker("Joker2",  99,  `${imageFolderPath}/card_joker.png`)});
     }
 
-    static createCardList() {
+    static createAllCardList() {
         this.#initCardList();
         return this.#cardList.map(c => c.obj);
     }
@@ -45,5 +45,11 @@ class CardFactory {
             throw new Error(`${name}のカードが存在しない`);
         }
         return cardList[0];
+    }
+
+    static createCardList(strNameList) {
+        const nameList = strNameList.split(",").map(name => name.trim());
+        const cardList = nameList.map(name => this.createCard(name));
+        return Common.sortCardList(cardList);
     }
 }
