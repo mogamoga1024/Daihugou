@@ -82,32 +82,39 @@ class Human extends Player {
                     c.isSelected = (c === justNowSelectedCard);
                 });
             }
-
-            let tmpCardList = [];
-            let prevCardPower = null;
-            for (const card of this.cardList) {
-                if (card.power <= battleFieldCardList[0].power) {
-                    continue;
-                }
-                else if (prevCardPower === null) {
-                    prevCardPower = card.power;
-                }
-
-                if (card.power === prevCardPower) {
-                    tmpCardList.push(card);
-                }
-                else {
-                    if (tmpCardList.length >= battleFieldCardList.length) {
-                        outputableCardList = outputableCardList.concat(tmpCardList);
+            else if (selectedCardList.length === battleFieldCardList.length) {
+                outputableCardList = selectedCardList;
+            }
+            
+            if (outputableCardList !== selectedCardList) {
+                let tmpCardList = [];
+                let prevCardPower = null;
+                for (const card of this.cardList) {
+                    if (card.power <= battleFieldCardList[0].power) {
+                        continue;
                     }
-                    tmpCardList = [card];
-                    prevCardPower = card.power;
+                    else if (justNowSelectedCard !== null && card.power !== justNowSelectedCard.power) {
+                        continue;
+                    }
+                    else if (prevCardPower === null) {
+                        prevCardPower = card.power;
+                    }
+    
+                    if (card.power === prevCardPower) {
+                        tmpCardList.push(card);
+                    }
+                    else {
+                        if (tmpCardList.length >= battleFieldCardList.length) {
+                            outputableCardList = outputableCardList.concat(tmpCardList);
+                        }
+                        tmpCardList = [card];
+                        prevCardPower = card.power;
+                    }
+                }
+                if (tmpCardList.length >= battleFieldCardList.length) {
+                    outputableCardList = outputableCardList.concat(tmpCardList);
                 }
             }
-            if (tmpCardList.length >= battleFieldCardList.length) {
-                outputableCardList = outputableCardList.concat(tmpCardList);
-            }
-            outputableCardList = outputableCardList;
         }
         if (bfHand === Hand.Stairs) {
             let suitCardListDic = {
@@ -154,5 +161,7 @@ class Human extends Player {
                 card.canSelect = true;
             }
         });
+
+        log(Common.cardListToString(outputableCardList));
     }
 }
