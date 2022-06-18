@@ -19,6 +19,9 @@ module.exports = {
     },
     created() {
         Dearler.dealCardList(this.playerList());
+
+        // debug
+        this.player.cardList = CardFactory.createCardList("s3, s4, s5, s6, s8, s9, sT, dJ, dQ, dK, d1");
     },
     async mounted() {
         //const leaderIndex = Common.randomInt(this.playerList().length);
