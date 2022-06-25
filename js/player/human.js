@@ -62,7 +62,7 @@ class Human extends Player {
 
             outputableCardList = this.cardList;
         }
-        if (bfHand === Hand.Single) {
+        else if (bfHand === Hand.Single) {
             if (selectedHand !== Hand.Single) {
                 selectedCardList.forEach(c => {
                     c.isSelected = (c === justNowSelectedCard);
@@ -76,7 +76,7 @@ class Human extends Player {
                 outputableCardList = this.cardList.filter(c => c.power > battleFieldCardList[0].power);
             }
         }
-        if (bfHand === Hand.Multi) {
+        else if (bfHand === Hand.Multi) {
             if (selectedHand !== Hand.Single && selectedHand !== Hand.Multi) {
                 selectedCardList.forEach(c => {
                     c.isSelected = (c === justNowSelectedCard);
@@ -116,7 +116,7 @@ class Human extends Player {
                 }
             }
         }
-        if (bfHand === Hand.Stairs) {
+        else if (bfHand === Hand.Stairs) {
             let suitCardListDic = {
                 [Suit.Spade.name]: [],
                 [Suit.Club.name]: [],
