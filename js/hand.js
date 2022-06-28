@@ -4,7 +4,7 @@ class Hand {
     static Single = Symbol("Single");
     static Multi = Symbol("Multi");
     static Stairs = Symbol("Stairs");
-    static Stairs = Symbol("MaybeStairs");
+    static MaybeStairs = Symbol("MaybeStairs");
 
     static cardListToHand(cardList) {
         if (cardList.length === 0) {
@@ -24,14 +24,18 @@ class Hand {
         }
         else {
             let prevCard = cardList[0];
+            let maybeStairs = false;
             for (let i = 1; i < cardList.length; i++) {
                 const card = cardList[i];
-                if (card.suit !== prevCard.suit || card.power - prevCard.power !== 1) {
+                if (card.suit !== prevCard.suit) {
                     return this.None;
+                }
+                else if (card.power - prevCard.power !== 1) {
+                    maybeStairs = true;
                 }
                 prevCard = card;
             }
-            return this.Stairs;
+            return maybeStairs ? this.MaybeStairs : this.Stairs;
         }
     }
 }
