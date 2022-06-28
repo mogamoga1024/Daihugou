@@ -117,6 +117,12 @@ class Human extends Player {
             }
         }
         else if (bfHand === Hand.Stairs) {
+            if (selectedHand !== Hand.Single && selectedHand !== Hand.Stairs && selectedHand !== Hand.MaybeStairs) {
+                selectedCardList.forEach(c => {
+                    c.isSelected = (c === justNowSelectedCard);
+                });
+            }
+
             let suitCardListDic = {
                 [Suit.Spade.name]: [],
                 [Suit.Club.name]: [],
