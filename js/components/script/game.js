@@ -53,10 +53,6 @@ module.exports = {
             else {
                 card.isSelected = true;
             }
-
-            if (this.player.isTurn) {
-                this.player.findOutputableCardList(this.battleFieldCardList, card);
-            }
         },
         outputCardList() {
             this.player.outputCardListFromUI();

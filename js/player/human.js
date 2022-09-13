@@ -7,9 +7,7 @@ class Human extends Player {
         return [];
     }
 
-    async outputCardList(battleFieldCardList) {
-        this.findOutputableCardList(battleFieldCardList);
-
+    async outputCardList() {
         const selectedCardList = await new Promise(resolve => {
             this.resolveOutputCardList = resolve;
         });
@@ -41,128 +39,5 @@ class Human extends Player {
             this.resolveOutputCardList(selectedCardList);
             this.resolveOutputCardList = null;
         }
-    }
-
-    findOutputableCardList(battleFieldCardList, justNowSelectedCard = null) {
-        const bfHand = Hand.cardListToHand(battleFieldCardList);
-
-        // TODO Joker, 革命, 縛りは未考慮
-
-        const selectedCardList = this.cardList.filter(c => c.isSelected);
-        const selectedHand = Hand.cardListToHand(selectedCardList);
-        let outputableCardList = [];
-
-        if (bfHand === Hand.None) {
-            if (selectedHand === Hand.None) {
-                selectedCardList.forEach(c => {
-                    c.isSelected = (c === justNowSelectedCard);
-                });
-            }
-
-            outputableCardList = this.cardList;
-        }
-        else if (bfHand === Hand.Single) {
-            if (selectedHand !== Hand.Single) {
-                selectedCardList.forEach(c => {
-                    c.isSelected = (c === justNowSelectedCard);
-                });
-            }
-            
-            if (justNowSelectedCard !== null) {
-                outputableCardList = [justNowSelectedCard];
-            }
-            else {
-                outputableCardList = this.cardList.filter(c => c.power > battleFieldCardList[0].power);
-            }
-        }
-        else if (bfHand === Hand.Multi) {
-            if (selectedHand !== Hand.Single && selectedHand !== Hand.Multi) {
-                selectedCardList.forEach(c => {
-                    c.isSelected = (c === justNowSelectedCard);
-                });
-            }
-            else if (selectedCardList.length === battleFieldCardList.length) {
-                outputableCardList = selectedCardList;
-            }
-            
-            if (outputableCardList !== selectedCardList) {
-                let tmpCardList = [];
-                let prevCardPower = null;
-                for (const card of this.cardList) {
-                    if (card.power <= battleFieldCardList[0].power) {
-                        continue;
-                    }
-                    else if (justNowSelectedCard !== null && card.power !== justNowSelectedCard.power) {
-                        continue;
-                    }
-                    else if (prevCardPower === null) {
-                        prevCardPower = card.power;
-                    }
-    
-                    if (card.power === prevCardPower) {
-                        tmpCardList.push(card);
-                    }
-                    else {
-                        if (tmpCardList.length >= battleFieldCardList.length) {
-                            outputableCardList = outputableCardList.concat(tmpCardList);
-                        }
-                        tmpCardList = [card];
-                        prevCardPower = card.power;
-                    }
-                }
-                if (tmpCardList.length >= battleFieldCardList.length) {
-                    outputableCardList = outputableCardList.concat(tmpCardList);
-                }
-            }
-        }
-        else if (bfHand === Hand.Stairs) {
-            if (selectedHand !== Hand.Single && selectedHand !== Hand.Stairs && selectedHand !== Hand.MaybeStairs) {
-                selectedCardList.forEach(c => {
-                    c.isSelected = (c === justNowSelectedCard);
-                });
-            }
-
-            let suitCardListDic = {
-                [Suit.Spade.name]: [],
-                [Suit.Club.name]: [],
-                [Suit.Diamond.name]: [],
-                [Suit.Heart.name]: []
-            };
-            for (const card of this.cardList) {
-                if (card.power <= battleFieldCardList[0].power) continue;
-
-                const suitCardList = suitCardListDic[card.suit.name];
-                if (suitCardList.length === 0) {
-                    suitCardList.push(card);
-                }
-                else {
-                    const prevCard = suitCardList[suitCardList.length - 1];
-                    if (card.power - prevCard.power === 1) {
-                        suitCardList.push(card);
-                    }
-                    else {
-                        if (suitCardList.length >= battleFieldCardList.length) {
-                            outputableCardList = outputableCardList.concat(suitCardList);
-                        }
-                        suitCardListDic[card.suit.name] = [card];
-                    }
-                }
-            }
-            for (const key in suitCardListDic) {
-                const suitCardList = suitCardListDic[key];
-                if (suitCardList.length >= battleFieldCardList.length) {
-                    outputableCardList = outputableCardList.concat(suitCardList);
-                }
-            }
-            outputableCardList = Common.sortCardList(outputableCardList);
-        }
-
-        this.cardList.forEach(card => {
-            if (outputableCardList.indexOf(card) === -1) {
-                card.isSelected = false;
-            }
-        });
-
-        log(Common.cardListToString(outputableCardList));
     }
 }
