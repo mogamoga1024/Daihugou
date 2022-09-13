@@ -19,6 +19,11 @@ class Human extends Player {
         return selectedCardList;
     }
 
+    canOutputCardList(battleFieldCardList) {
+        // TODO
+        return true;
+    }
+
     outputCardListFromUI() {
         if (this.resolveOutputCardList !== null) {
             const selectedCardList = [];

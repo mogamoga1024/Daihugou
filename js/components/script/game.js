@@ -55,7 +55,9 @@ module.exports = {
             }
         },
         outputCardList() {
-            this.player.outputCardListFromUI();
+            if (this.player.canOutputCardList(this.battleFieldCardList)) {
+                this.player.outputCardListFromUI();
+            }
         },
         pass() {
             this.player.cardList.forEach(c => {
