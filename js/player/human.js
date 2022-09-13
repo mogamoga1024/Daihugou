@@ -24,10 +24,13 @@ class Human extends Player {
 
         const bfHand = Hand.cardListToHand(battleFieldCardList);
 
+
+
+
         return true;
     }
 
-    outputCardListFromUI() {
+    outputCardListFromUI(battleFieldCardList) {
         if (this.resolveOutputCardList !== null) {
             const selectedCardList = [];
             const tmpCardList = [];
@@ -40,6 +43,10 @@ class Human extends Player {
                 else {
                     tmpCardList.push(card);
                 }
+            }
+
+            if (this.canOutputCardList(battleFieldCardList) === false) {
+                return;
             }
 
             this.cardList = tmpCardList;
