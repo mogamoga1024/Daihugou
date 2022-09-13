@@ -24,18 +24,14 @@ class Hand {
         }
         else {
             let prevCard = cardList[0];
-            let maybeStairs = false;
             for (let i = 1; i < cardList.length; i++) {
                 const card = cardList[i];
-                if (card.suit !== prevCard.suit) {
+                if (card.suit !== prevCard.suit || card.power - prevCard.power !== 1) {
                     return this.None;
-                }
-                else if (card.power - prevCard.power !== 1) {
-                    maybeStairs = true;
                 }
                 prevCard = card;
             }
-            return maybeStairs ? this.MaybeStairs : this.Stairs;
+            return this.Stairs;
         }
     }
 }

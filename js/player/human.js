@@ -21,6 +21,9 @@ class Human extends Player {
 
     canOutputCardList(battleFieldCardList) {
         // TODO
+
+        const bfHand = Hand.cardListToHand(battleFieldCardList);
+
         return true;
     }
 
