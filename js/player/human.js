@@ -29,19 +29,14 @@ class Human extends Player {
 
         switch (bfHand) {
             case Hand.Single:
-                
-                break;
+                return selectedCardList[0].power > battleFieldCardList[0].power;
             case Hand.Multi:
-
-                break;
+                return selectedCardList[0].power > battleFieldCardList[0].power;
             case Hand.Stairs:
-
-                break;
+                return selectedCardList[0].power > battleFieldCardList[0].power;
             default:
                 throw new Error("存在しない役");
         }
-
-        return true;
     }
 
     outputCardListFromUI(battleFieldCardList) {
