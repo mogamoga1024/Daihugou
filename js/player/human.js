@@ -19,13 +19,24 @@ class Human extends Player {
         return selectedCardList;
     }
 
-    canOutputCardList(battleFieldCardList) {
+    canOutputCardList(battleFieldCardList, selectedCardList) {
         // TODO
 
         const bfHand = Hand.cardListToHand(battleFieldCardList);
 
+        switch (bfHand) {
+            case Hand.Single:
+                
+                break;
+            case Hand.Multi:
 
+                break;
+            case Hand.Stairs:
 
+                break;
+            default:
+                throw new Error("存在しない役");
+        }
 
         return true;
     }
@@ -45,7 +56,7 @@ class Human extends Player {
                 }
             }
 
-            if (this.canOutputCardList(battleFieldCardList) === false) {
+            if (this.canOutputCardList(battleFieldCardList, selectedCardList) === false) {
                 return;
             }
 
