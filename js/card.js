@@ -7,22 +7,6 @@ class Card {
     name = "";
     isSelected = false;
 
-    _canSelect = true;
-    get canSelect() {
-        return this._canSelect;
-    }
-    set canSelect(val) {
-        if (this._canSelect === val) return;
-
-        this._canSelect = val;
-        if (val) {
-            this.imagePath = this.imagePath.replace("_disabled.png", ".png");
-        }
-        else {
-            this.imagePath = this.imagePath.replace(".png", "_disabled.png");
-        }
-    }
-
     constructor(suit, numberName, name, power, imagePath) {
         this.suit = suit;
         this.numberName = numberName;

@@ -15,7 +15,6 @@ class Human extends Player {
         });
 
         this.cardList.forEach(card => {
-            card.canSelect = true;
             card.isSelected = false;
         });
 
@@ -160,11 +159,7 @@ class Human extends Player {
 
         this.cardList.forEach(card => {
             if (outputableCardList.indexOf(card) === -1) {
-                card.canSelect = false;
                 card.isSelected = false;
-            }
-            else {
-                card.canSelect = true;
             }
         });
 

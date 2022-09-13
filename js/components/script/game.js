@@ -44,8 +44,6 @@ module.exports = {
         cardClick(index) {
             let card = this.player.cardList[index];
 
-            if (!card.canSelect) return;
-
             if (card.isSelected) {
                 this.player.cardList.forEach(c => {
                     c.isSelected = false;
