@@ -10,10 +10,10 @@ module.exports = {
                 new Cpu("CPU3"),
             ],
             battleFieldCardList: [
-                CardFactory.createCard("d3"),
-                //CardFactory.createCard("s3"),
-                CardFactory.createCard("d4"),
-                CardFactory.createCard("d5"),
+                // CardFactory.createCard("d3"),
+                // //CardFactory.createCard("s3"),
+                // CardFactory.createCard("d4"),
+                // CardFactory.createCard("d5"),
             ]
         }
     },
