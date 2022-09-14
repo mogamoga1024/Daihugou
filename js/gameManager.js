@@ -3,6 +3,7 @@ class GameManager {
     static #playerList = [];
     static #vm = null;
     static #latestOutputCardPlayer = null;
+    static #ranking = 1;
 
     static async startGame(playerList, leaderIndex, vm) {
         this.#playerList = playerList;
@@ -11,11 +12,14 @@ class GameManager {
 
         log("【ゲーム開始】");
 
-        while (this.#playerList.filter(p => !p.isRankDecided).length > 0) {
+        while (this.#playerList.filter(p => !p.isRankDecided).length > 1) {
             playerIndex = await this.startTurn(playerIndex);
-
-            //break; // debug
         }
+
+        const lastPlayer = this.#playerList[playerIndex];
+        lastPlayer.rank = Rank.getRank(this.#ranking++);
+        lastPlayer.isRankDecided = true;
+        this.#ranking = 1;
 
         log("【ゲーム終了】");
     }
@@ -47,6 +51,7 @@ class GameManager {
 
             if (player.cardList.length === 0) {
                 log("あがり");
+                player.rank = Rank.getRank(this.#ranking++);
                 player.isRankDecided = true;
                 this.#playerList.forEach(p => p.isNowPass = false);
             }
