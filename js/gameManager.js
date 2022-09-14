@@ -2,6 +2,7 @@
 class GameManager {
     static #playerList = [];
     static #vm = null;
+    static #latestOutputCardPlayer = null;
 
     static async startGame(playerList, leaderIndex, vm) {
         this.#playerList = playerList;
@@ -25,11 +26,17 @@ class GameManager {
         log(`【${player.name}のターン】`);
         player.isTurn = true;
 
+        if (this.#latestOutputCardPlayer === player) {
+            this.#vm.battleFieldCardList = [];
+            await Common.sleep();
+        }
+
         const cardList = await player.outputCardList(this.#vm.battleFieldCardList);
 
         if (cardList.length > 0) {
             log(`場に出したカード: ${Common.cardListToString(cardList)}`)
             this.#vm.battleFieldCardList = cardList;
+            this.#latestOutputCardPlayer = player;
         }
         else {
             log("パス");
