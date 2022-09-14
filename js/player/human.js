@@ -33,9 +33,7 @@ class Human extends Player {
 
         switch (bfHand) {
             case Hand.Single:
-                return selectedCardList[0].power > battleFieldCardList[0].power;
             case Hand.Multi:
-                return selectedCardList[0].power > battleFieldCardList[0].power;
             case Hand.Stairs:
                 return selectedCardList[0].power > battleFieldCardList[0].power;
             default:
