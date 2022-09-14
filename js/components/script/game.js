@@ -61,7 +61,7 @@ module.exports = {
             this.player.cardList.forEach(c => {
                 c.isSelected = false;
             });
-            this.player.outputCardListFromUI();
+            this.player.outputCardListFromUI(this.battleFieldCardList);
         },
         playerList() {
             // computedのほうだと順番が狂った。謎

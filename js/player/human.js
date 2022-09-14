@@ -25,7 +25,7 @@ class Human extends Player {
         const bfHand = Hand.cardListToHand(battleFieldCardList);
         const hand = Hand.cardListToHand(selectedCardList);
 
-        if (battleFieldCardList.length === 0 && hand !== Hand.None) {
+        if (selectedCardList.length === 0 || battleFieldCardList.length === 0 && hand !== Hand.None) {
             return true;
         }
 
