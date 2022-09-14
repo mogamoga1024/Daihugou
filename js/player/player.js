@@ -4,6 +4,7 @@ class Player {
     rank = Rank.Heimin;
     cardList = [];
     isTurn = false;
+    isNowPass = false;
     isRankDecided = false;
 
     constructor(name) {

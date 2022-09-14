@@ -25,6 +25,7 @@ class GameManager {
 
         log(`【${player.name}のターン】`);
         player.isTurn = true;
+        player.isNowPass = false;
 
         if (this.#latestOutputCardPlayer === player) {
             this.#vm.battleFieldCardList = [];
@@ -40,6 +41,7 @@ class GameManager {
         }
         else {
             log("パス");
+            player.isNowPass = true;
         }
 
         await Common.sleep();
