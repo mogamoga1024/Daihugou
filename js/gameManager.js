@@ -25,19 +25,31 @@ class GameManager {
 
         log(`【${player.name}のターン】`);
         player.isTurn = true;
-        player.isNowPass = false;
-
-        if (this.#latestOutputCardPlayer === player) {
+        
+        // 場を流すかどうか
+        if (
+            this.#latestOutputCardPlayer === player ||
+            this.#latestOutputCardPlayer !== null && this.#latestOutputCardPlayer.isRankDecided && player.isNowPass
+        ) {
             this.#vm.battleFieldCardList = [];
+            this.#playerList.forEach(p => p.isNowPass = false);
             await Common.sleep();
         }
+
+        player.isNowPass = false;
 
         const cardList = await player.outputCardList(this.#vm.battleFieldCardList);
 
         if (cardList.length > 0) {
-            log(`場に出したカード: ${Common.cardListToString(cardList)}`)
+            log(`場に出したカード: ${Common.cardListToString(cardList)}`);
             this.#vm.battleFieldCardList = cardList;
             this.#latestOutputCardPlayer = player;
+
+            if (player.cardList.length === 0) {
+                log("あがり");
+                player.isRankDecided = true;
+                this.#playerList.forEach(p => p.isNowPass = false);
+            }
         }
         else {
             log("パス");
