@@ -22,6 +22,9 @@ class Hand {
             }
             return this.Multi;
         }
+        else if (cardList.length < 3) {
+            return this.None;
+        }
         else {
             let prevCard = cardList[0];
             for (let i = 1; i < cardList.length; i++) {
