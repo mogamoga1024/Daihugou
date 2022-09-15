@@ -1,5 +1,9 @@
 
 class Cpu extends Player {
+    _singleCardList = [];
+    _multiCardList = [];
+    _stairsCardList = [];
+
     exchangeCardList() {
         // TODO
         return [];
@@ -7,6 +11,14 @@ class Cpu extends Player {
 
     outputCardList(battleFieldCardList) {
         // TODO
+
+        if (
+            this._singleCardList.length === 0 &&
+            this._multiCardList.length === 0 &&
+            this._stairsCardList.length === 0
+        ) {
+            this._cardDivision();
+        }
 
         // 仮
 
@@ -46,5 +58,9 @@ class Cpu extends Player {
         }
 
         return selectedCardList;
+    }
+
+    _cardDivision() {
+
     }
 }
