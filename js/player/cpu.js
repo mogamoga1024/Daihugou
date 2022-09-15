@@ -61,6 +61,36 @@ class Cpu extends Player {
     }
 
     _cardDivision() {
+        // とりあえず multi → stairs → single の順で分割する。
+        // 本当は組数が最小になるように分割したいが…
+
+        // TODO 一旦、Jokerは考慮しない
+
+        const tmpCardList = this.cardList;
+
+        // multi
+        this._multiCardList = [];
+        let prevCard = tmpCardList[0];
+        let tmpMultiCardList = [prevCard];
+
+        for (let i = 1; i < tmpCardList.length; i++) {
+            const card = tmpCardList[i];
+            if (prevCard.power === card.power) {
+                tmpMultiCardList.push(card);
+                if (i === tmpCardList.length - 1) {
+                    this._multiCardList.push(tmpMultiCardList);
+                }
+            }
+            else if (tmpMultiCardList.length >= 2) {
+                this._multiCardList.push(tmpMultiCardList);
+                tmpMultiCardList = [card];
+            }
+            prevCard = card;
+        }
+
+        // for (const card of tmpCardList) {
+            
+        // }
 
     }
 }
