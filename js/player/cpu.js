@@ -66,9 +66,14 @@ class Cpu extends Player {
 
         // TODO 一旦、Jokerは考慮しない
 
-        const tmpCardList = this.cardList;
+        let tmpCardList = this.cardList;
 
-        // multi
+        tmpCardList = this._cardMultiDivision(tmpCardList);
+
+        tmpCardList = this._cardStairsDivision(tmpCardList);
+    }
+
+    _cardMultiDivision(tmpCardList) {
         this._multiCardList = [];
         let prevCard = tmpCardList[0];
         let tmpMultiCardList = [prevCard];
@@ -88,9 +93,14 @@ class Cpu extends Player {
             prevCard = card;
         }
 
-        // for (const card of tmpCardList) {
-            
-        // }
+        for (const cardList of this._multiCardList) {
+            tmpCardList = tmpCardList.filter(c => cardList.indexOf(c) !== -1);
+        }
+        
+        return tmpCardList;
+    }
 
+    _cardStairsDivision() {
+        
     }
 }
