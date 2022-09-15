@@ -3,7 +3,10 @@ class CardFactory {
     static #cardList = [];
     
     static #initCardList() {
-        if (this.#cardList.length > 0) return;
+        if (this.#cardList.length > 0) {
+            this.#cardList.forEach(c => c.obj.isDead = false);
+            return;
+        }
 
         const imageFolderPath = "./assets/card";
         const suitList = [Suit.Spade, Suit.Club, Suit.Diamond, Suit.Heart];

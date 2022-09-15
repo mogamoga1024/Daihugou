@@ -6,6 +6,7 @@ class Card {
     imagePath = "";
     name = "";
     isSelected = false;
+    isDead = false;
 
     constructor(suit, numberName, name, power, imagePath) {
         this.suit = suit;

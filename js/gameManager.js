@@ -49,6 +49,8 @@ class GameManager {
             this.#vm.battleFieldCardList = cardList;
             this.#latestOutputCardPlayer = player;
 
+            cardList.forEach(c => c.isDead = true);
+
             if (player.cardList.length === 0) {
                 log("あがり");
                 player.rank = Rank.getRank(this.#ranking++);
