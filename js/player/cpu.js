@@ -55,6 +55,9 @@ class Cpu extends Player {
         // 手札の更新
         if (selectedCardList.length > 0) {
             this.cardList = this.cardList.filter(c => selectedCardList.indexOf(c) === -1);
+            if (this.cardList.length === 0) {
+                this._singleCardList = this._multiCardList = this._stairsCardList = [];
+            }
         }
 
         return selectedCardList;
