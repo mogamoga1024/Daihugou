@@ -34,14 +34,23 @@ class Cpu extends Player {
 
             switch (bfHand) {
                 case Hand.Single:
-                    // TODO とりあえず強いカード
-                    for (const card of this.cardList) {
-                        if (battleFieldCardList[0].power < card.power) {
-                            selectedCardList = [card];
-                            break;
-                        }
+                    if (this._singleCardList.length === 0) {
+                        return [];
                     }
-                    break;
+
+                    let targetCard = null;
+                    if (
+                        this._handCount === 2 &&
+                        this._singleCardList[this._singleCardList.length - 1].power === this._strongestCardPower
+                    ) {
+                        targetCard = this._singleCardList[this._singleCardList.length - 1];
+                    }
+                    else {
+                        targetCard = this._singleCardList[0];
+                    }
+
+                    this._singleCardList = this._singleCardList.filter(c => c !== targetCard);
+                    return [targetCard];
                 case Hand.Multi:
                     break;
                 case Hand.Stairs:
@@ -160,6 +169,27 @@ class Cpu extends Player {
                 strongestCard = card.obj;
             }
         }
-        return strongestCard === null ? Number.MIN_SAFE_INTEGER : strongestCard.power;
+        if (strongestCard === null) {
+            throw new Error("すでにゲームが終わっている");
+        }
+        return strongestCard.power;
+    }
+
+    get _lastOutputCard() {
+        // 一番弱いカードを最後に出す
+        if (this._singleCardList.length > 0) {
+            return this._singleCardList[0];
+        }
+        else if (this._multiCardList.length > 0) {
+            return this._multiCardList[0];
+        }
+        else if (this._stairsCardList.length > 0) {
+            return this._stairsCardList[0];
+        }
+        throw new Error("該当なし");
+    }
+
+    get _handCount() {
+        return this._singleCardList.length + this._multiCardList.length + this._stairsCardList.length;
     }
 }
