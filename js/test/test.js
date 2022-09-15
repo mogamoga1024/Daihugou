@@ -10,7 +10,7 @@ module("CPUのAIのテスト", {
 // memo: ((s|c|d|h)([1-9]|T|J|Q|K))|Joker1|Joker2
 
 test("カードの分割 single", function() {
-    cpu.cardList = CardFactory.createCardList("s3, c4, d5, h6");;
+    cpu.cardList = CardFactory.createCardList("s3, c4, d5, h6");
 
     cpu._cardDivision();
 
@@ -30,7 +30,7 @@ test("カードの分割 single", function() {
 });
 
 test("カードの分割 multi", function() {
-    cpu.cardList = CardFactory.createCardList("s4, c4, sJ, dJ, hJ");;
+    cpu.cardList = CardFactory.createCardList("s4, c4, sJ, dJ, hJ");
 
     cpu._cardDivision();
 
@@ -42,7 +42,7 @@ test("カードの分割 multi", function() {
 });
 
 test("カードの分割 stairs", function() {
-    cpu.cardList = CardFactory.createCardList("s4, s5, s6, dJ, dQ, dK, d1");;
+    cpu.cardList = CardFactory.createCardList("s4, s5, s6, dJ, dQ, dK, d1");
 
     cpu._cardDivision();
 
@@ -56,7 +56,7 @@ test("カードの分割 stairs", function() {
 // memo: ((s|c|d|h)([1-9]|T|J|Q|K))|Joker1|Joker2
 
 test("カードの分割 複合", function() {
-    cpu.cardList = CardFactory.createCardList("s3, s4, s5, s6, c6, d6, h6, d7, d8, sJ, cJ, h2");;
+    cpu.cardList = CardFactory.createCardList("s3, s4, s5, s6, c6, d6, h6, d7, d8, sJ, cJ, h2");
 
     cpu._cardDivision();
 
@@ -69,4 +69,18 @@ test("カードの分割 複合", function() {
     strictEqual(Common.cardListToString(cpu._stairsCardList[0]), "s3, s4, s5");
 });
 
+test("最強のカードの強さ", function() {
+    cpu.cardList = CardFactory.createCardList("s3, s4, s5, s6, s7, s8, s9, sT, sJ, sQ, sK, s1, s2, Joker1, Joker2");
 
+    cpu.cardList.filter(c => c.name === "Joker1").forEach(c => c.isDead = true);
+
+    strictEqual(cpu._strongestCardPower, CardFactory.createCard("Joker1").power);
+});
+
+test("最強のカードの強さ", function() {
+    cpu.cardList = CardFactory.createCardList("s3, s4, s5, s6, s7, s8, s9, sT, sJ, sQ, sK, s1, s2, Joker1, Joker2");
+
+    cpu.cardList.filter(c => c.name === "Joker1" || c.name === "Joker2").forEach(c => c.isDead = true);
+
+    strictEqual(cpu._strongestCardPower, CardFactory.createCard("s2").power);
+});

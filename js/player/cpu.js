@@ -145,4 +145,21 @@ class Cpu extends Player {
         this._singleCardList = cardList;
         return cardList;
     }
+
+    get _strongestCardPower() {
+        let strongestCard = null;
+        for (const card of CardFactory.allCardList) {
+            if (card.isDead) {
+                continue;
+            }
+            if (strongestCard === null) {
+                strongestCard = card.obj;
+                continue;
+            }
+            if (strongestCard.power < card.obj.power) {
+                strongestCard = card.obj;
+            }
+        }
+        return strongestCard.power; // strongestCardがnullならその状態自体が異常だからエラーでいい
+    }
 }

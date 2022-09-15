@@ -2,6 +2,10 @@
 class CardFactory {
     static #cardList = [];
     
+    static get allCardList() {
+        return this.#cardList;
+    }
+
     static #initCardList() {
         if (this.#cardList.length > 0) {
             this.#cardList.forEach(c => c.obj.isDead = false);
