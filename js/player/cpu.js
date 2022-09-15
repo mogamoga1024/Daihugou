@@ -58,6 +58,9 @@ class Cpu extends Player {
                     }
 
                     const tmpMultiCardList = this._multiCardList.filter(c => c.length === battleFieldCardList.length);
+                    if (tmpMultiCardList.length === 0) {
+                        return []; // TODO 考えもの
+                    }
 
                     if (
                         this._handCount === 2 &&
@@ -73,7 +76,28 @@ class Cpu extends Player {
                     return targetCard;
 
                 case Hand.Stairs:
-                    break;
+                    if (this._stairsCardList.length === 0) {
+                        return [];
+                    }
+
+                    const tmpStairsCardList = this._stairsCardList.filter(c => c.length === battleFieldCardList.length);
+                    if (tmpStairsCardList.length === 0) {
+                        return []; // TODO 考えもの
+                    }
+                    const lastTmpStairsCard = tmpStairsCardList[tmpStairsCardList.length - 1];
+
+                    if (
+                        this._handCount === 2 &&
+                        lastTmpStairsCard[lastTmpStairsCard.length - 1].power === this._strongestCardPower
+                    ) {
+                        targetCard = tmpStairsCardList[tmpStairsCardList.length - 1];
+                    }
+                    else {
+                        targetCard = tmpStairsCardList[0];
+                    }
+
+                    this._stairsCardList = this._stairsCardList.filter(c => c !== targetCard);
+                    return targetCard;
             
                 default:
                     throw new Error("存在しない役");
