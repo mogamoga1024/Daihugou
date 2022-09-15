@@ -149,7 +149,7 @@ class Cpu extends Player {
     get _strongestCardPower() {
         let strongestCard = null;
         for (const card of CardFactory.allCardList) {
-            if (card.isDead) {
+            if (card.obj.isDead) {
                 continue;
             }
             if (strongestCard === null) {
@@ -160,6 +160,6 @@ class Cpu extends Player {
                 strongestCard = card.obj;
             }
         }
-        return strongestCard.power; // strongestCardがnullならその状態自体が異常だからエラーでいい
+        return strongestCard === null ? Number.MIN_SAFE_INTEGER : strongestCard.power;
     }
 }
