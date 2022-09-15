@@ -26,7 +26,7 @@ class Cpu extends Player {
         if (this.cardList.length === 0) return [];
 
         if (battleFieldCardList.length === 0) {
-            // TODO
+            // TODO 親のとき
             selectedCardList = [this.cardList[0]];
         }
         else {
