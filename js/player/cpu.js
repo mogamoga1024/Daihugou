@@ -35,29 +35,30 @@ class Cpu extends Player {
             let targetCard = null;
             switch (bfHand) {
                 case Hand.Single:
-                    if (this._singleCardList.length === 0) {
+                    const tmpSingleCardList = this._singleCardList.filter(c => c.power > battleFieldCardList[0].power);
+
+                    if (tmpSingleCardList.length === 0) {
                         return [];
                     }
 
                     if (
                         this._handCount === 2 &&
-                        this._singleCardList[this._singleCardList.length - 1].power === this._strongestCardPower
+                        tmpSingleCardList[tmpSingleCardList.length - 1].power === this._strongestCardPower
                     ) {
-                        targetCard = this._singleCardList[this._singleCardList.length - 1];
+                        targetCard = tmpSingleCardList[tmpSingleCardList.length - 1];
                     }
                     else {
-                        targetCard = this._singleCardList[0];
+                        targetCard = tmpSingleCardList[0];
                     }
 
                     this._singleCardList = this._singleCardList.filter(c => c !== targetCard);
                     return [targetCard];
 
                 case Hand.Multi:
-                    if (this._multiCardList.length === 0) {
-                        return [];
-                    }
-
-                    const tmpMultiCardList = this._multiCardList.filter(c => c.length === battleFieldCardList.length);
+                    const tmpMultiCardList = this._multiCardList.filter(c =>
+                        c.length === battleFieldCardList.length &&
+                        c[0].power > battleFieldCardList[0].power
+                    );
                     if (tmpMultiCardList.length === 0) {
                         return []; // TODO 考えもの
                     }
@@ -76,11 +77,10 @@ class Cpu extends Player {
                     return targetCard;
 
                 case Hand.Stairs:
-                    if (this._stairsCardList.length === 0) {
-                        return [];
-                    }
-
-                    const tmpStairsCardList = this._stairsCardList.filter(c => c.length === battleFieldCardList.length);
+                    const tmpStairsCardList = this._stairsCardList.filter(c =>
+                        c.length === battleFieldCardList.length &&
+                        c[0].power > battleFieldCardList[0].power
+                    );
                     if (tmpStairsCardList.length === 0) {
                         return []; // TODO 考えもの
                     }
