@@ -43,13 +43,12 @@ module.exports = {
     },
     methods: {
         cardClick(index) {
-            let card = this.player.cardList[index];
+            const card = this.player.cardList[index];
 
             if (card.isSelected) {
                 this.player.cardList.forEach(c => {
                     c.isSelected = false;
                 });
-                card = null;
             }
             else {
                 card.isSelected = true;
