@@ -94,11 +94,14 @@ class Cpu extends Player {
                 this._multiCardList.push(multiCard);
                 multiCard = [card];
             }
+            else {
+                multiCard = [card];
+            }
             prevCard = card;
         }
 
         for (const multiCard of this._multiCardList) {
-            cardList = cardList.filter(c => multiCard.indexOf(c) !== -1);
+            cardList = cardList.filter(c => multiCard.indexOf(c) === -1);
         }
         
         return cardList;
@@ -122,11 +125,14 @@ class Cpu extends Player {
                 this._stairsCardList.push(stairsCard);
                 stairsCard = [card];
             }
+            else {
+                stairsCard = [card];
+            }
             prevCard = card;
         }
 
         for (const stairsCard of this._stairsCardList) {
-            cardList = cardList.filter(c => stairsCard.indexOf(c) !== -1);
+            cardList = cardList.filter(c => stairsCard.indexOf(c) === -1);
         }
         
         return cardList;

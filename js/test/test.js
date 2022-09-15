@@ -60,7 +60,7 @@ test("カードの分割 複合", function() {
 
     cpu._cardDivision();
 
-    strictEqual(cpu._singleCardList.length, 1);
+    strictEqual(cpu._singleCardList.length, 3);
     strictEqual(Common.cardListToString(cpu._singleCardList), "d7, d8, h2");
     strictEqual(cpu._multiCardList.length, 2);
     strictEqual(Common.cardListToString(cpu._multiCardList[0]), "s6, c6, d6, h6");
@@ -68,3 +68,5 @@ test("カードの分割 複合", function() {
     strictEqual(cpu._stairsCardList.length, 1);
     strictEqual(Common.cardListToString(cpu._stairsCardList[0]), "s3, s4, s5");
 });
+
+
