@@ -114,11 +114,11 @@ class Cpu extends Player {
             const card = cardList[i];
             if (prevCard.suit === card.suit && card.power - prevCard.power === 1) {
                 stairsCard.push(card);
-                if (i === cardList.length - 1) {
+                if (i === cardList.length - 1 && stairsCard.length >= 3) {
                     this._stairsCardList.push(stairsCard);
                 }
             }
-            else if (stairsCard.length >= 2) {
+            else if (stairsCard.length >= 3) {
                 this._stairsCardList.push(stairsCard);
                 stairsCard = [card];
             }

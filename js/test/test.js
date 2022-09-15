@@ -19,6 +19,16 @@ test("カードの分割 single", function() {
     strictEqual(cpu._stairsCardList.length, 0);
 });
 
+test("カードの分割 single", function() {
+    cpu.cardList = CardFactory.createCardList("s3, s4");;
+
+    cpu._cardDivision();
+
+    strictEqual(Common.cardListToString(cpu._singleCardList), "s3, s4");
+    strictEqual(cpu._multiCardList.length, 0);
+    strictEqual(cpu._stairsCardList.length, 0);
+});
+
 test("カードの分割 multi", function() {
     cpu.cardList = CardFactory.createCardList("s4, c4, sJ, dJ, hJ");;
 
@@ -43,4 +53,12 @@ test("カードの分割 stairs", function() {
     strictEqual(Common.cardListToString(cpu._stairsCardList[1]), "dJ, dQ, dK, d1");
 });
 
+// memo: ((s|c|d|h)([1-9]|T|J|Q|K))|Joker1|Joker2
 
+test("カードの分割 複合", function() {
+    cpu.cardList = CardFactory.createCardList("s3, s4, s5, s6, c6, d6, h6, d7, d8, sJ, cJ, d2");;
+
+    cpu._cardDivision();
+
+
+});
