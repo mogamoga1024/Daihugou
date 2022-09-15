@@ -32,13 +32,13 @@ class Cpu extends Player {
         else {
             const bfHand = Hand.cardListToHand(battleFieldCardList);
 
+            let targetCard = null;
             switch (bfHand) {
                 case Hand.Single:
                     if (this._singleCardList.length === 0) {
                         return [];
                     }
 
-                    let targetCard = null;
                     if (
                         this._handCount === 2 &&
                         this._singleCardList[this._singleCardList.length - 1].power === this._strongestCardPower
@@ -51,8 +51,27 @@ class Cpu extends Player {
 
                     this._singleCardList = this._singleCardList.filter(c => c !== targetCard);
                     return [targetCard];
+
                 case Hand.Multi:
-                    break;
+                    if (this._multiCardList.length === 0) {
+                        return [];
+                    }
+
+                    const tmpMultiCardList = this._multiCardList.filter(c => c.length === battleFieldCardList.length);
+
+                    if (
+                        this._handCount === 2 &&
+                        tmpMultiCardList[tmpMultiCardList.length - 1][0].power === this._strongestCardPower
+                    ) {
+                        targetCard = tmpMultiCardList[tmpMultiCardList.length - 1];
+                    }
+                    else {
+                        targetCard = tmpMultiCardList[0];
+                    }
+
+                    this._multiCardList = this._multiCardList.filter(c => c !== targetCard);
+                    return targetCard;
+
                 case Hand.Stairs:
                     break;
             
