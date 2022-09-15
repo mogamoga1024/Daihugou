@@ -78,6 +78,7 @@ class Cpu extends Player {
 
     _cardMultiDivision(cardList) {
         this._multiCardList = [];
+        if (cardList.length === 0) return cardList;
         let prevCard = cardList[0];
         let multiCard = [prevCard];
 
@@ -104,10 +105,35 @@ class Cpu extends Player {
     }
 
     _cardStairsDivision(cardList) {
+        this._stairsCardList = [];
+        if (cardList.length === 0) return cardList;
+        let prevCard = cardList[0];
+        let stairsCard = [prevCard];
+
+        for (let i = 1; i < cardList.length; i++) {
+            const card = cardList[i];
+            if (prevCard.suit === card.suit && card.power - prevCard.power === 1) {
+                stairsCard.push(card);
+                if (i === cardList.length - 1) {
+                    this._stairsCardList.push(stairsCard);
+                }
+            }
+            else if (stairsCard.length >= 2) {
+                this._stairsCardList.push(stairsCard);
+                stairsCard = [card];
+            }
+            prevCard = card;
+        }
+
+        for (const stairsCard of this._stairsCardList) {
+            cardList = cardList.filter(c => stairsCard.indexOf(c) !== -1);
+        }
         
+        return cardList;
     }
 
     _cardSingleDivision(cardList) {
-
+        this._singleCardList = cardList;
+        return cardList;
     }
 }
