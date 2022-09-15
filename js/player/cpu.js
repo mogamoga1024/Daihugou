@@ -10,7 +10,9 @@ class Cpu extends Player {
     }
 
     outputCardList(battleFieldCardList) {
-        // TODO
+        if (this.cardList.length === 0) {
+            throw new Error("すでにあがってる");
+        }
 
         if (
             this._singleCardList.length === 0 &&
@@ -20,11 +22,8 @@ class Cpu extends Player {
             this._cardDivision();
         }
 
-        // 仮
-
         let selectedCardList = [];
-        if (this.cardList.length === 0) return [];
-
+        
         if (battleFieldCardList.length === 0) {
             // TODO 親のとき
             selectedCardList = [this.cardList[0]];
@@ -52,7 +51,8 @@ class Cpu extends Player {
                     }
 
                     this._singleCardList = this._singleCardList.filter(c => c !== targetCard);
-                    return [targetCard];
+                    selectedCardList = [targetCard];
+                    break;
 
                 case Hand.Multi:
                     const tmpMultiCardList = this._multiCardList.filter(c =>
@@ -74,7 +74,8 @@ class Cpu extends Player {
                     }
 
                     this._multiCardList = this._multiCardList.filter(c => c !== targetCard);
-                    return targetCard;
+                    selectedCardList = targetCard;
+                    break;
 
                 case Hand.Stairs:
                     const tmpStairsCardList = this._stairsCardList.filter(c =>
@@ -97,8 +98,9 @@ class Cpu extends Player {
                     }
 
                     this._stairsCardList = this._stairsCardList.filter(c => c !== targetCard);
-                    return targetCard;
-            
+                    selectedCardList = targetCard;
+                    break;
+
                 default:
                     throw new Error("存在しない役");
             }
