@@ -23,4 +23,8 @@ class Player {
     outputHand(battleFieldHand) {
         return [];
     }
+
+    onRevolution() {}
+
+    onGameFinish() {}
 }

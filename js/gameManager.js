@@ -22,6 +22,8 @@ class GameManager {
         this.#ranking = 1;
 
         log("【ゲーム終了】");
+
+        this.#playerList.forEach(p => p.onGameFinish());
     }
 
     static async startTurn(playerIndex) {
@@ -65,7 +67,7 @@ class GameManager {
                     card.power *= -1;
                 }
 
-                // TODO CPUに通知
+                this.#playerList.forEach(p => p.onRevolution());
             }
 
             this.#vm.battleFieldHand = cardList;

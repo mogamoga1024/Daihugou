@@ -183,9 +183,6 @@ class Cpu extends Player {
         // 手札の更新
         if (selectedHand.length > 0) {
             this.cardList = this.cardList.filter(c => selectedHand.indexOf(c) === -1);
-            if (this.cardList.length === 0) {
-                this._singleHandList = this._multiHandList = this._stairsHandList = [];
-            }
         }
 
         switch (Hand.handKindFrom(selectedHand)) {
@@ -316,5 +313,14 @@ class Cpu extends Player {
 
     get _handCount() {
         return this._singleHandList.length + this._multiHandList.length + this._stairsHandList.length;
+    }
+
+    onRevolution() {
+        this._singleHandList = this._multiHandList = this._stairsHandList = [];
+        this._cardDivision();
+    }
+
+    onGameFinish() {
+        this._singleHandList = this._multiHandList = this._stairsHandList = [];
     }
 }
