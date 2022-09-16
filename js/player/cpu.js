@@ -86,6 +86,7 @@ class Cpu extends Player {
             }
             // 3組以上
             // → 最後に出す役、最強の役以外で最弱の役をだす
+            // TODO 最強の役を持っていない場合は最後に出す予定のカードはさっさと切っていい
             else {
                 const tmpSingleCardList = this._singleHandList.filter(h => h !== lastOutputHand && h.power !== strongestCardPower);
                 const tmpMultiCardList = this._multiHandList.filter(h => h !== lastOutputHand && h.power !== strongestCardPower);
