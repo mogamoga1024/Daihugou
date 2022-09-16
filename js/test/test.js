@@ -79,18 +79,17 @@ test("カードの分割 複合", function() {
 
 test("最強のカードの強さ", function() {
     cpu.cardList = CardFactory.createCardList("s3, s4, s5, s6, s7, s8, s9, sT, sJ, sQ, sK, s1, s2, Joker1, Joker2");
-    const joker1Power = CardFactory.createCard("Joker1").power;
+    
+    CardFactory.getCard("Joker1").isDead = true;
 
-    cpu.cardList.filter(c => c.name === "Joker1").forEach(c => c.isDead = true);
-
-    strictEqual(cpu._strongestCardPower, joker1Power);
+    strictEqual(cpu._strongestCardPower, CardFactory.getCard("Joker1").power);
 });
 
 test("最強のカードの強さ", function() {
     cpu.cardList = CardFactory.createCardList("s3, s4, s5, s6, s7, s8, s9, sT, sJ, sQ, sK, s1, s2, Joker1, Joker2");
-    const s2Power = CardFactory.createCard("s2").power;
-
-    cpu.cardList.filter(c => c.name === "Joker1" || c.name === "Joker2").forEach(c => c.isDead = true);
-
-    strictEqual(cpu._strongestCardPower, s2Power);
+    
+    CardFactory.getCard("Joker1").isDead = true;
+    CardFactory.getCard("Joker2").isDead = true;
+    
+    strictEqual(cpu._strongestCardPower, CardFactory.getCard("s2").power);
 });

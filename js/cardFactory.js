@@ -35,8 +35,10 @@ class CardFactory {
         this.#cardList.push({name: "Joker2", obj: new Joker("Joker2",  99,  `${imageFolderPath}/card_joker.png`)});
     }
 
-    static createAllCardList() {
-        this.#initCardList();
+    static createAllCardList(needInit = true) {
+        if (needInit) {
+            this.#initCardList();
+        }
         return this.#cardList.map(c => c.obj);
     }
 
@@ -45,8 +47,10 @@ class CardFactory {
      * @param {string} name 
      * @returns 
      */
-    static createCard(name) {
-        this.#initCardList();
+    static createCard(name, needInit = true) {
+        if (needInit) {
+            this.#initCardList();
+        }
         const cardList = this.#cardList.filter(c => c.name === name).map(c => c.obj);
         if (cardList.length === 0) {
             throw new Error(`${name}のカードが存在しない`);
@@ -54,9 +58,13 @@ class CardFactory {
         return cardList[0];
     }
 
-    static createCardList(strNameList) {
+    static createCardList(strNameList, needInit = true) {
         const nameList = strNameList.split(",").map(name => name.trim());
-        const cardList = nameList.map(name => this.createCard(name));
+        const cardList = nameList.map(name => this.createCard(name, needInit));
         return Common.sortCardList(cardList);
+    }
+
+    static getCard(name) {
+        return this.createCard(name, false);
     }
 }
