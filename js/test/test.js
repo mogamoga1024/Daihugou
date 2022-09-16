@@ -14,7 +14,11 @@ test("カードの分割 single", function() {
 
     cpu._cardDivision();
 
-    strictEqual(Common.cardListToString(cpu._singleHandList), "s3, c4, d5, h6");
+    strictEqual(cpu._singleHandList.length, 4);
+    strictEqual(Common.cardListToString(cpu._singleHandList[0]), "s3");
+    strictEqual(Common.cardListToString(cpu._singleHandList[1]), "c4");
+    strictEqual(Common.cardListToString(cpu._singleHandList[2]), "d5");
+    strictEqual(Common.cardListToString(cpu._singleHandList[3]), "h6");
     strictEqual(cpu._multiHandList.length, 0);
     strictEqual(cpu._stairsHandList.length, 0);
 });
@@ -24,7 +28,9 @@ test("カードの分割 single", function() {
 
     cpu._cardDivision();
 
-    strictEqual(Common.cardListToString(cpu._singleHandList), "s3, s4");
+    strictEqual(cpu._singleHandList.length, 2);
+    strictEqual(Common.cardListToString(cpu._singleHandList[0]), "s3");
+    strictEqual(Common.cardListToString(cpu._singleHandList[1]), "s4");
     strictEqual(cpu._multiHandList.length, 0);
     strictEqual(cpu._stairsHandList.length, 0);
 });
@@ -61,7 +67,9 @@ test("カードの分割 複合", function() {
     cpu._cardDivision();
 
     strictEqual(cpu._singleHandList.length, 3);
-    strictEqual(Common.cardListToString(cpu._singleHandList), "d7, d8, h2");
+    strictEqual(Common.cardListToString(cpu._singleHandList[0]), "d7");
+    strictEqual(Common.cardListToString(cpu._singleHandList[1]), "d8");
+    strictEqual(Common.cardListToString(cpu._singleHandList[2]), "h2");
     strictEqual(cpu._multiHandList.length, 2);
     strictEqual(Common.cardListToString(cpu._multiHandList[0]), "s6, c6, d6, h6");
     strictEqual(Common.cardListToString(cpu._multiHandList[1]), "sJ, cJ");

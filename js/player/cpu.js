@@ -28,7 +28,7 @@ class Cpu extends Player {
         
         if (battleFieldCardList.length === 0) {
             if (this._handCount === 1 && this._singleHandList.length > 0) {
-                selectedHand = [this._singleHandList[0]];
+                selectedHand = this._singleHandList[0];
             }
             else if (this._handCount === 1 && this._multiHandList.length > 0) {
                 selectedHand = this._multiHandList[0];
@@ -40,7 +40,7 @@ class Cpu extends Player {
                 this._handCount === 2 && this._singleHandList.length > 0 &&
                 this._singleHandList.last().power === strongestCardPower
             ) {
-                selectedHand = [this._singleHandList.last()];
+                selectedHand = this._singleHandList.last();
             }
             else if (
                 this._handCount === 2 && this._multiHandList.length > 0 &&
@@ -54,8 +54,8 @@ class Cpu extends Player {
             ) {
                 selectedHand = this._stairsHandList.last();
             }
-            else if (this._singleHandList.length >= 2 && this._singleHandList[0] === lastOutputCard) { // TODO
-                selectedHand = [this._singleHandList[1]];
+            else if (this._singleHandList.length >= 2 && this._singleHandList[0] === lastOutputCard) {
+                selectedHand = this._singleHandList[1];
             }
             else if (this._multiHandList.length >= 2 && this._multiHandList[0] === lastOutputCard) {
                 selectedHand = this._multiHandList[1];
@@ -70,27 +70,26 @@ class Cpu extends Player {
         else {
             const bfHandKind = Hand.cardListToHandKind(battleFieldCardList);
 
-            let targetCard = null;
             switch (bfHandKind) {
                 case Hand.Single:
-                    const tmpSingleCardList = this._singleHandList.filter(c => c.power > battleFieldCardList[0].power);
-
+                    const tmpSingleCardList = this._singleHandList.filter(c =>
+                        c[0].power > battleFieldCardList[0].power
+                    );
                     if (tmpSingleCardList.length === 0) {
                         return [];
                     }
 
                     if (
                         this._handCount === 2 &&
-                        tmpSingleCardList.last().power === strongestCardPower
+                        tmpSingleCardList.last()[0].power === strongestCardPower
                     ) {
-                        targetCard = tmpSingleCardList.last();
+                        selectedHand = tmpSingleCardList.last();
                     }
                     else {
-                        targetCard = tmpSingleCardList[0];
+                        selectedHand = tmpSingleCardList[0];
                     }
 
-                    this._singleHandList = this._singleHandList.filter(c => c !== targetCard);
-                    selectedHand = [targetCard];
+                    this._singleHandList = this._singleHandList.filter(c => c !== selectedHand);
                     break;
 
                 case Hand.Multi:
@@ -106,14 +105,13 @@ class Cpu extends Player {
                         this._handCount === 2 &&
                         tmpMultiCardList.last()[0].power === strongestCardPower
                     ) {
-                        targetCard = tmpMultiCardList.last();
+                        selectedHand = tmpMultiCardList.last();
                     }
                     else {
-                        targetCard = tmpMultiCardList[0];
+                        selectedHand = tmpMultiCardList[0];
                     }
 
-                    this._multiHandList = this._multiHandList.filter(c => c !== targetCard);
-                    selectedHand = targetCard;
+                    this._multiHandList = this._multiHandList.filter(c => c !== selectedHand);
                     break;
 
                 case Hand.Stairs:
@@ -129,14 +127,13 @@ class Cpu extends Player {
                         this._handCount === 2 &&
                         tmpStairsCardList.last().last().power === strongestCardPower
                     ) {
-                        targetCard = tmpStairsCardList.last();
+                        selectedHand = tmpStairsCardList.last();
                     }
                     else {
-                        targetCard = tmpStairsCardList[0];
+                        selectedHand = tmpStairsCardList[0];
                     }
 
-                    this._stairsHandList = this._stairsHandList.filter(c => c !== targetCard);
-                    selectedHand = targetCard;
+                    this._stairsHandList = this._stairsHandList.filter(c => c !== selectedHand);
                     break;
 
                 default:
@@ -234,7 +231,7 @@ class Cpu extends Player {
     }
 
     _cardSingleDivision(cardList) {
-        this._singleHandList = cardList;
+        this._singleHandList = cardList.map(c => [c]);
         return cardList;
     }
 
