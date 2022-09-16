@@ -44,25 +44,30 @@ class GameManager {
 
         const cardList = await player.outputHand(this.#vm.battleFieldHand);
 
-        // TODO Joker未考慮
-        if (
-            cardList.length === 4 &&
-            cardList[0].power === cardList[1].power &&
-            cardList[1].power === cardList[2].power &&
-            cardList[2].power === cardList[3].power
-        ) {
-            this.#vm.isRevolution = !this.#vm.isRevolution;
-            const allCardList = CardFactory.getAllCardList();
-            for (const card of allCardList) {
-                if (card.constructor === Joker) {
-                    continue;
-                }
-                card.power *= -1;
-            }
-        }
-
         if (cardList.length > 0) {
             log(`場に出したカード: ${Common.cardListToString(cardList)}`);
+
+            // TODO Joker未考慮
+            // 革命判定
+            if (
+                cardList.length === 4 &&
+                cardList[0].power === cardList[1].power &&
+                cardList[1].power === cardList[2].power &&
+                cardList[2].power === cardList[3].power
+            ) {
+                log("革命！");
+                this.#vm.isRevolution = !this.#vm.isRevolution;
+                const allCardList = CardFactory.getAllCardList();
+                for (const card of allCardList) {
+                    if (card.constructor === Joker) {
+                        continue;
+                    }
+                    card.power *= -1;
+                }
+
+                // TODO CPUに通知
+            }
+
             this.#vm.battleFieldHand = cardList;
             this.#latestOutputCardPlayer = player;
 
