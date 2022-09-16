@@ -44,18 +44,18 @@ class GameManager {
 
         player.isNowPass = false;
 
-        const cardList = await player.outputHand(this.#vm.battleFieldHand);
+        const hand = await player.outputHand(this.#vm.battleFieldHand);
 
-        if (cardList.length > 0) {
-            log(`場に出したカード: ${Common.cardListToString(cardList)}`);
+        if (hand.length > 0) {
+            log(`場に出したカード: ${Common.cardListToString(hand)}`);
 
             // TODO Joker未考慮
             // 革命判定
             if (
-                cardList.length === 4 &&
-                cardList[0].power === cardList[1].power &&
-                cardList[1].power === cardList[2].power &&
-                cardList[2].power === cardList[3].power
+                hand.length === 4 &&
+                hand[0].power === hand[1].power &&
+                hand[1].power === hand[2].power &&
+                hand[2].power === hand[3].power
             ) {
                 log("革命！");
                 this.#vm.isRevolution = !this.#vm.isRevolution;
@@ -70,12 +70,12 @@ class GameManager {
                 this.#playerList.forEach(p => p.onRevolution());
             }
 
-            this.#vm.battleFieldHand = cardList;
+            this.#vm.battleFieldHand = hand;
             this.#latestOutputCardPlayer = player;
 
-            cardList.forEach(c => c.isDead = true);
+            hand.forEach(c => c.isDead = true);
 
-            if (player.cardList.length === 0) {
+            if (player.hand.length === 0) {
                 log("あがり");
                 player.rank = Rank.getRank(this.#ranking++);
                 player.isRankDecided = true;
