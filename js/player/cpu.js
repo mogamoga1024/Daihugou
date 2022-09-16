@@ -68,10 +68,10 @@ class Cpu extends Player {
             }
         }
         else {
-            const bfHand = Hand.cardListToHand(battleFieldCardList);
+            const bfHandKind = Hand.cardListToHandKind(battleFieldCardList);
 
             let targetCard = null;
-            switch (bfHand) {
+            switch (bfHandKind) {
                 case Hand.Single:
                     const tmpSingleCardList = this._singleCardList.filter(c => c.power > battleFieldCardList[0].power);
 

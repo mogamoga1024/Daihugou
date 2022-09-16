@@ -22,16 +22,16 @@ class Human extends Player {
     canOutputCardList(battleFieldCardList, selectedCardList) {
         // TODO
 
-        const bfHand = Hand.cardListToHand(battleFieldCardList);
-        const hand = Hand.cardListToHand(selectedCardList);
+        const bfHandKind = Hand.cardListToHandKind(battleFieldCardList);
+        const handKind = Hand.cardListToHandKind(selectedCardList);
 
-        if (selectedCardList.length === 0 || battleFieldCardList.length === 0 && hand !== Hand.None) {
+        if (selectedCardList.length === 0 || battleFieldCardList.length === 0 && handKind !== Hand.None) {
             return true;
         }
 
-        if (hand !== bfHand || selectedCardList.length !== battleFieldCardList.length) return false;
+        if (handKind !== bfHandKind || selectedCardList.length !== battleFieldCardList.length) return false;
 
-        switch (bfHand) {
+        switch (bfHandKind) {
             case Hand.Single:
             case Hand.Multi:
             case Hand.Stairs:

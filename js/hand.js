@@ -6,7 +6,7 @@ class Hand {
     static Stairs = Symbol("Stairs");
     static MaybeStairs = Symbol("MaybeStairs");
 
-    static cardListToHand(cardList) {
+    static cardListToHandKind(cardList) {
         if (cardList.length === 0) {
             return this.None;
         }
