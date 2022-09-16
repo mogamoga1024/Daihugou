@@ -88,8 +88,6 @@ class Cpu extends Player {
                     else {
                         selectedHand = tmpSingleCardList[0];
                     }
-
-                    this._singleHandList = this._singleHandList.filter(c => c !== selectedHand);
                     break;
 
                 case Hand.Multi:
@@ -110,8 +108,6 @@ class Cpu extends Player {
                     else {
                         selectedHand = tmpMultiCardList[0];
                     }
-
-                    this._multiHandList = this._multiHandList.filter(c => c !== selectedHand);
                     break;
 
                 case Hand.Stairs:
@@ -132,8 +128,6 @@ class Cpu extends Player {
                     else {
                         selectedHand = tmpStairsCardList[0];
                     }
-
-                    this._stairsHandList = this._stairsHandList.filter(c => c !== selectedHand);
                     break;
 
                 default:
@@ -147,6 +141,13 @@ class Cpu extends Player {
             if (this.cardList.length === 0) {
                 this._singleHandList = this._multiHandList = this._stairsHandList = [];
             }
+        }
+
+        switch (Hand.cardListToHandKind(selectedHand)) {
+            case Hand.Single: this._singleHandList = this._singleHandList.filter(c => c !== selectedHand); break;
+            case Hand.Multi:  this._multiHandList = this._multiHandList.filter(c => c !== selectedHand);   break;
+            case Hand.Stairs: this._stairsHandList = this._stairsHandList.filter(c => c !== selectedHand); break;
+            default: throw new Error("存在しない役");
         }
 
         return selectedHand;
