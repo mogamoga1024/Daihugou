@@ -23,33 +23,34 @@ class Cpu extends Player {
         }
 
         let selectedHand = [];
+        const handCount = this._handCount;
         const strongestCardPower = this._strongestCardPower;
         const lastOutputCard = this._lastOutputCard;
         
         if (battleFieldCardList.length === 0) {
-            if (this._handCount === 1 && this._singleHandList.length > 0) {
+            if (handCount === 1 && this._singleHandList.length > 0) {
                 selectedHand = this._singleHandList[0];
             }
-            else if (this._handCount === 1 && this._multiHandList.length > 0) {
+            else if (handCount === 1 && this._multiHandList.length > 0) {
                 selectedHand = this._multiHandList[0];
             }
-            else if (this._handCount === 1 && this._stairsHandList.length > 0) {
+            else if (handCount === 1 && this._stairsHandList.length > 0) {
                 selectedHand = this._stairsHandList[0];
             }
             else if (
-                this._handCount === 2 && this._singleHandList.length > 0 &&
+                handCount === 2 && this._singleHandList.length > 0 &&
                 this._singleHandList.last().power === strongestCardPower
             ) {
                 selectedHand = this._singleHandList.last();
             }
             else if (
-                this._handCount === 2 && this._multiHandList.length > 0 &&
+                handCount === 2 && this._multiHandList.length > 0 &&
                 this._multiHandList.last()[0].power === strongestCardPower
             ) {
                 selectedHand = this._multiHandList.last();
             }
             else if (
-                this._handCount === 2 && this._stairsHandList.length > 0 &&
+                handCount === 2 && this._stairsHandList.length > 0 &&
                 this._stairsHandList.last().last().power === strongestCardPower
             ) {
                 selectedHand = this._stairsHandList.last();
@@ -80,7 +81,7 @@ class Cpu extends Player {
                     }
 
                     if (
-                        this._handCount === 2 &&
+                        handCount === 2 &&
                         tmpSingleCardList.last()[0].power === strongestCardPower
                     ) {
                         selectedHand = tmpSingleCardList.last();
@@ -100,7 +101,7 @@ class Cpu extends Player {
                     }
 
                     if (
-                        this._handCount === 2 &&
+                        handCount === 2 &&
                         tmpMultiCardList.last()[0].power === strongestCardPower
                     ) {
                         selectedHand = tmpMultiCardList.last();
@@ -120,7 +121,7 @@ class Cpu extends Player {
                     }
 
                     if (
-                        this._handCount === 2 &&
+                        handCount === 2 &&
                         tmpStairsCardList.last().last().power === strongestCardPower
                     ) {
                         selectedHand = tmpStairsCardList.last();
