@@ -4,6 +4,7 @@
     module("CPUのAIのテスト2", {
         setup() {
             cpu = new Cpu("CPU1");
+            GameManagerMock.init([cpu]);
         }
     });
 
@@ -53,5 +54,21 @@
         strictEqual(Common.cardListToString(cpu.outputHand([])), "hT, hJ, hQ, hK");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s2");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
+    });
+
+    test("思考 革命中 single multi stairs", function() {
+        cpu.cardList = CardFactory.createCardList("s3, s4, c4, d8, s9, d9, hT, hJ, hQ, hK, s2");
+        
+        CardFactory.getCard("Joker1").isDead = true;
+        CardFactory.getCard("Joker2").isDead = true;
+
+        GameManagerMock.revolution();
+
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "d8");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s9, d9");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s4, c4");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "hT, hJ, hQ, hK");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s2");
     });
 })();
