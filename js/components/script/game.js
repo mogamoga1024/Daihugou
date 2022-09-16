@@ -15,7 +15,7 @@ module.exports = {
                 // CardFactory.createCard("d4"),
                 // CardFactory.createCard("d5"),
             ],
-            isRevolution: false
+            isRevolution: true // debug
         }
     },
     created() {

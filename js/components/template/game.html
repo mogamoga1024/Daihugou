@@ -10,7 +10,7 @@
         </div>
     </div>
     <div id="battle-field">
-        <div id="revolution"></div>
+        <div v-show="isRevolution" id="revolution">革命中</div>
         <div id="battle-field-card-container" :style="{width: battleFieldCardContainerWidth + 'px'}">
             <img v-for="card in battleFieldHand"
                 class="battle-field-card"
