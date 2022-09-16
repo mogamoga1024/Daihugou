@@ -44,6 +44,16 @@ class GameManager {
 
         const cardList = await player.outputHand(this.#vm.battleFieldHand);
 
+        // TODO Joker未考慮
+        if (
+            cardList.length === 4 &&
+            cardList[0].power === cardList[1].power &&
+            cardList[1].power === cardList[2].power &&
+            cardList[2].power === cardList[3].power
+        ) {
+            this.#vm.isRevolution = !this.#vm.isRevolution;
+        }
+
         if (cardList.length > 0) {
             log(`場に出したカード: ${Common.cardListToString(cardList)}`);
             this.#vm.battleFieldHand = cardList;
