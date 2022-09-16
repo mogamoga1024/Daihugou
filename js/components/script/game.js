@@ -14,7 +14,8 @@ module.exports = {
                 // //CardFactory.createCard("s3"),
                 // CardFactory.createCard("d4"),
                 // CardFactory.createCard("d5"),
-            ]
+            ],
+            isRevolution: false
         }
     },
     created() {

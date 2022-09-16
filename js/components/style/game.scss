@@ -33,11 +33,21 @@
 }
 
 #battle-field {
+    position: relative;
     display: flex;
     height: 190px;
     justify-content: center;
     align-items: center;
     background-color: lavender;
+}
+
+#revolution {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    top: 0;
+    right: 0;
+    background-color: red;
 }
 
 #battle-field-card-container {
