@@ -67,7 +67,7 @@
         strictEqual(Common.cardListToString(cpu.outputHand([])), "d8");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s9, d9");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s4, c4");
-        strictEqual(Common.cardListToString(cpu.outputHand([])), "hT, hJ, hQ, hK");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "hK, hQ, hJ, hT");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s2");
     });
