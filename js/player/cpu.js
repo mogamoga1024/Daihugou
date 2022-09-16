@@ -88,7 +88,18 @@ class Cpu extends Player {
             // → 最後に出す役、最強の役以外で最弱の役をだす
             else {
                 const tmpSingleCardList = this._singleHandList.filter(h => h !== lastOutputHand && h.power !== strongestCardPower);
-                // TODO
+                const tmpMultiCardList = this._multiHandList.filter(h => h !== lastOutputHand && h.power !== strongestCardPower);
+                const tmpStairsCardList = this._stairsHandList.filter(h => h !== lastOutputHand && h.power !== strongestCardPower);
+                
+                if (tmpSingleCardList.length > 0) {
+                    selectedHand = tmpSingleCardList[0];
+                }
+                else if (tmpMultiCardList.length > 0) {
+                    selectedHand = tmpMultiCardList[0];
+                }
+                else if (tmpStairsCardList.length > 0) {
+                    selectedHand = tmpStairsCardList[0];
+                }
             }
         }
         else {
