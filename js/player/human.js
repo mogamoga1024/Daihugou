@@ -22,8 +22,8 @@ class Human extends Player {
     canOutputHand(battleFieldHand, selectedHand) {
         // TODO
 
-        const bfHandKind = Hand.cardListToHandKind(battleFieldHand);
-        const handKind = Hand.cardListToHandKind(selectedHand);
+        const bfHandKind = Hand.handKindFrom(battleFieldHand);
+        const handKind = Hand.handKindFrom(selectedHand);
 
         if (selectedHand.length === 0 || battleFieldHand.length === 0 && handKind !== Hand.None) {
             return true;

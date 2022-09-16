@@ -113,7 +113,7 @@ class Cpu extends Player {
             }
         }
         else {
-            const bfHandKind = Hand.cardListToHandKind(battleFieldHand);
+            const bfHandKind = Hand.handKindFrom(battleFieldHand);
 
             switch (bfHandKind) {
                 case Hand.Single:
@@ -188,7 +188,7 @@ class Cpu extends Player {
             }
         }
 
-        switch (Hand.cardListToHandKind(selectedHand)) {
+        switch (Hand.handKindFrom(selectedHand)) {
             case Hand.Single: this._singleHandList = this._singleHandList.filter(h => h !== selectedHand); break;
             case Hand.Multi:  this._multiHandList  = this._multiHandList.filter(h => h !== selectedHand);  break;
             case Hand.Stairs: this._stairsHandList = this._stairsHandList.filter(h => h !== selectedHand); break;
