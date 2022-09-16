@@ -25,7 +25,7 @@ class Cpu extends Player {
         let selectedHand = [];
         const handCount = this._handCount;
         const strongestCardPower = this._strongestCardPower;
-        const lastOutputHand = this._lastOutputHand;
+        const maybeLastOutputHand = this._maybeLastOutputHand;
         
         if (battleFieldHand.length === 0) {
             // 最後の1役
@@ -67,39 +67,48 @@ class Cpu extends Player {
                 // → 弱い役をだす
                 else if (
                     this._singleHandList.length > 0 &&
-                    this._singleHandList[0] === lastOutputHand
+                    this._singleHandList[0] === maybeLastOutputHand
                 ) {
                     selectedHand = this._singleHandList[0];
                 }
                 else if (
                     this._multiHandList.length > 0 &&
-                    this._multiHandList[0] === lastOutputHand
+                    this._multiHandList[0] === maybeLastOutputHand
                 ) {
                     selectedHand = this._multiHandList[0];
                 }
                 else if (
                     this._stairsHandList.length > 0 &&
-                    this._stairsHandList[0] === lastOutputHand
+                    this._stairsHandList[0] === maybeLastOutputHand
                 ) {
                     selectedHand = this._stairsHandList[0];
                 }
             }
             // 3組以上
             // → 最後に出す役、最強の役以外で最弱の役をだす
-            // TODO 最強の役を持っていない場合は最後に出す予定のカードはさっさと切っていい
+            //   ただし、最強の役を持っていない場合は最後に出す予定のカードはさっさと切っていい
             else {
-                const tmpSingleCardList = this._singleHandList.filter(h => h !== lastOutputHand && h.power !== strongestCardPower);
-                const tmpMultiCardList = this._multiHandList.filter(h => h !== lastOutputHand && h.power !== strongestCardPower);
-                const tmpStairsCardList = this._stairsHandList.filter(h => h !== lastOutputHand && h.power !== strongestCardPower);
-                
-                if (tmpSingleCardList.length > 0) {
-                    selectedHand = tmpSingleCardList[0];
+                const tmpSingleCardList = this._singleHandList.filter(h => h !== maybeLastOutputHand && h[0].power !== strongestCardPower);
+                const tmpMultiCardList = this._multiHandList.filter(h => h !== maybeLastOutputHand && h[0].power !== strongestCardPower);
+                const tmpStairsCardList = this._stairsHandList.filter(h => h !== maybeLastOutputHand && h.last().power !== strongestCardPower);
+
+                if (
+                    this._singleHandList.length > 0 && this._singleHandList.last()[0].power === strongestCardPower ||
+                    this._multiHandList.length > 0 && this._multiHandList.last()[0].power === strongestCardPower ||
+                    this._stairsHandList.length > 0 && this._stairsHandList.last().last().power === strongestCardPower
+                ) {
+                    if (tmpSingleCardList.length > 0) {
+                        selectedHand = tmpSingleCardList[0];
+                    }
+                    else if (tmpMultiCardList.length > 0) {
+                        selectedHand = tmpMultiCardList[0];
+                    }
+                    else if (tmpStairsCardList.length > 0) {
+                        selectedHand = tmpStairsCardList[0];
+                    }
                 }
-                else if (tmpMultiCardList.length > 0) {
-                    selectedHand = tmpMultiCardList[0];
-                }
-                else if (tmpStairsCardList.length > 0) {
-                    selectedHand = tmpStairsCardList[0];
+                else {
+                    selectedHand = maybeLastOutputHand;
                 }
             }
         }
@@ -292,8 +301,7 @@ class Cpu extends Player {
         return strongestCard.power;
     }
 
-    get _lastOutputHand() {
-        // 一番弱いカードを最後に出す
+    get _maybeLastOutputHand() {
         if (this._singleHandList.length > 0) {
             return this._singleHandList[0];
         }
