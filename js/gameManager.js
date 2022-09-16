@@ -35,18 +35,18 @@ class GameManager {
             this.#latestOutputCardPlayer === player ||
             this.#latestOutputCardPlayer !== null && this.#latestOutputCardPlayer.isRankDecided && player.isNowPass
         ) {
-            this.#vm.battleFieldCardList = [];
+            this.#vm.battleFieldHand = [];
             this.#playerList.forEach(p => p.isNowPass = false);
             await Common.sleep();
         }
 
         player.isNowPass = false;
 
-        const cardList = await player.outputCardList(this.#vm.battleFieldCardList);
+        const cardList = await player.outputHand(this.#vm.battleFieldHand);
 
         if (cardList.length > 0) {
             log(`場に出したカード: ${Common.cardListToString(cardList)}`);
-            this.#vm.battleFieldCardList = cardList;
+            this.#vm.battleFieldHand = cardList;
             this.#latestOutputCardPlayer = player;
 
             cardList.forEach(c => c.isDead = true);

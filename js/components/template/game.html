@@ -11,7 +11,7 @@
     </div>
     <div id="battle-field">
         <div id="battle-field-card-container" :style="{width: battleFieldCardContainerWidth + 'px'}">
-            <img v-for="card in battleFieldCardList"
+            <img v-for="card in battleFieldHand"
                 class="battle-field-card"
                 :src="card.imagePath"
             >
@@ -22,7 +22,7 @@
             <span :class="{turn: player.isTurn}">{{player.name}}</span><span class="rank">{{player.isNowPass ? "パス" : player.rank}}</span>
             <div id="player-button-container">
                 <button @click="pass">パス</button>
-                <button :disabled="!canOutputCardList" @click="outputCardList">カードを出す</button>
+                <button :disabled="!canOutputHand" @click="outputHand">カードを出す</button>
             </div>
         </div>
         <div id="player-card-list">

@@ -7,8 +7,8 @@ class Human extends Player {
         return [];
     }
 
-    async outputCardList() {
-        const selectedCardList = await new Promise(resolve => {
+    async outputHand() {
+        const selectedHand = await new Promise(resolve => {
             this.resolveOutputCardList = resolve;
         });
 
@@ -16,53 +16,53 @@ class Human extends Player {
             card.isSelected = false;
         });
 
-        return selectedCardList;
+        return selectedHand;
     }
 
-    canOutputCardList(battleFieldCardList, selectedCardList) {
+    canOutputHand(battleFieldHand, selectedHand) {
         // TODO
 
-        const bfHandKind = Hand.cardListToHandKind(battleFieldCardList);
-        const handKind = Hand.cardListToHandKind(selectedCardList);
+        const bfHandKind = Hand.cardListToHandKind(battleFieldHand);
+        const handKind = Hand.cardListToHandKind(selectedHand);
 
-        if (selectedCardList.length === 0 || battleFieldCardList.length === 0 && handKind !== Hand.None) {
+        if (selectedHand.length === 0 || battleFieldHand.length === 0 && handKind !== Hand.None) {
             return true;
         }
 
-        if (handKind !== bfHandKind || selectedCardList.length !== battleFieldCardList.length) return false;
+        if (handKind !== bfHandKind || selectedHand.length !== battleFieldHand.length) return false;
 
         switch (bfHandKind) {
             case Hand.Single:
             case Hand.Multi:
             case Hand.Stairs:
-                return selectedCardList[0].power > battleFieldCardList[0].power;
+                return selectedHand[0].power > battleFieldHand[0].power;
             default:
                 throw new Error("存在しない役");
         }
     }
 
-    outputCardListFromUI(battleFieldCardList) {
+    outputCardListFromUI(battleFieldHand) {
         if (this.resolveOutputCardList !== null) {
-            const selectedCardList = [];
+            const selectedHand = [];
             const tmpCardList = [];
 
             for (const card of this.cardList) {
                 if (card.isSelected) {
                     card.isSelected = false;
-                    selectedCardList.push(card);
+                    selectedHand.push(card);
                 }
                 else {
                     tmpCardList.push(card);
                 }
             }
 
-            if (this.canOutputCardList(battleFieldCardList, selectedCardList) === false) {
+            if (this.canOutputHand(battleFieldHand, selectedHand) === false) {
                 return;
             }
 
             this.cardList = tmpCardList;
 
-            this.resolveOutputCardList(selectedCardList);
+            this.resolveOutputCardList(selectedHand);
             this.resolveOutputCardList = null;
         }
     }

@@ -9,7 +9,7 @@ module.exports = {
                 new Cpu("CPU2"),
                 new Cpu("CPU3"),
             ],
-            battleFieldCardList: [
+            battleFieldHand: [
                 // CardFactory.createCard("d3"),
                 // //CardFactory.createCard("s3"),
                 // CardFactory.createCard("d4"),
@@ -32,9 +32,9 @@ module.exports = {
     computed: {
         battleFieldCardContainerWidth() {
             // 値はテキトー
-            return Math.min(100 + 80 * (this.battleFieldCardList.length - 1), 800);
+            return Math.min(100 + 80 * (this.battleFieldHand.length - 1), 800);
         },
-        canOutputCardList() {
+        canOutputHand() {
             for (const card of this.player.cardList) {
                 if (card.isSelected) return true;
             }
@@ -54,14 +54,14 @@ module.exports = {
                 card.isSelected = true;
             }
         },
-        outputCardList() {
-            this.player.outputCardListFromUI(this.battleFieldCardList);
+        outputHand() {
+            this.player.outputCardListFromUI(this.battleFieldHand);
         },
         pass() {
             this.player.cardList.forEach(c => {
                 c.isSelected = false;
             });
-            this.player.outputCardListFromUI(this.battleFieldCardList);
+            this.player.outputCardListFromUI(this.battleFieldHand);
         },
         playerList() {
             // computedのほうだと順番が狂った。謎

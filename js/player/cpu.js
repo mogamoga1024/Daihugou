@@ -9,7 +9,7 @@ class Cpu extends Player {
         return [];
     }
 
-    outputCardList(battleFieldCardList) {
+    outputHand(battleFieldHand) {
         if (this.cardList.length === 0) {
             throw new Error("すでにあがってる");
         }
@@ -27,7 +27,7 @@ class Cpu extends Player {
         const strongestCardPower = this._strongestCardPower;
         const lastOutputHand = this._lastOutputHand;
         
-        if (battleFieldCardList.length === 0) {
+        if (battleFieldHand.length === 0) {
             // 最後の1役
             // → それをだす
             if (handCount === 1) {
@@ -100,12 +100,12 @@ class Cpu extends Player {
             }
         }
         else {
-            const bfHandKind = Hand.cardListToHandKind(battleFieldCardList);
+            const bfHandKind = Hand.cardListToHandKind(battleFieldHand);
 
             switch (bfHandKind) {
                 case Hand.Single:
                     const tmpSingleCardList = this._singleHandList.filter(c =>
-                        c[0].power > battleFieldCardList[0].power
+                        c[0].power > battleFieldHand[0].power
                     );
                     if (tmpSingleCardList.length === 0) {
                         return [];
@@ -124,8 +124,8 @@ class Cpu extends Player {
 
                 case Hand.Multi:
                     const tmpMultiCardList = this._multiHandList.filter(c =>
-                        c.length === battleFieldCardList.length &&
-                        c[0].power > battleFieldCardList[0].power
+                        c.length === battleFieldHand.length &&
+                        c[0].power > battleFieldHand[0].power
                     );
                     if (tmpMultiCardList.length === 0) {
                         return []; // TODO 考えもの
@@ -144,8 +144,8 @@ class Cpu extends Player {
 
                 case Hand.Stairs:
                     const tmpStairsCardList = this._stairsHandList.filter(c =>
-                        c.length === battleFieldCardList.length &&
-                        c[0].power > battleFieldCardList[0].power
+                        c.length === battleFieldHand.length &&
+                        c[0].power > battleFieldHand[0].power
                     );
                     if (tmpStairsCardList.length === 0) {
                         return []; // TODO 考えもの
