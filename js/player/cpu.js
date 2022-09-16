@@ -96,8 +96,8 @@ class Cpu extends Player {
 
             switch (bfHandKind) {
                 case Hand.Single:
-                    const tmpSingleCardList = this._singleHandList.filter(c =>
-                        c[0].power > battleFieldHand[0].power
+                    const tmpSingleCardList = this._singleHandList.filter(h =>
+                        h[0].power > battleFieldHand[0].power
                     );
                     if (tmpSingleCardList.length === 0) {
                         return [];
@@ -115,9 +115,9 @@ class Cpu extends Player {
                     break;
 
                 case Hand.Multi:
-                    const tmpMultiCardList = this._multiHandList.filter(c =>
-                        c.length === battleFieldHand.length &&
-                        c[0].power > battleFieldHand[0].power
+                    const tmpMultiCardList = this._multiHandList.filter(h =>
+                        h.length === battleFieldHand.length &&
+                        h[0].power > battleFieldHand[0].power
                     );
                     if (tmpMultiCardList.length === 0) {
                         return []; // TODO 考えもの
@@ -135,9 +135,9 @@ class Cpu extends Player {
                     break;
 
                 case Hand.Stairs:
-                    const tmpStairsCardList = this._stairsHandList.filter(c =>
-                        c.length === battleFieldHand.length &&
-                        c[0].power > battleFieldHand[0].power
+                    const tmpStairsCardList = this._stairsHandList.filter(h =>
+                        h.length === battleFieldHand.length &&
+                        h[0].power > battleFieldHand[0].power
                     );
                     if (tmpStairsCardList.length === 0) {
                         return []; // TODO 考えもの
@@ -168,9 +168,9 @@ class Cpu extends Player {
         }
 
         switch (Hand.cardListToHandKind(selectedHand)) {
-            case Hand.Single: this._singleHandList = this._singleHandList.filter(c => c !== selectedHand); break;
-            case Hand.Multi:  this._multiHandList  = this._multiHandList.filter(c => c !== selectedHand);  break;
-            case Hand.Stairs: this._stairsHandList = this._stairsHandList.filter(c => c !== selectedHand); break;
+            case Hand.Single: this._singleHandList = this._singleHandList.filter(h => h !== selectedHand); break;
+            case Hand.Multi:  this._multiHandList  = this._multiHandList.filter(h => h !== selectedHand);  break;
+            case Hand.Stairs: this._stairsHandList = this._stairsHandList.filter(h => h !== selectedHand); break;
             default: throw new Error("存在しない役");
         }
 
