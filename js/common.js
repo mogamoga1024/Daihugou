@@ -27,3 +27,10 @@ class Common {
 }
 
 const log = console.log;
+
+Array.prototype.last = function() {
+    if (this.length === 0) {
+        throw new Error("要素が存在しない");
+    }
+    return this[this.length - 1];
+};
