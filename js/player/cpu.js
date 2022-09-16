@@ -88,23 +88,23 @@ class Cpu extends Player {
             // → 最後に出す役、最強の役以外で最弱の役をだす
             //   ただし、最強の役を持っていない場合は最後に出す予定のカードはさっさと切っていい
             else {
-                const tmpSingleCardList = this._singleHandList.filter(h => h !== maybeLastOutputHand && h[0].power !== strongestCardPower);
-                const tmpMultiCardList = this._multiHandList.filter(h => h !== maybeLastOutputHand && h[0].power !== strongestCardPower);
-                const tmpStairsCardList = this._stairsHandList.filter(h => h !== maybeLastOutputHand && h.last().power !== strongestCardPower);
+                const tmpSingleHandList = this._singleHandList.filter(h => h !== maybeLastOutputHand && h[0].power !== strongestCardPower);
+                const tmpMultiHandList = this._multiHandList.filter(h => h !== maybeLastOutputHand && h[0].power !== strongestCardPower);
+                const tmpStairsHandList = this._stairsHandList.filter(h => h !== maybeLastOutputHand && h.last().power !== strongestCardPower);
 
                 if (
                     this._singleHandList.length > 0 && this._singleHandList.last()[0].power === strongestCardPower ||
                     this._multiHandList.length > 0 && this._multiHandList.last()[0].power === strongestCardPower ||
                     this._stairsHandList.length > 0 && this._stairsHandList.last().last().power === strongestCardPower
                 ) {
-                    if (tmpSingleCardList.length > 0) {
-                        selectedHand = tmpSingleCardList[0];
+                    if (tmpSingleHandList.length > 0) {
+                        selectedHand = tmpSingleHandList[0];
                     }
-                    else if (tmpMultiCardList.length > 0) {
-                        selectedHand = tmpMultiCardList[0];
+                    else if (tmpMultiHandList.length > 0) {
+                        selectedHand = tmpMultiHandList[0];
                     }
-                    else if (tmpStairsCardList.length > 0) {
-                        selectedHand = tmpStairsCardList[0];
+                    else if (tmpStairsHandList.length > 0) {
+                        selectedHand = tmpStairsHandList[0];
                     }
                 }
                 else {
@@ -117,61 +117,61 @@ class Cpu extends Player {
 
             switch (bfHandKind) {
                 case Hand.Single:
-                    const tmpSingleCardList = this._singleHandList.filter(h =>
+                    const tmpSingleHandList = this._singleHandList.filter(h =>
                         h[0].power > battleFieldHand[0].power
                     );
-                    if (tmpSingleCardList.length === 0) {
+                    if (tmpSingleHandList.length === 0) {
                         return [];
                     }
 
                     if (
                         handCount === 2 &&
-                        tmpSingleCardList.last()[0].power === strongestCardPower
+                        tmpSingleHandList.last()[0].power === strongestCardPower
                     ) {
-                        selectedHand = tmpSingleCardList.last();
+                        selectedHand = tmpSingleHandList.last();
                     }
                     else {
-                        selectedHand = tmpSingleCardList[0];
+                        selectedHand = tmpSingleHandList[0];
                     }
                     break;
 
                 case Hand.Multi:
-                    const tmpMultiCardList = this._multiHandList.filter(h =>
+                    const tmpMultiHandList = this._multiHandList.filter(h =>
                         h.length === battleFieldHand.length &&
                         h[0].power > battleFieldHand[0].power
                     );
-                    if (tmpMultiCardList.length === 0) {
+                    if (tmpMultiHandList.length === 0) {
                         return []; // TODO 考えもの
                     }
 
                     if (
                         handCount === 2 &&
-                        tmpMultiCardList.last()[0].power === strongestCardPower
+                        tmpMultiHandList.last()[0].power === strongestCardPower
                     ) {
-                        selectedHand = tmpMultiCardList.last();
+                        selectedHand = tmpMultiHandList.last();
                     }
                     else {
-                        selectedHand = tmpMultiCardList[0];
+                        selectedHand = tmpMultiHandList[0];
                     }
                     break;
 
                 case Hand.Stairs:
-                    const tmpStairsCardList = this._stairsHandList.filter(h =>
+                    const tmpStairsHandList = this._stairsHandList.filter(h =>
                         h.length === battleFieldHand.length &&
                         h[0].power > battleFieldHand[0].power
                     );
-                    if (tmpStairsCardList.length === 0) {
+                    if (tmpStairsHandList.length === 0) {
                         return []; // TODO 考えもの
                     }
 
                     if (
                         handCount === 2 &&
-                        tmpStairsCardList.last().last().power === strongestCardPower
+                        tmpStairsHandList.last().last().power === strongestCardPower
                     ) {
-                        selectedHand = tmpStairsCardList.last();
+                        selectedHand = tmpStairsHandList.last();
                     }
                     else {
-                        selectedHand = tmpStairsCardList[0];
+                        selectedHand = tmpStairsHandList[0];
                     }
                     break;
 
