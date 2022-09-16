@@ -29,7 +29,7 @@ class Cpu extends Player {
             if (this._handCount === 2) {
                 if (
                     this._singleCardList.length > 0 &&
-                    this._singleCardList[this._singleCardList.length - 1].power > strongestCardPower)
+                    this._singleCardList.last().power > strongestCardPower)
                 {
                     // TODO
                 }
@@ -49,9 +49,9 @@ class Cpu extends Player {
 
                     if (
                         this._handCount === 2 &&
-                        tmpSingleCardList[tmpSingleCardList.length - 1].power === strongestCardPower
+                        tmpSingleCardList.last().power === strongestCardPower
                     ) {
-                        targetCard = tmpSingleCardList[tmpSingleCardList.length - 1];
+                        targetCard = tmpSingleCardList.last();
                     }
                     else {
                         targetCard = tmpSingleCardList[0];
@@ -72,9 +72,9 @@ class Cpu extends Player {
 
                     if (
                         this._handCount === 2 &&
-                        tmpMultiCardList[tmpMultiCardList.length - 1][0].power === strongestCardPower
+                        tmpMultiCardList.last()[0].power === strongestCardPower
                     ) {
-                        targetCard = tmpMultiCardList[tmpMultiCardList.length - 1];
+                        targetCard = tmpMultiCardList.last();
                     }
                     else {
                         targetCard = tmpMultiCardList[0];
@@ -92,13 +92,13 @@ class Cpu extends Player {
                     if (tmpStairsCardList.length === 0) {
                         return []; // TODO 考えもの
                     }
-                    const lastTmpStairsCard = tmpStairsCardList[tmpStairsCardList.length - 1];
+                    const lastTmpStairsCard = tmpStairsCardList.last();
 
                     if (
                         this._handCount === 2 &&
-                        lastTmpStairsCard[lastTmpStairsCard.length - 1].power === strongestCardPower
+                        lastTmpStairsCard.last().power === strongestCardPower
                     ) {
-                        targetCard = tmpStairsCardList[tmpStairsCardList.length - 1];
+                        targetCard = tmpStairsCardList.last();
                     }
                     else {
                         targetCard = tmpStairsCardList[0];
