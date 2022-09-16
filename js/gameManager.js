@@ -17,7 +17,7 @@ class GameManager {
         }
 
         const lastPlayer = this.#playerList[playerIndex];
-        lastPlayer.rank = Rank.getRank(this.#ranking++);
+        lastPlayer.rank = Rank.getRank(this.#ranking);
         lastPlayer.isRankDecided = true;
         this.#ranking = 1;
 
