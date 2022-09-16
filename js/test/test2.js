@@ -43,7 +43,7 @@
     });
 
     test("思考 single multi stairs", function() {
-        cpu.cardList = CardFactory.createCardList("s3, s4, c4, d8, s9, d9, hT, hJ, hQ, hK, s2");
+        cpu.cardList = CardFactory.createCardList("s3, s4, c4, h5, h6, h7, d8, s9, d9, hT, hJ, hQ, hK, s2");
         
         CardFactory.getCard("Joker1").isDead = true;
         CardFactory.getCard("Joker2").isDead = true;
@@ -51,13 +51,14 @@
         strictEqual(Common.cardListToString(cpu.outputHand([])), "d8");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s4, c4");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s9, d9");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "h5, h6, h7");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "hT, hJ, hQ, hK");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s2");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
     });
 
     test("思考 革命中 single multi stairs", function() {
-        cpu.cardList = CardFactory.createCardList("s3, s4, c4, d8, s9, d9, hT, hJ, hQ, hK, s2");
+        cpu.cardList = CardFactory.createCardList("s3, s4, c4, h5, h6, h7, d8, s9, d9, hT, hJ, hQ, hK, s2");
         
         CardFactory.getCard("Joker1").isDead = true;
         CardFactory.getCard("Joker2").isDead = true;
@@ -68,6 +69,7 @@
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s9, d9");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s4, c4");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "hK, hQ, hJ, hT");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "h7, h6, h5");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s2");
     });
