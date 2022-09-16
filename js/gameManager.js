@@ -1,33 +1,36 @@
 
 class GameManager {
-    static playerList = [];
-    static vm = null;
+    static #playerList = [];
+    static #vm = null;
     static #latestOutputCardPlayer = null;
     static #ranking = 1;
 
-    static async startGame(playerList, leaderIndex, vm) {
-        this.playerList = playerList;
-        this.vm = vm;
+    static init(playerList, vm) {
+        this.#playerList = playerList;
+        this.#vm = vm;
+    }
+
+    static async startGame(leaderIndex) {
         let playerIndex = leaderIndex;
 
         log("【ゲーム開始】");
 
-        while (this.playerList.filter(p => !p.isRankDecided).length > 1) {
+        while (this.#playerList.filter(p => !p.isRankDecided).length > 1) {
             playerIndex = await this.startTurn(playerIndex);
         }
 
-        const lastPlayer = this.playerList[playerIndex];
+        const lastPlayer = this.#playerList[playerIndex];
         lastPlayer.rank = Rank.getRank(this.#ranking);
         lastPlayer.isRankDecided = true;
         this.#ranking = 1;
 
         log("【ゲーム終了】");
 
-        this.playerList.forEach(p => p.onGameFinish());
+        this.#playerList.forEach(p => p.onGameFinish());
     }
 
     static async startTurn(playerIndex) {
-        const player = this.playerList[playerIndex];
+        const player = this.#playerList[playerIndex];
 
         log(`【${player.name}のターン】`);
         player.isTurn = true;
@@ -37,14 +40,14 @@ class GameManager {
             this.#latestOutputCardPlayer === player ||
             this.#latestOutputCardPlayer !== null && this.#latestOutputCardPlayer.isRankDecided && player.isNowPass
         ) {
-            this.vm.battleFieldHand = [];
-            this.playerList.forEach(p => p.isNowPass = false);
+            this.#vm.battleFieldHand = [];
+            this.#playerList.forEach(p => p.isNowPass = false);
             await Common.sleep();
         }
 
         player.isNowPass = false;
 
-        const hand = await player.outputHand(this.vm.battleFieldHand);
+        const hand = await player.outputHand(this.#vm.battleFieldHand);
 
         if (hand.length > 0) {
             log(`場に出したカード: ${Common.cardListToString(hand)}`);
@@ -60,7 +63,7 @@ class GameManager {
                 this.revolution();
             }
 
-            this.vm.battleFieldHand = hand;
+            this.#vm.battleFieldHand = hand;
             this.#latestOutputCardPlayer = player;
 
             hand.forEach(c => c.isDead = true);
@@ -69,7 +72,7 @@ class GameManager {
                 log("あがり");
                 player.rank = Rank.getRank(this.#ranking++);
                 player.isRankDecided = true;
-                this.playerList.forEach(p => p.isNowPass = false);
+                this.#playerList.forEach(p => p.isNowPass = false);
             }
         }
         else {
@@ -90,8 +93,8 @@ class GameManager {
         let nextPlayerIndex = currentPlayerIndex;
         
         do {
-            nextPlayerIndex = (nextPlayerIndex + 1) % this.playerList.length;
-            if (!this.playerList[nextPlayerIndex].isRankDecided) {
+            nextPlayerIndex = (nextPlayerIndex + 1) % this.#playerList.length;
+            if (!this.#playerList[nextPlayerIndex].isRankDecided) {
                 return nextPlayerIndex;
             }
         }
@@ -106,7 +109,7 @@ class GameManager {
 
     static revolution() {
         log("革命！");
-        this.vm.isRevolution = !this.vm.isRevolution;
+        this.#vm.isRevolution = !this.#vm.isRevolution;
         const allCardList = CardFactory.getAllCardList();
         for (const card of allCardList) {
             if (card.constructor === Joker) {
@@ -114,6 +117,6 @@ class GameManager {
             }
             card.power *= -1;
         }
-        this.playerList.forEach(p => p.onRevolution());
+        this.#playerList.forEach(p => p.onRevolution());
     }
 }

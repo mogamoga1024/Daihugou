@@ -29,7 +29,8 @@ module.exports = {
     async mounted() {
         //const leaderIndex = Common.randomInt(this.playerList().length);
         const leaderIndex = 0; // debug
-        await GameManager.startGame(this.playerList(), leaderIndex, this);
+        GameManager.init(this.playerList(), this);
+        await GameManager.startGame(leaderIndex);
     },
     computed: {
         battleFieldCardContainerWidth() {

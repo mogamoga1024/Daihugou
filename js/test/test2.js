@@ -4,7 +4,7 @@
     module("CPUのAIのテスト2", {
         setup() {
             cpu = new Cpu("CPU1");
-            GameManagerMock.init([cpu]);
+            GameManager.init([cpu], {isRevolution: false});
         }
     });
 
@@ -63,7 +63,7 @@
         CardFactory.getCard("Joker1").isDead = true;
         CardFactory.getCard("Joker2").isDead = true;
 
-        GameManagerMock.revolution();
+        GameManager.revolution();
 
         strictEqual(Common.cardListToString(cpu.outputHand([])), "d8");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s9, d9");
