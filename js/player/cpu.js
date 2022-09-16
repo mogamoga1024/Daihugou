@@ -84,18 +84,10 @@ class Cpu extends Player {
                     selectedHand = this._stairsHandList[0];
                 }
             }
-            // 2組以上 // TODO
+            // 3組以上
             // → 最後に出す役、最強の役以外で最弱の役をだす
-            else if (this._singleHandList.length >= 2 && this._singleHandList[0] === lastOutputHand) {
-                selectedHand = this._singleHandList[1];
-            }
-            else if (this._multiHandList.length >= 2 && this._multiHandList[0] === lastOutputHand) {
-                selectedHand = this._multiHandList[1];
-            }
-            else if (this._stairsHandList.length >= 2 && this._stairsHandList[0] === lastOutputHand) {
-                selectedHand = this._stairsHandList[1];
-            }
             else {
+                const tmpSingleCardList = this._singleHandList.filter(h => h !== lastOutputHand && h.power !== strongestCardPower);
                 // TODO
             }
         }
@@ -177,7 +169,7 @@ class Cpu extends Player {
 
         switch (Hand.cardListToHandKind(selectedHand)) {
             case Hand.Single: this._singleHandList = this._singleHandList.filter(c => c !== selectedHand); break;
-            case Hand.Multi:  this._multiHandList = this._multiHandList.filter(c => c !== selectedHand);   break;
+            case Hand.Multi:  this._multiHandList  = this._multiHandList.filter(c => c !== selectedHand);  break;
             case Hand.Stairs: this._stairsHandList = this._stairsHandList.filter(c => c !== selectedHand); break;
             default: throw new Error("存在しない役");
         }
