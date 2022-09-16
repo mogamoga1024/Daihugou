@@ -23,10 +23,17 @@ class Cpu extends Player {
         }
 
         let selectedCardList = [];
+        const strongestCardPower = this._strongestCardPower;
         
         if (battleFieldCardList.length === 0) {
-            // TODO 親のとき
-            selectedCardList = [this.cardList[0]];
+            if (this._handCount === 2) {
+                if (
+                    this._singleCardList.length > 0 &&
+                    this._singleCardList[this._singleCardList.length - 1].power > strongestCardPower)
+                {
+                    // TODO
+                }
+            }
         }
         else {
             const bfHand = Hand.cardListToHand(battleFieldCardList);
@@ -42,7 +49,7 @@ class Cpu extends Player {
 
                     if (
                         this._handCount === 2 &&
-                        tmpSingleCardList[tmpSingleCardList.length - 1].power === this._strongestCardPower
+                        tmpSingleCardList[tmpSingleCardList.length - 1].power === strongestCardPower
                     ) {
                         targetCard = tmpSingleCardList[tmpSingleCardList.length - 1];
                     }
@@ -65,7 +72,7 @@ class Cpu extends Player {
 
                     if (
                         this._handCount === 2 &&
-                        tmpMultiCardList[tmpMultiCardList.length - 1][0].power === this._strongestCardPower
+                        tmpMultiCardList[tmpMultiCardList.length - 1][0].power === strongestCardPower
                     ) {
                         targetCard = tmpMultiCardList[tmpMultiCardList.length - 1];
                     }
@@ -89,7 +96,7 @@ class Cpu extends Player {
 
                     if (
                         this._handCount === 2 &&
-                        lastTmpStairsCard[lastTmpStairsCard.length - 1].power === this._strongestCardPower
+                        lastTmpStairsCard[lastTmpStairsCard.length - 1].power === strongestCardPower
                     ) {
                         targetCard = tmpStairsCardList[tmpStairsCardList.length - 1];
                     }
