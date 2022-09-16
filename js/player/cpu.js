@@ -24,15 +24,47 @@ class Cpu extends Player {
 
         let selectedCardList = [];
         const strongestCardPower = this._strongestCardPower;
+        const lastOutputCard = this._lastOutputCard;
         
         if (battleFieldCardList.length === 0) {
-            if (this._handCount === 2) {
-                if (
-                    this._singleCardList.length > 0 &&
-                    this._singleCardList.last().power > strongestCardPower)
-                {
-                    // TODO
-                }
+            if (this._handCount === 1 && this._singleCardList.length > 0) {
+                selectedCardList = [this._singleCardList[0]];
+            }
+            else if (this._handCount === 1 && this._multiCardList.length > 0) {
+                selectedCardList = this._multiCardList[0];
+            }
+            else if (this._handCount === 1 && this._stairsCardList.length > 0) {
+                selectedCardList = this._stairsCardList[0];
+            }
+            else if (
+                this._handCount === 2 && this._singleCardList.length > 0 &&
+                this._singleCardList.last().power === strongestCardPower
+            ) {
+                selectedCardList = [this._singleCardList.last()];
+            }
+            else if (
+                this._handCount === 2 && this._multiCardList.length > 0 &&
+                this._multiCardList.last()[0].power === strongestCardPower
+            ) {
+                selectedCardList = this._multiCardList.last();
+            }
+            else if (
+                this._handCount === 2 && this._stairsCardList.length > 0 &&
+                this._stairsCardList.last().last().power === strongestCardPower
+            ) {
+                selectedCardList = this._stairsCardList.last();
+            }
+            else if (this._singleCardList.length >= 2 && this._singleCardList[0] === lastOutputCard) { // TODO
+                selectedCardList = [this._singleCardList[1]];
+            }
+            else if (this._multiCardList.length >= 2 && this._multiCardList[0] === lastOutputCard) {
+                selectedCardList = this._multiCardList[1];
+            }
+            else if (this._stairsCardList.length >= 2 && this._stairsCardList[0] === lastOutputCard) {
+                selectedCardList = this._stairsCardList[1];
+            }
+            else {
+                // TODO
             }
         }
         else {
@@ -92,11 +124,10 @@ class Cpu extends Player {
                     if (tmpStairsCardList.length === 0) {
                         return []; // TODO 考えもの
                     }
-                    const lastTmpStairsCard = tmpStairsCardList.last();
 
                     if (
                         this._handCount === 2 &&
-                        lastTmpStairsCard.last().power === strongestCardPower
+                        tmpStairsCardList.last().last().power === strongestCardPower
                     ) {
                         targetCard = tmpStairsCardList.last();
                     }
