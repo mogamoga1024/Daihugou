@@ -52,6 +52,13 @@ class GameManager {
             cardList[2].power === cardList[3].power
         ) {
             this.#vm.isRevolution = !this.#vm.isRevolution;
+            const allCardList = CardFactory.getAllCardList();
+            for (const card of allCardList) {
+                if (card.constructor === Joker) {
+                    continue;
+                }
+                card.power *= -1;
+            }
         }
 
         if (cardList.length > 0) {

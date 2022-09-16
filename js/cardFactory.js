@@ -67,4 +67,8 @@ class CardFactory {
     static getCard(name) {
         return this.createCard(name, false);
     }
+
+    static getAllCardList() {
+        return this.createAllCardList(false);
+    }
 }
