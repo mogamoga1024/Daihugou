@@ -316,6 +316,7 @@ class Cpu extends Player {
     }
 
     onRevolution() {
+        super.onRevolution();
         this._singleHandList = this._multiHandList = this._stairsHandList = [];
         this._cardDivision();
     }

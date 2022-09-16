@@ -75,7 +75,7 @@ class GameManager {
 
             hand.forEach(c => c.isDead = true);
 
-            if (player.hand.length === 0) {
+            if (player.cardList.length === 0) {
                 log("あがり");
                 player.rank = Rank.getRank(this.#ranking++);
                 player.isRankDecided = true;

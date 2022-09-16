@@ -24,7 +24,9 @@ class Player {
         return [];
     }
 
-    onRevolution() {}
+    onRevolution() {
+        Common.sortCardList(this.cardList);
+    }
 
     onGameFinish() {}
 }
