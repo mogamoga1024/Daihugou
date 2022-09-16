@@ -47,7 +47,7 @@ class Cpu extends Player {
                 // → 最強の役をだす
                 if (
                     this._singleHandList.length > 0 &&
-                    this._singleHandList.last().power === strongestCardPower
+                    this._singleHandList.last()[0].power === strongestCardPower
                 ) {
                     selectedHand = this._singleHandList.last();
                 }
