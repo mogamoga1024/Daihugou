@@ -339,8 +339,9 @@ class Cpu extends Player {
 
         const centerCardPower = CardFactory.getCard("s9").power;
         cardList = cardList.filter(c => c.power !== centerCardPower);
-        const lowerCount = cardList.filter(c => c.power !== centerCardPower)
+        const lowerCount = cardList.filter(c => c.power !== centerCardPower).length;
+        const upperCount = cardList.length - lowerCount;
 
-        return lowerCount / cardList.length >= 0.7;
+        return lowerCount - upperCount >= 2;
     }
 }

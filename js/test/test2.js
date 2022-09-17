@@ -65,6 +65,32 @@
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s2");
     });
 
+    // memo: ((s|c|d|h)([1-9]|T|J|Q|K))|Joker1|Joker2
+
+    test("思考 革命すべきか", function() {
+        cpu.cardList = CardFactory.createCardList("s3, s4, c5, d6, s9, c9, d9, h9, sK, s2");
+
+        cpu._cardDivision();
+        
+        strictEqual(cpu._shouldRevolution(), true);
+    });
+
+    test("思考 革命すべきか", function() {
+        cpu.cardList = CardFactory.createCardList("s3, s4, c4, d4, h4, sJ, cJ, dQ, sK, s2");
+
+        cpu._cardDivision();
+        
+        strictEqual(cpu._shouldRevolution(), true);
+    });
+
+    test("思考 革命すべきか", function() {
+        cpu.cardList = CardFactory.createCardList("s3, s4, c4, d4, h4, s9, s2");
+
+        cpu._cardDivision();
+        
+        strictEqual(cpu._shouldRevolution(), true);
+    });
+
     test("思考 革命考慮", function() {
         cpu.cardList = CardFactory.createCardList("s3, s4, c4, d4, h4, s9, s2");
         
