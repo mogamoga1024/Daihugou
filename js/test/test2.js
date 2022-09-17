@@ -48,7 +48,24 @@
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
     });
 
-    test("思考 応手で気軽に最強をださない", function() {
+    test("思考 応手で気軽に最強をださない single", function() {
+        cpu.cardList = CardFactory.createCardList("s3, s4, s2");
+
+        CardFactory.getCard("Joker1").isDead = true;
+        CardFactory.getCard("Joker2").isDead = true;
+
+        const s1 = CardFactory.getCard("s1");
+
+        strictEqual(Common.cardListToString(cpu.outputHand([s1])), "");
+
+        s1.isDead = true;
+
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s4");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s2");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
+    });
+
+    test("思考 応手で気軽に最強をださない multi", function() {
         cpu.cardList = CardFactory.createCardList("s3, s4, s2, c2");
 
         CardFactory.getCard("Joker1").isDead = true;
@@ -64,7 +81,26 @@
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s4");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s2, c2");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
-    })
+    });
+
+    test("思考 応手で気軽に最強をださない stairs", function() {
+        cpu.cardList = CardFactory.createCardList("s3, s4, sK, s1, s2");
+
+        CardFactory.getCard("Joker1").isDead = true;
+        CardFactory.getCard("Joker2").isDead = true;
+
+        const cQ = CardFactory.getCard("cQ");
+        const cK = CardFactory.getCard("cK");
+        const c1 = CardFactory.getCard("c1");
+
+        strictEqual(Common.cardListToString(cpu.outputHand([cQ, cK, c1])), "");
+
+        cQ.isDead = cK.isDead = c1.isDead = true;
+
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s4");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "sK, s1, s2");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
+    });
 
     test("思考 革命中 single multi stairs", function() {
         cpu.cardList = CardFactory.createCardList("s3, s4, c4, h5, h6, h7, d9, sT, dT, hJ, hQ, hK, h1, s2");
