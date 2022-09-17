@@ -48,6 +48,24 @@
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
     });
 
+    test("思考 応手で気軽に最強をださない", function() {
+        cpu.cardList = CardFactory.createCardList("s3, s4, s2, c2");
+
+        CardFactory.getCard("Joker1").isDead = true;
+        CardFactory.getCard("Joker2").isDead = true;
+
+        const s1 = CardFactory.getCard("s1");
+        const c1 = CardFactory.getCard("c1");
+
+        strictEqual(Common.cardListToString(cpu.outputHand([s1, c1])), "");
+
+        s1.isDead = c1.isDead = true;
+
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s4");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s2, c2");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
+    })
+
     test("思考 革命中 single multi stairs", function() {
         cpu.cardList = CardFactory.createCardList("s3, s4, c4, h5, h6, h7, d9, sT, dT, hJ, hQ, hK, h1, s2");
         
