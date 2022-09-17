@@ -159,4 +159,21 @@
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s9");
     });
+
+    test("思考 革命考慮 応手", function() {
+        cpu.cardList = CardFactory.createCardList("s3, s4, c4, d4, h4, s9, s2");
+        
+        CardFactory.getCard("Joker1").isDead = true;
+        CardFactory.getCard("Joker2").isDead = true;
+
+        const c5 = CardFactory.getCard("c5");
+
+        strictEqual(Common.cardListToString(cpu.outputHand([c5])), "s2");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s4, c4, d4, h4");
+
+        GameManager.revolution();
+
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s9");
+    });
 })();
