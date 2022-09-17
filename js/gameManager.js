@@ -64,6 +64,7 @@ class GameManager {
                 hand[1].power === hand[2].power &&
                 hand[2].power === hand[3].power
             ) {
+                log(`${player.name} 革命！`);
                 this.revolution();
             }
 
@@ -112,7 +113,6 @@ class GameManager {
     }
 
     static revolution() {
-        log(`${player.name} 革命！`);
         this.#vm.isRevolution = !this.#vm.isRevolution;
         const allCardList = CardFactory.getAllCardList();
         for (const card of allCardList) {
