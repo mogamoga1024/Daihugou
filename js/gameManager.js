@@ -15,6 +15,11 @@ class GameManager {
 
         log("【ゲーム開始】");
 
+        for (const player of this.#playerList) {
+            // debug用
+            log(`%c${player.name} 初期手札: ${Common.cardListToString(player.cardList)}`, "color: crimson");
+        }
+
         while (this.#playerList.filter(p => !p.isRankDecided).length > 1) {
             playerIndex = await this.startTurn(playerIndex);
         }
