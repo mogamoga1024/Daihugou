@@ -324,4 +324,23 @@ class Cpu extends Player {
     onGameFinish() {
         this._singleHandList = this._multiHandList = this._stairsHandList = [];
     }
+
+    _shouldRevolution() {
+        // 革命できる かつ 弱いカードが大半なら革命すべき
+
+        const revolutionHandList = this._multiHandList.filter(h => h.length === 4);
+
+        if (revolutionHandList.length === 0) return false;
+
+        let cardList = this.cardList;
+        for (const hand of revolutionHandList) {
+            cardList = cardList.filter(c => c.power !== hand[0].power);
+        }
+
+        const centerCardPower = CardFactory.getCard("s9").power;
+        cardList = cardList.filter(c => c.power !== centerCardPower);
+        const lowerCount = cardList.filter(c => c.power !== centerCardPower)
+
+        return lowerCount / cardList.length >= 0.7;
+    }
 }
