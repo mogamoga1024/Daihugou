@@ -32,7 +32,6 @@ class GameManager {
     static async startTurn(playerIndex) {
         const player = this.#playerList[playerIndex];
 
-        log(`【${player.name}のターン】`);
         player.isTurn = true;
         
         // 場を流すかどうか
@@ -50,7 +49,7 @@ class GameManager {
         const hand = await player.outputHand(this.#vm.battleFieldHand);
 
         if (hand.length > 0) {
-            log(`場に出したカード: ${Common.cardListToString(hand)}`);
+            log(`${player.name} 場に出したカード: ${Common.cardListToString(hand)}`);
 
             // TODO Joker未考慮
             // 革命判定
@@ -69,14 +68,14 @@ class GameManager {
             hand.forEach(c => c.isDead = true);
 
             if (player.cardList.length === 0) {
-                log("あがり");
+                log(`${player.name} あがり`);
                 player.rank = Rank.getRank(this.#ranking++);
                 player.isRankDecided = true;
                 this.#playerList.forEach(p => p.isNowPass = false);
             }
         }
         else {
-            log("パス");
+            log(`${player.name} パス`);
             player.isNowPass = true;
         }
 
@@ -108,7 +107,7 @@ class GameManager {
     }
 
     static revolution() {
-        log("革命！");
+        log(`${player.name} 革命！`);
         this.#vm.isRevolution = !this.#vm.isRevolution;
         const allCardList = CardFactory.getAllCardList();
         for (const card of allCardList) {
