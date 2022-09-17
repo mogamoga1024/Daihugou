@@ -28,6 +28,8 @@ class Cpu extends Player {
         const maybeLastOutputHand = this._maybeLastOutputHand;
         
         if (battleFieldHand.length === 0) {
+            // 親番
+
             // 最後の1役
             // → それをだす
             if (handCount === 1) {
@@ -113,6 +115,8 @@ class Cpu extends Player {
             }
         }
         else {
+            // 子番（応手）
+
             const bfHandKind = Hand.handKindFrom(battleFieldHand);
 
             switch (bfHandKind) {
@@ -121,7 +125,8 @@ class Cpu extends Player {
                         h[0].power > battleFieldHand[0].power
                     );
                     if (tmpSingleHandList.length === 0) {
-                        return [];
+                        selectedHand = [];
+                        break;
                     }
 
                     if (
@@ -131,7 +136,13 @@ class Cpu extends Player {
                         selectedHand = tmpSingleHandList.last();
                     }
                     else {
-                        selectedHand = tmpSingleHandList[0];
+                        const hand = tmpSingleHandList[0]
+                        if (hand[0].power === strongestCardPower) {
+                            selectedHand = [];
+                        }
+                        else {
+                            selectedHand = hand;
+                        }
                     }
                     break;
 
@@ -141,7 +152,8 @@ class Cpu extends Player {
                         h[0].power > battleFieldHand[0].power
                     );
                     if (tmpMultiHandList.length === 0) {
-                        return []; // TODO 考えもの
+                        selectedHand = []; // TODO 考えもの
+                        break;
                     }
 
                     if (
@@ -151,7 +163,13 @@ class Cpu extends Player {
                         selectedHand = tmpMultiHandList.last();
                     }
                     else {
-                        selectedHand = tmpMultiHandList[0];
+                        const hand = tmpMultiHandList[0]
+                        if (hand[0].power === strongestCardPower) {
+                            selectedHand = [];
+                        }
+                        else {
+                            selectedHand = hand;
+                        }
                     }
                     break;
 
@@ -161,7 +179,8 @@ class Cpu extends Player {
                         h[0].power > battleFieldHand[0].power
                     );
                     if (tmpStairsHandList.length === 0) {
-                        return []; // TODO 考えもの
+                        selectedHand = []; // TODO 考えもの
+                        break;
                     }
 
                     if (
@@ -171,7 +190,13 @@ class Cpu extends Player {
                         selectedHand = tmpStairsHandList.last();
                     }
                     else {
-                        selectedHand = tmpStairsHandList[0];
+                        const hand = tmpStairsHandList[0]
+                        if (hand.last().power === strongestCardPower) {
+                            selectedHand = [];
+                        }
+                        else {
+                            selectedHand = hand;
+                        }
                     }
                     break;
 
@@ -183,13 +208,12 @@ class Cpu extends Player {
         // 手札の更新
         if (selectedHand.length > 0) {
             this.cardList = this.cardList.filter(c => selectedHand.indexOf(c) === -1);
-        }
-
-        switch (Hand.handKindFrom(selectedHand)) {
-            case Hand.Single: this._singleHandList = this._singleHandList.filter(h => h !== selectedHand); break;
-            case Hand.Multi:  this._multiHandList  = this._multiHandList.filter(h => h !== selectedHand);  break;
-            case Hand.Stairs: this._stairsHandList = this._stairsHandList.filter(h => h !== selectedHand); break;
-            default: throw new Error("存在しない役");
+            switch (Hand.handKindFrom(selectedHand)) {
+                case Hand.Single: this._singleHandList = this._singleHandList.filter(h => h !== selectedHand); break;
+                case Hand.Multi:  this._multiHandList  = this._multiHandList.filter(h => h !== selectedHand);  break;
+                case Hand.Stairs: this._stairsHandList = this._stairsHandList.filter(h => h !== selectedHand); break;
+                default: throw new Error("存在しない役");
+            }
         }
 
         return selectedHand;
