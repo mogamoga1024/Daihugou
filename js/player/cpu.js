@@ -87,8 +87,9 @@ class Cpu extends Player {
                 }
             }
             // 3組以上
-            // → 最後に出す役、最強の役以外で最弱の役をだす
-            //   ただし、最強の役を持っていない場合は最後に出す予定のカードはさっさと切っていい
+            // → ・基本的に最後に出す役、最強の役以外で最弱の役をだす
+            //   ・最強の役を持っていない場合は最後に出す予定の役はさっさと切っていい
+            //   ・革命する予定があるなら最強の役はさっさと切っていい
             else {
                 const tmpSingleHandList = this._singleHandList.filter(h => h !== maybeLastOutputHand && h[0].power !== strongestCardPower);
                 const tmpMultiHandList = this._multiHandList.filter(h => h !== maybeLastOutputHand && h[0].power !== strongestCardPower);
@@ -99,6 +100,8 @@ class Cpu extends Player {
                     this._multiHandList.length > 0 && this._multiHandList.last()[0].power === strongestCardPower ||
                     this._stairsHandList.length > 0 && this._stairsHandList.last().last().power === strongestCardPower
                 ) {
+                    // 最強の役を持っている場合、最後に出す役、最強の役以外で最弱の役をだす
+
                     if (tmpSingleHandList.length > 0) {
                         selectedHand = tmpSingleHandList[0];
                     }
@@ -110,6 +113,7 @@ class Cpu extends Player {
                     }
                 }
                 else {
+                    // 最強の役を持っていない場合は最後に出す予定の役をだす
                     selectedHand = maybeLastOutputHand;
                 }
             }
@@ -133,14 +137,19 @@ class Cpu extends Player {
                         handCount === 2 &&
                         tmpSingleHandList.last()[0].power === strongestCardPower
                     ) {
+                        // 2役で最強の役を持っている場合、最強の役をだす
                         selectedHand = tmpSingleHandList.last();
                     }
                     else {
+                        // 2役以外 または 2役で最強の役を持っていない場合
+
                         const hand = tmpSingleHandList[0]
                         if (hand[0].power === strongestCardPower) {
+                            // 最強の役しかない場合、応手しない
                             selectedHand = [];
                         }
                         else {
+                            // 弱い役で応手する
                             selectedHand = hand;
                         }
                     }
@@ -160,14 +169,19 @@ class Cpu extends Player {
                         handCount === 2 &&
                         tmpMultiHandList.last()[0].power === strongestCardPower
                     ) {
+                        // 2役で最強の役を持っている場合、最強の役をだす
                         selectedHand = tmpMultiHandList.last();
                     }
                     else {
+                        // 2役以外 または 2役で最強の役を持っていない場合
+
                         const hand = tmpMultiHandList[0]
                         if (hand[0].power === strongestCardPower) {
+                            // 最強の役しかない場合、応手しない
                             selectedHand = [];
                         }
                         else {
+                            // 弱い役で応手する
                             selectedHand = hand;
                         }
                     }
@@ -187,14 +201,19 @@ class Cpu extends Player {
                         handCount === 2 &&
                         tmpStairsHandList.last().last().power === strongestCardPower
                     ) {
+                        // 2役で最強の役を持っている場合、最強の役をだす
                         selectedHand = tmpStairsHandList.last();
                     }
                     else {
+                        // 2役以外 または 2役で最強の役を持っていない場合
+
                         const hand = tmpStairsHandList[0]
                         if (hand.last().power === strongestCardPower) {
+                            // 最強の役しかない場合、応手しない
                             selectedHand = [];
                         }
                         else {
+                            // 弱い役で応手する
                             selectedHand = hand;
                         }
                     }
