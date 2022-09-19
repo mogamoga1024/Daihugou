@@ -45,6 +45,16 @@
 
     test("思考 応手 multi 残り2役 最強あり", function() {
         const d3h3 = CardFactory.getCardList("d3, h3");
+        const s2c2 = CardFactory.getCardList("s2, c2");
+        multiThinking = new MultiThinking([s2c2]);
+
+        strictEqual(Common.cardListToString(
+            multiThinking.outputHandIfHandInBattleField(d3h3, 2, twoPower)), "s2, c2"
+        );
+    });
+
+    test("思考 応手 multi 残り2役 最強あり", function() {
+        const d3h3 = CardFactory.getCardList("d3, h3");
         const s7c7 = CardFactory.getCardList("s7, c7");
         const s2c2 = CardFactory.getCardList("s2, c2");
         multiThinking = new MultiThinking([s7c7, s2c2]);
