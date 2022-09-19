@@ -5,13 +5,14 @@
         setup() {
             cpu = new Cpu("CPU1");
             GameManager.init([cpu], {isRevolution: false});
+            CardFactory.initCardList();
         }
     });
 
     // memo: ((s|c|d|h)([1-9]|T|J|Q|K))|Joker1|Joker2
 
     test("思考 single", function() {
-        cpu.cardList = CardFactory.createCardList("s3, d7, s2");
+        cpu.cardList = CardFactory.getCardList("s3, d7, s2");
         
         CardFactory.getCard("Joker1").isDead = true;
         CardFactory.getCard("Joker2").isDead = true;
@@ -22,7 +23,7 @@
     });
 
     test("思考 single multi", function() {
-        cpu.cardList = CardFactory.createCardList("s3, d7, sT, dT, s2");
+        cpu.cardList = CardFactory.getCardList("s3, d7, sT, dT, s2");
         
         CardFactory.getCard("Joker1").isDead = true;
         CardFactory.getCard("Joker2").isDead = true;
@@ -34,7 +35,7 @@
     });
 
     test("思考 single multi stairs", function() {
-        cpu.cardList = CardFactory.createCardList("s3, s4, c4, h5, h6, h7, d9, sT, dT, hJ, hQ, hK, h1, s2");
+        cpu.cardList = CardFactory.getCardList("s3, s4, c4, h5, h6, h7, d9, sT, dT, hJ, hQ, hK, h1, s2");
         
         CardFactory.getCard("Joker1").isDead = true;
         CardFactory.getCard("Joker2").isDead = true;
@@ -49,7 +50,7 @@
     });
 
     test("思考 応手で気軽に最強をださない single", function() {
-        cpu.cardList = CardFactory.createCardList("s3, s4, s2");
+        cpu.cardList = CardFactory.getCardList("s3, s4, s2");
 
         CardFactory.getCard("Joker1").isDead = true;
         CardFactory.getCard("Joker2").isDead = true;
@@ -66,7 +67,7 @@
     });
 
     test("思考 応手で気軽に最強をださない multi", function() {
-        cpu.cardList = CardFactory.createCardList("s3, s4, s2, c2");
+        cpu.cardList = CardFactory.getCardList("s3, s4, s2, c2");
 
         CardFactory.getCard("Joker1").isDead = true;
         CardFactory.getCard("Joker2").isDead = true;
@@ -84,7 +85,7 @@
     });
 
     test("思考 応手で気軽に最強をださない stairs", function() {
-        cpu.cardList = CardFactory.createCardList("s3, s4, sK, s1, s2");
+        cpu.cardList = CardFactory.getCardList("s3, s4, sK, s1, s2");
 
         CardFactory.getCard("Joker1").isDead = true;
         CardFactory.getCard("Joker2").isDead = true;
@@ -103,7 +104,7 @@
     });
 
     test("思考 革命中 single multi stairs", function() {
-        cpu.cardList = CardFactory.createCardList("s3, s4, c4, h5, h6, h7, d9, sT, dT, hJ, hQ, hK, h1, s2");
+        cpu.cardList = CardFactory.getCardList("s3, s4, c4, h5, h6, h7, d9, sT, dT, hJ, hQ, hK, h1, s2");
         
         CardFactory.getCard("Joker1").isDead = true;
         CardFactory.getCard("Joker2").isDead = true;
@@ -122,7 +123,7 @@
     // memo: ((s|c|d|h)([1-9]|T|J|Q|K))|Joker1|Joker2
 
     test("思考 革命すべきか", function() {
-        cpu.cardList = CardFactory.createCardList("s3, s4, c5, d6, s9, c9, d9, h9, sK, s2");
+        cpu.cardList = CardFactory.getCardList("s3, s4, c5, d6, s9, c9, d9, h9, sK, s2");
 
         cpu._cardDivision();
         
@@ -130,7 +131,7 @@
     });
 
     test("思考 革命すべきか", function() {
-        cpu.cardList = CardFactory.createCardList("s3, s4, c4, d4, h4, sJ, cJ, dQ, sK, s2");
+        cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, sJ, cJ, dQ, sK, s2");
 
         cpu._cardDivision();
         
@@ -138,7 +139,7 @@
     });
 
     test("思考 革命すべきか", function() {
-        cpu.cardList = CardFactory.createCardList("s3, s4, c4, d4, h4, s9, s2");
+        cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s9, s2");
 
         cpu._cardDivision();
         
@@ -146,7 +147,7 @@
     });
 
     test("思考 革命考慮", function() {
-        cpu.cardList = CardFactory.createCardList("s3, s4, c4, d4, h4, s9, s2");
+        cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s9, s2");
         
         CardFactory.getCard("Joker1").isDead = true;
         CardFactory.getCard("Joker2").isDead = true;
@@ -161,7 +162,7 @@
     });
 
     test("思考 革命考慮 応手", function() {
-        cpu.cardList = CardFactory.createCardList("s3, s4, c4, d4, h4, s9, s2");
+        cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s9, s2");
         
         CardFactory.getCard("Joker1").isDead = true;
         CardFactory.getCard("Joker2").isDead = true;

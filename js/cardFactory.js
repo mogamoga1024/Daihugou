@@ -1,12 +1,15 @@
 
 class CardFactory {
+    static #isInitialized = false;
     static #cardList = [];
     
     static get allCardList() {
         return this.#cardList;
     }
 
-    static #initCardList() {
+    static initCardList() {
+        this.#isInitialized = true;
+
         if (this.#cardList.length > 0) {
             this.#cardList.forEach(c => c.obj.isDead = false);
             return;
@@ -35,9 +38,9 @@ class CardFactory {
         this.#cardList.push({name: "Joker2", obj: new Joker("Joker2",  99,  `${imageFolderPath}/card_joker.png`)});
     }
 
-    static createAllCardList(needInit = true) {
-        if (needInit) {
-            this.#initCardList();
+    static getAllCardList() {
+        if (this.#isInitialized === false) {
+            throw new Error("CardFactory#initCardListでの初期化処理が必要");
         }
         return this.#cardList.map(c => c.obj);
     }
@@ -47,9 +50,9 @@ class CardFactory {
      * @param {string} name 
      * @returns 
      */
-    static createCard(name, needInit = true) {
-        if (needInit) {
-            this.#initCardList();
+    static getCard(name) {
+        if (this.#isInitialized === false) {
+            throw new Error("CardFactory#initCardListでの初期化処理が必要");
         }
         const cardList = this.#cardList.filter(c => c.name === name).map(c => c.obj);
         if (cardList.length === 0) {
@@ -58,17 +61,12 @@ class CardFactory {
         return cardList[0];
     }
 
-    static createCardList(strNameList, needInit = true) {
+    static getCardList(strNameList) {
+        if (this.#isInitialized === false) {
+            throw new Error("CardFactory#initCardListでの初期化処理が必要");
+        }
         const nameList = strNameList.split(",").map(name => name.trim());
-        const cardList = nameList.map(name => this.createCard(name, needInit));
+        const cardList = nameList.map(name => this.getCard(name));
         return Common.sortCardList(cardList);
-    }
-
-    static getCard(name) {
-        return this.createCard(name, false);
-    }
-
-    static getAllCardList() {
-        return this.createAllCardList(false);
     }
 }

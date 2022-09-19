@@ -11,21 +11,22 @@
             singleThinking = null;
             multiThinking = null;
             stairsThinking = null;
+            CardFactory.initCardList();
         }
     });
 
     // memo: ((s|c|d|h)([1-9]|T|J|Q|K))|Joker1|Joker2
 
     test("思考 応手 single 役なし", function() {
-        const s3 = CardFactory.createCard("s3");
+        const s3 = CardFactory.getCard("s3");
         singleThinking = new SingleThinking([]);
 
         strictEqual(Common.cardListToString(singleThinking.outputHandIfHandInBattleField([s3])), "");
     });
 
     test("思考 応手 single 役なし", function() {
-        const s7 = CardFactory.createCard("s7");
-        const s1 = CardFactory.createCard("s1");
+        const s7 = CardFactory.getCard("s7");
+        const s1 = CardFactory.getCard("s1");
         singleThinking = new SingleThinking([s7]);
 
         strictEqual(Common.cardListToString(singleThinking.outputHandIfHandInBattleField([s1])), "");
