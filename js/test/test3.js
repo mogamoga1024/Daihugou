@@ -1,6 +1,5 @@
 
 (function() {
-    let cpu = null;
     let singleThinking = null;
     
     CardFactory.initCardList();
@@ -8,7 +7,6 @@
     
     module("CPUのAIのテスト3（SingleThinkingクラス）", {
         setup() {
-            cpu = new Cpu("CPU1");
             singleThinking = null;
             CardFactory.initCardList();
         }

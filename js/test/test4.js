@@ -1,14 +1,12 @@
 
 (function() {
-    let cpu = null;
     let multiThinking = null;
     
     CardFactory.initCardList();
-    const twoPower = CardFactory.getCard("s2").power;
+    const twoPower = CardFactory.getCardList("s2, c2").power;
     
     module("CPUのAIのテスト4（MultiThinkingクラス）", {
         setup() {
-            cpu = new Cpu("CPU1");
             multiThinking = null;
             CardFactory.initCardList();
         }
@@ -18,98 +16,98 @@
 
     test("思考 応手 multi 役なし", function() {
         const s3c3 = CardFactory.getCardList("s3, c3");
-        multiThinking = new SingleThinking([]);
+        multiThinking = new MultiThinking();
 
         strictEqual(Common.cardListToString(
             multiThinking.outputHandIfHandInBattleField(s3c3, 8, twoPower)), ""
         );
     });
 
-    test("思考 応手 multi 役なし", function() { // 以下TODO
-        const s7 = CardFactory.getCard("s7");
-        const s1 = CardFactory.getCard("s1");
-        multiThinking = new SingleThinking([[s7]]);
+    test("思考 応手 multi 役なし", function() {
+        const s7c7 = CardFactory.getCardList("s7, c7");
+        const s1c1 = CardFactory.getCardList("s1, c1");
+        multiThinking = new MultiThinking(s7c7);
 
         strictEqual(Common.cardListToString(
-            multiThinking.outputHandIfHandInBattleField([s1], 8, twoPower)), ""
+            multiThinking.outputHandIfHandInBattleField(s1c1, 8, twoPower)), ""
         );
     });
 
     test("思考 応手 multi 残り1役", function() {
-        const d3 = CardFactory.getCard("d3");
-        const s7 = CardFactory.getCard("s7");
-        multiThinking = new SingleThinking([[s7]]);
+        const d3h3 = CardFactory.getCardList("d3, h3");
+        const s7c7 = CardFactory.getCardList("s7, c7");
+        multiThinking = new MultiThinking(s7c7);
 
         strictEqual(Common.cardListToString(
-            multiThinking.outputHandIfHandInBattleField([d3], 1, twoPower)), "s7"
+            multiThinking.outputHandIfHandInBattleField([d3h3], 1, twoPower)), "s7, c7"
         );
     });
 
     test("思考 応手 multi 残り2役 最強あり", function() {
-        const d3 = CardFactory.getCard("d3");
-        const s7 = CardFactory.getCard("s7");
-        const s2 = CardFactory.getCard("s2");
-        multiThinking = new SingleThinking([[s7], [s2]]);
+        const d3h3 = CardFactory.getCardList("d3, h3");
+        const s7c7 = CardFactory.getCardList("s7, c7");
+        const s2c2 = CardFactory.getCardList("s2, c2");
+        multiThinking = new MultiThinking(s7c7, s2c2);
 
         strictEqual(Common.cardListToString(
-            multiThinking.outputHandIfHandInBattleField([d3], 2, twoPower)), "s2"
+            multiThinking.outputHandIfHandInBattleField([d3h3], 2, twoPower)), "s2, c2"
         );
     });
 
     test("思考 応手 multi 残り2役 最強なし", function() {
-        const d3 = CardFactory.getCard("d3");
-        const s7 = CardFactory.getCard("s7");
-        const s1 = CardFactory.getCard("s1");
-        multiThinking = new SingleThinking([[s7], [s1]]);
+        const d3h3 = CardFactory.getCardList("d3, h3");
+        const s7c7 = CardFactory.getCardList("s7, c7");
+        const s1c1 = CardFactory.getCardList("s1, c1");
+        multiThinking = new MultiThinking(s7c7, s1c1);
 
         strictEqual(Common.cardListToString(
-            multiThinking.outputHandIfHandInBattleField([d3], 2, twoPower)), "s7"
+            multiThinking.outputHandIfHandInBattleField([d3h3], 2, twoPower)), "s7, c7"
         );
     });
 
     test("思考 応手 multi 残り3役", function() {
-        const d3 = CardFactory.getCard("d3");
-        const s7 = CardFactory.getCard("s7");
-        const s9 = CardFactory.getCard("s9");
-        const s2 = CardFactory.getCard("s2");
-        multiThinking = new SingleThinking([[s7], [s9], [s2]]);
+        const d3h3 = CardFactory.getCardList("d3, h3");
+        const s7c7 = CardFactory.getCardList("s7, c7");
+        const s9c9 = CardFactory.getCardList("s9, c9");
+        const s2c2 = CardFactory.getCardList("s2, c2");
+        multiThinking = new MultiThinking(s7c7, s9c9, s2c2);
 
         strictEqual(Common.cardListToString(
-            multiThinking.outputHandIfHandInBattleField([d3], 3, twoPower)), "s7"
+            multiThinking.outputHandIfHandInBattleField([d3h3], 3, twoPower)), "s7, c7"
         );
     });
 
     test("思考 応手 multi 残り3役", function() {
-        const d7 = CardFactory.getCard("d7");
-        const s7 = CardFactory.getCard("s7");
-        const s9 = CardFactory.getCard("s9");
-        const s2 = CardFactory.getCard("s2");
-        multiThinking = new SingleThinking([[s7], [s9], [s2]]);
+        const d7h7 = CardFactory.getCardList("d7, h7");
+        const s7c7 = CardFactory.getCardList("s7, c7");
+        const s9c9 = CardFactory.getCardList("s9, c9");
+        const s2c2 = CardFactory.getCardList("s2, c2");
+        multiThinking = new MultiThinking(s7c7, s9c9, s2c2);
 
         strictEqual(Common.cardListToString(
-            multiThinking.outputHandIfHandInBattleField([d7], 3, twoPower)), "s9"
+            multiThinking.outputHandIfHandInBattleField([d7h7], 3, twoPower)), "s9, c9"
         );
     });
 
     test("思考 応手 multi 残り3役", function() {
-        const d1 = CardFactory.getCard("d1");
-        const s7 = CardFactory.getCard("s7");
-        const s9 = CardFactory.getCard("s9");
-        const s2 = CardFactory.getCard("s2");
-        multiThinking = new SingleThinking([[s7], [s9], [s2]]);
+        const d1h1 = CardFactory.getCardList("d1, h1");
+        const s7c7 = CardFactory.getCardList("s7, c7");
+        const s9c9 = CardFactory.getCardList("s9, c9");
+        const s2c2 = CardFactory.getCardList("s2, c2");
+        multiThinking = new MultiThinking(s7c7, s9c9, s2c2);
 
         strictEqual(Common.cardListToString(
-            multiThinking.outputHandIfHandInBattleField([d1], 3, twoPower)), ""
+            multiThinking.outputHandIfHandInBattleField([d1h1], 3, twoPower)), ""
         );
     });
 
     test("思考 応手 multi 残り3役", function() {
-        const d1 = CardFactory.getCard("d1");
-        const s2 = CardFactory.getCard("s2");
-        multiThinking = new SingleThinking([[s2]]);
+        const d1h1 = CardFactory.getCardList("d1, h1");
+        const s2c2 = CardFactory.getCardList("s2, c2");
+        multiThinking = new MultiThinking(s2c2);
 
         strictEqual(Common.cardListToString(
-            multiThinking.outputHandIfHandInBattleField([d1], 3, twoPower)), ""
+            multiThinking.outputHandIfHandInBattleField([d1h1], 3, twoPower)), ""
         );
     });
 })();
