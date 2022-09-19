@@ -32,7 +32,7 @@
     test("思考 応手 single 役なし", function() {
         const s7 = CardFactory.getCard("s7");
         const s1 = CardFactory.getCard("s1");
-        singleThinking = new SingleThinking([s7]);
+        singleThinking = new SingleThinking([[s7]]);
 
         strictEqual(Common.cardListToString(
             singleThinking.outputHandIfHandInBattleField([s1], 8, twoPower)), ""
@@ -42,7 +42,7 @@
     test("思考 応手 single 残り1役", function() {
         const d3 = CardFactory.getCard("d3");
         const s7 = CardFactory.getCard("s7");
-        singleThinking = new SingleThinking([s7]);
+        singleThinking = new SingleThinking([[s7]]);
 
         strictEqual(Common.cardListToString(
             singleThinking.outputHandIfHandInBattleField([d3], 1, twoPower)), "s7"
@@ -53,17 +53,14 @@
         const d3 = CardFactory.getCard("d3");
         const s7 = CardFactory.getCard("s7");
         const s2 = CardFactory.getCard("s2");
-        singleThinking = new SingleThinking([s7, s2]);
-
-        CardFactory.getCard("Joker1").isDead = true;
-        CardFactory.getCard("Joker2").isDead = true;
+        singleThinking = new SingleThinking([[s7], [s2]]);
 
         strictEqual(Common.cardListToString(
-            singleThinking.outputHandIfHandInBattleField([d3], 2, twoPower)), ""
+            singleThinking.outputHandIfHandInBattleField([d3], 2, twoPower)), "s2"
         );
     });
 
-
+    // TODO
 
 
 })();
