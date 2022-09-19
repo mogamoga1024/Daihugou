@@ -15,96 +15,96 @@
     // memo: ((s|c|d|h)([1-9]|T|J|Q|K))|Joker1|Joker2
 
     test("思考 応手 stairs 役なし", function() {
-        const s3c3 = CardFactory.getCardList("s3, c3");
+        const s345 = CardFactory.getCardList("s3, s4, s5");
         stairsThinking = new StairsThinking([]);
 
         strictEqual(Common.cardListToString(
-            stairsThinking.outputHandIfHandInBattleField(s3c3, 8, twoPower)), ""
+            stairsThinking.outputHandIfHandInBattleField(s345, 8, twoPower)), ""
         );
     });
 
     test("思考 応手 stairs 役なし", function() {
-        const s7c7 = CardFactory.getCardList("s7, c7");
-        const s1c1 = CardFactory.getCardList("s1, c1");
-        stairsThinking = new StairsThinking([s7c7]);
+        const s567 = CardFactory.getCardList("s5, s6, s7");
+        const sQK1 = CardFactory.getCardList("sQ, sK, s1");
+        stairsThinking = new StairsThinking([s567]);
 
         strictEqual(Common.cardListToString(
-            stairsThinking.outputHandIfHandInBattleField(s1c1, 8, twoPower)), ""
+            stairsThinking.outputHandIfHandInBattleField(sQK1, 8, twoPower)), ""
         );
     });
 
     test("思考 応手 stairs 残り1役", function() {
-        const d3h3 = CardFactory.getCardList("d3, h3");
-        const s7c7 = CardFactory.getCardList("s7, c7");
-        stairsThinking = new StairsThinking([s7c7]);
+        const d345 = CardFactory.getCardList("d3, d4, d5");
+        const s567 = CardFactory.getCardList("s5, s6, s7");
+        stairsThinking = new StairsThinking([s567]);
 
         strictEqual(Common.cardListToString(
-            stairsThinking.outputHandIfHandInBattleField(d3h3, 1, twoPower)), "s7, c7"
+            stairsThinking.outputHandIfHandInBattleField(d345, 1, twoPower)), "s5, s6, s7"
         );
     });
 
     test("思考 応手 stairs 残り2役 最強あり", function() {
-        const d3h3 = CardFactory.getCardList("d3, h3");
-        const s2c2 = CardFactory.getCardList("s2, c2");
-        stairsThinking = new StairsThinking([s2c2]);
+        const d345 = CardFactory.getCardList("d3, d4, d5");
+        const sK12 = CardFactory.getCardList("sK, s1, s2");
+        stairsThinking = new StairsThinking([sK12]);
 
         strictEqual(Common.cardListToString(
-            stairsThinking.outputHandIfHandInBattleField(d3h3, 2, twoPower)), "s2, c2"
+            stairsThinking.outputHandIfHandInBattleField(d345, 2, twoPower)), "sK, s1, s2"
         );
     });
 
     test("思考 応手 stairs 残り2役 最強あり", function() {
-        const d3h3 = CardFactory.getCardList("d3, h3");
-        const s7c7 = CardFactory.getCardList("s7, c7");
-        const s2c2 = CardFactory.getCardList("s2, c2");
-        stairsThinking = new StairsThinking([s7c7, s2c2]);
+        const d345 = CardFactory.getCardList("d3, d4, d5");
+        const s567 = CardFactory.getCardList("s5, s6, s7");
+        const sK12 = CardFactory.getCardList("sK, s1, s2");
+        stairsThinking = new StairsThinking([s567, sK12]);
 
         strictEqual(Common.cardListToString(
-            stairsThinking.outputHandIfHandInBattleField(d3h3, 2, twoPower)), "s2, c2"
+            stairsThinking.outputHandIfHandInBattleField(d345, 2, twoPower)), "sK, s1, s2"
         );
     });
 
     test("思考 応手 stairs 残り2役 最強なし", function() {
-        const d3h3 = CardFactory.getCardList("d3, h3");
-        const s7c7 = CardFactory.getCardList("s7, c7");
-        const s1c1 = CardFactory.getCardList("s1, c1");
-        stairsThinking = new StairsThinking([s7c7, s1c1]);
+        const d345 = CardFactory.getCardList("d3, d4, d5");
+        const s567 = CardFactory.getCardList("s5, s6, s7");
+        const sQK1 = CardFactory.getCardList("sQ, sK, s1");
+        stairsThinking = new StairsThinking([s567, sQK1]);
 
         strictEqual(Common.cardListToString(
-            stairsThinking.outputHandIfHandInBattleField(d3h3, 2, twoPower)), "s7, c7"
+            stairsThinking.outputHandIfHandInBattleField(d345, 2, twoPower)), "s5, s6, s7"
         );
     });
 
     test("思考 応手 stairs 残り3役", function() {
-        const d3h3 = CardFactory.getCardList("d3, h3");
-        const s7c7 = CardFactory.getCardList("s7, c7");
-        const s9c9 = CardFactory.getCardList("s9, c9");
-        const s2c2 = CardFactory.getCardList("s2, c2");
-        stairsThinking = new StairsThinking([s7c7, s9c9, s2c2]);
+        const d345 = CardFactory.getCardList("d3, d4, d5");
+        const s567 = CardFactory.getCardList("s5, s6, s7");
+        const s9TJ = CardFactory.getCardList("s9, sT, sJ");
+        const sK12 = CardFactory.getCardList("sK, s1, s2");
+        stairsThinking = new StairsThinking([s567, s9TJ, sK12]);
 
         strictEqual(Common.cardListToString(
-            stairsThinking.outputHandIfHandInBattleField(d3h3, 3, twoPower)), "s7, c7"
+            stairsThinking.outputHandIfHandInBattleField(d345, 3, twoPower)), "s5, s6, s7"
         );
     });
 
     test("思考 応手 stairs 残り3役", function() {
-        const d7h7 = CardFactory.getCardList("d7, h7");
-        const s7c7 = CardFactory.getCardList("s7, c7");
-        const s9c9 = CardFactory.getCardList("s9, c9");
-        const s2c2 = CardFactory.getCardList("s2, c2");
-        stairsThinking = new StairsThinking([s7c7, s9c9, s2c2]);
+        const d567 = CardFactory.getCardList("d5, d6, d7");
+        const s567 = CardFactory.getCardList("s5, s6, s7");
+        const s9TJ = CardFactory.getCardList("s9, sT, sJ");
+        const sK12 = CardFactory.getCardList("sK, s1, s2");
+        stairsThinking = new StairsThinking([s567, s9TJ, sK12]);
 
         strictEqual(Common.cardListToString(
-            stairsThinking.outputHandIfHandInBattleField(d7h7, 3, twoPower)), "s9, c9"
+            stairsThinking.outputHandIfHandInBattleField(d567, 3, twoPower)), "s9, sT, sJ"
         );
     });
 
     test("思考 応手 stairs 残り3役", function() {
         const d1h1 = CardFactory.getCardList("d1, h1");
-        const s7c7 = CardFactory.getCardList("s7, c7");
-        const s9c9 = CardFactory.getCardList("s9, c9");
-        const s2c2 = CardFactory.getCardList("s2, c2");
-        stairsThinking = new StairsThinking([s7c7, s9c9, s2c2]);
+        const s567 = CardFactory.getCardList("s5, s6, s7");
+        const s9TJ = CardFactory.getCardList("s9, sT, sJ");
+        const sK12 = CardFactory.getCardList("sK, s1, s2");
+        stairsThinking = new StairsThinking([s567, s9TJ, sK12]);
 
         strictEqual(Common.cardListToString(
             stairsThinking.outputHandIfHandInBattleField(d1h1, 3, twoPower)), ""
@@ -113,8 +113,8 @@
 
     test("思考 応手 stairs 残り3役", function() {
         const d1h1 = CardFactory.getCardList("d1, h1");
-        const s2c2 = CardFactory.getCardList("s2, c2");
-        stairsThinking = new StairsThinking([s2c2]);
+        const sK12 = CardFactory.getCardList("sK, s1, s2");
+        stairsThinking = new StairsThinking([sK12]);
 
         strictEqual(Common.cardListToString(
             stairsThinking.outputHandIfHandInBattleField(d1h1, 3, twoPower)), ""
