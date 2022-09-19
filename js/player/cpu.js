@@ -4,6 +4,10 @@ class Cpu extends Player {
     _multiHandList = [];
     _stairsHandList = [];
 
+    _singleThinking = null;
+    _multiThinking = null;
+    _stairsThinking = null;
+
     exchangeCardList() {
         // TODO
         return [];
@@ -247,11 +251,12 @@ class Cpu extends Player {
         let tmpCardList = this.cardList;
 
         tmpCardList = this._cardMultiDivision(tmpCardList);
-
         tmpCardList = this._cardStairsDivision(tmpCardList);
+        this._cardSingleDivision(tmpCardList);
 
-        tmpCardList = this._cardSingleDivision(tmpCardList);
-
+        this._singleThinking = new SingleThinking(this, this._singleHandList);
+        this._multiThinking = new MultiThinking(this, this._multiHandList);
+        this._stairsThinking = new StairsThinking(this, this._stairsHandList);
     }
 
     _cardMultiDivision(cardList) {
