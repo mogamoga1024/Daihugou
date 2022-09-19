@@ -5,7 +5,7 @@ class SingleThinking extends MultiThinking {
         return [];
     }
 
-    outputHandIfHandInBattleField(battleField) {
+    outputHandIfHandInBattleField(battleFieldHand, handCount, strongestCardPower) {
         // TODO
         return [];
     }

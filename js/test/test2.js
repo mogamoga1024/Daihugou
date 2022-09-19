@@ -48,6 +48,18 @@
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
     });
 
+    test("思考 応手 single", function() {
+
+    });
+
+    test("思考 応手 multi", function() {
+        
+    });
+
+    test("思考 応手 stairs", function() {
+        
+    });
+
     test("思考 応手で気軽に最強をださない single", function() {
         cpu.cardList = CardFactory.createCardList("s3, s4, s2");
 

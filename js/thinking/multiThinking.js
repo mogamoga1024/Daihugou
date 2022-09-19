@@ -14,7 +14,7 @@ class MultiThinking extends Thinking {
         );
 
         if (tmpMultiHandList.length === 0) {
-            // パスする // TODO 考えもの
+            // 場に出せる役がない場合、パスする
         }
         else if (
             handCount === 2 &&

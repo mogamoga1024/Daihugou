@@ -2,7 +2,7 @@
 class Thinking {
     _handList = [];
 
-    constructor(player, handList) {
+    constructor(handList) {
         this._handList = handList;
     }
 

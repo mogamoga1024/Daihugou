@@ -142,7 +142,8 @@ class Cpu extends Player {
                         h[0].power > battleFieldHand[0].power
                     );
                     if (tmpStairsHandList.length === 0) {
-                        selectedHand = []; // TODO 考えもの
+                        // 場に出せる役がない場合、パスする
+                        selectedHand = [];
                         break;
                     }
 
@@ -199,9 +200,9 @@ class Cpu extends Player {
         tmpCardList = this._cardStairsDivision(tmpCardList);
         this._cardSingleDivision(tmpCardList);
 
-        this._singleThinking = new SingleThinking(this, this._singleHandList);
-        this._multiThinking = new MultiThinking(this, this._multiHandList);
-        this._stairsThinking = new StairsThinking(this, this._stairsHandList);
+        this._singleThinking = new SingleThinking(this._singleHandList);
+        this._multiThinking = new MultiThinking(this._multiHandList);
+        this._stairsThinking = new StairsThinking(this._stairsHandList);
     }
 
     _cardMultiDivision(cardList) {
