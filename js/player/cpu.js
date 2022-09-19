@@ -127,22 +127,14 @@ class Cpu extends Player {
 
             const bfHandKind = Hand.handKindFrom(battleFieldHand);
 
+            let thinking = null;
             switch (bfHandKind) {
-                case Hand.Single:
-                    selectedHand = this._singleThinking.outputHandIfHandInBattleField(battleFieldHand, handCount, strongestCardPower);
-                    break;
-
-                case Hand.Multi:
-                    selectedHand = this._multiThinking.outputHandIfHandInBattleField(battleFieldHand, handCount, strongestCardPower);
-                    break;
-
-                case Hand.Stairs:
-                    selectedHand = this._stairsThinking.outputHandIfHandInBattleField(battleFieldHand, handCount, strongestCardPower);
-                    break;
-
-                default:
-                    throw new Error("存在しない役");
+                case Hand.Single: thinking = this._singleThinking; break;
+                case Hand.Multi:  thinking = this._multiThinking;  break;
+                case Hand.Stairs: thinking = this._stairsThinking; break;
+                default: throw new Error("存在しない役");
             }
+            selectedHand = thinking.outputHandIfHandInBattleField(battleFieldHand, handCount, strongestCardPower);
         }
 
         // 手札の更新
