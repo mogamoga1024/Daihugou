@@ -16,8 +16,7 @@ class StairsThinking extends Thinking {
         if (tmpStairsHandList.length === 0) {
             // 場に出せる役がない場合、パスする
         }
-
-        if (
+        else if (
             handCount === 2 &&
             tmpStairsHandList.last().last().power === strongestCardPower
         ) {
