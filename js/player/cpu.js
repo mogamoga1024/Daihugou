@@ -1,9 +1,5 @@
 
 class Cpu extends Player {
-    _singleHandList = [];
-    _multiHandList = [];
-    _stairsHandList = [];
-
     _singleThinking = null;
     _multiThinking = null;
     _stairsThinking = null;
@@ -19,9 +15,9 @@ class Cpu extends Player {
         }
 
         if (
-            this._singleHandList.length === 0 &&
-            this._multiHandList.length === 0 &&
-            this._stairsHandList.length === 0
+            this._singleThinking === null ||
+            this._multiThinking  === null ||
+            this._stairsThinking === null
         ) {
             this._cardDivision();
         }
@@ -37,14 +33,14 @@ class Cpu extends Player {
             // 最後の1役
             // → それをだす
             if (handCount === 1) {
-                if (this._singleHandList.length > 0) {
-                    selectedHand = this._singleHandList[0];
+                if (this._singleThinking.handList.length > 0) {
+                    selectedHand = this._singleThinking.handList[0];
                 }
-                else if (this._multiHandList.length > 0) {
-                    selectedHand = this._multiHandList[0];
+                else if (this._multiThinking.handList.length > 0) {
+                    selectedHand = this._multiThinking.handList[0];
                 }
-                else if (this._stairsHandList.length > 0) {
-                    selectedHand = this._stairsHandList[0];
+                else if (this._stairsThinking.handList.length > 0) {
+                    selectedHand = this._stairsThinking.handList[0];
                 }
             }
             // 最後の2役
@@ -52,42 +48,42 @@ class Cpu extends Player {
                 // 最強の役あり
                 // → 最強の役をだす
                 if (
-                    this._singleHandList.length > 0 &&
-                    this._singleHandList.last()[0].power === strongestCardPower
+                    this._singleThinking.handList.length > 0 &&
+                    this._singleThinking.handList.last()[0].power === strongestCardPower
                 ) {
-                    selectedHand = this._singleHandList.last();
+                    selectedHand = this._singleThinking.handList.last();
                 }
                 else if (
-                    this._multiHandList.length > 0 &&
-                    this._multiHandList.last()[0].power === strongestCardPower
+                    this._multiThinking.handList.length > 0 &&
+                    this._multiThinking.handList.last()[0].power === strongestCardPower
                 ) {
-                    selectedHand = this._multiHandList.last();
+                    selectedHand = this._multiThinking.handList.last();
                 }
                 else if (
-                    this._stairsHandList.length > 0 &&
-                    this._stairsHandList.last().last().power === strongestCardPower
+                    this._stairsThinking.handList.length > 0 &&
+                    this._stairsThinking.handList.last().last().power === strongestCardPower
                 ) {
-                    selectedHand = this._stairsHandList.last();
+                    selectedHand = this._stairsThinking.handList.last();
                 }
                 // 最強の役なし
                 // → 弱い役をだす
                 else if (
-                    this._singleHandList.length > 0 &&
-                    this._singleHandList[0] === maybeLastOutputHand
+                    this._singleThinking.handList.length > 0 &&
+                    this._singleThinking.handList[0] === maybeLastOutputHand
                 ) {
-                    selectedHand = this._singleHandList[0];
+                    selectedHand = this._singleThinking.handList[0];
                 }
                 else if (
-                    this._multiHandList.length > 0 &&
-                    this._multiHandList[0] === maybeLastOutputHand
+                    this._multiThinking.handList.length > 0 &&
+                    this._multiThinking.handList[0] === maybeLastOutputHand
                 ) {
-                    selectedHand = this._multiHandList[0];
+                    selectedHand = this._multiThinking.handList[0];
                 }
                 else if (
-                    this._stairsHandList.length > 0 &&
-                    this._stairsHandList[0] === maybeLastOutputHand
+                    this._stairsThinking.handList.length > 0 &&
+                    this._stairsThinking.handList[0] === maybeLastOutputHand
                 ) {
-                    selectedHand = this._stairsHandList[0];
+                    selectedHand = this._stairsThinking.handList[0];
                 }
             }
             // 3組以上
@@ -95,14 +91,14 @@ class Cpu extends Player {
             //   ・最強の役を持っていない場合は最後に出す予定の役はさっさと切っていい
             //   ・革命する予定があるなら最強の役はさっさと切っていい
             else {
-                const tmpSingleHandList = this._singleHandList.filter(h => h !== maybeLastOutputHand && h[0].power !== strongestCardPower);
-                const tmpMultiHandList = this._multiHandList.filter(h => h !== maybeLastOutputHand && h[0].power !== strongestCardPower);
-                const tmpStairsHandList = this._stairsHandList.filter(h => h !== maybeLastOutputHand && h.last().power !== strongestCardPower);
+                const tmpSingleHandList = this._singleThinking.handList.filter(h => h !== maybeLastOutputHand && h[0].power !== strongestCardPower);
+                const tmpMultiHandList = this._multiThinking.handList.filter(h => h !== maybeLastOutputHand && h[0].power !== strongestCardPower);
+                const tmpStairsHandList = this._stairsThinking.handList.filter(h => h !== maybeLastOutputHand && h.last().power !== strongestCardPower);
 
                 if (
-                    this._singleHandList.length > 0 && this._singleHandList.last()[0].power === strongestCardPower ||
-                    this._multiHandList.length > 0 && this._multiHandList.last()[0].power === strongestCardPower ||
-                    this._stairsHandList.length > 0 && this._stairsHandList.last().last().power === strongestCardPower
+                    this._singleThinking.handList.length > 0 && this._singleThinking.handList.last()[0].power === strongestCardPower ||
+                    this._multiThinking.handList.length > 0 && this._multiThinking.handList.last()[0].power === strongestCardPower ||
+                    this._stairsThinking.handList.length > 0 && this._stairsThinking.handList.last().last().power === strongestCardPower
                 ) {
                     // 最強の役を持っている場合、最後に出す役、最強の役以外で最弱の役をだす
 
@@ -140,12 +136,14 @@ class Cpu extends Player {
         // 手札の更新
         if (selectedHand.length > 0) {
             this.cardList = this.cardList.filter(c => selectedHand.indexOf(c) === -1);
+            let thinking = null;
             switch (Hand.handKindFrom(selectedHand)) {
-                case Hand.Single: this._singleHandList = this._singleHandList.filter(h => h !== selectedHand); break;
-                case Hand.Multi:  this._multiHandList  = this._multiHandList.filter(h => h !== selectedHand);  break;
-                case Hand.Stairs: this._stairsHandList = this._stairsHandList.filter(h => h !== selectedHand); break;
+                case Hand.Single: thinking = this._singleThinking; break;
+                case Hand.Multi:  thinking = this._multiThinking;  break;
+                case Hand.Stairs: thinking = this._stairsThinking; break;
                 default: throw new Error("存在しない役");
             }
+            thinking.removeHand(selectedHand);
         }
 
         return selectedHand;
@@ -157,82 +155,101 @@ class Cpu extends Player {
 
         // TODO 一旦、Jokerは考慮しない
 
-        let tmpCardList = this.cardList;
+        const createMultiThinkingResult = this._createMultiThinking(this.cardList);
+        const createStairsThinkingResult = this._createStairsThinking(createMultiThinkingResult.remainingCardList);
+        const createSingleThinkingResult = this._createSingleThinking(createStairsThinkingResult.remainingCardList);
 
-        tmpCardList = this._cardMultiDivision(tmpCardList);
-        tmpCardList = this._cardStairsDivision(tmpCardList);
-        this._cardSingleDivision(tmpCardList);
-
-        this._singleThinking = new SingleThinking(this._singleHandList);
-        this._multiThinking = new MultiThinking(this._multiHandList);
-        this._stairsThinking = new StairsThinking(this._stairsHandList);
+        this._singleThinking = createSingleThinkingResult.instance;
+        this._multiThinking = createMultiThinkingResult.instance;
+        this._stairsThinking = createStairsThinkingResult.instance;
     }
 
-    _cardMultiDivision(cardList) {
-        this._multiHandList = [];
-        if (cardList.length === 0) return cardList;
+    _createMultiThinking(cardList) {
+        if (cardList.length === 0) {
+            return {
+                instance: new MultiThinking([]),
+                remainingCardList: cardList
+            }
+        };
+
+        const multiHandList = [];
         let prevCard = cardList[0];
-        let multiCard = [prevCard];
+        let hand = [prevCard];
 
         for (let i = 1; i < cardList.length; i++) {
             const card = cardList[i];
             if (prevCard.power === card.power) {
-                multiCard.push(card);
+                hand.push(card);
                 if (i === cardList.length - 1) {
-                    this._multiHandList.push(multiCard);
+                    multiHandList.push(hand);
                 }
             }
-            else if (multiCard.length >= 2) {
-                this._multiHandList.push(multiCard);
-                multiCard = [card];
+            else if (hand.length >= 2) {
+                multiHandList.push(hand);
+                hand = [card];
             }
             else {
-                multiCard = [card];
+                hand = [card];
             }
             prevCard = card;
         }
 
-        for (const multiCard of this._multiHandList) {
-            cardList = cardList.filter(c => multiCard.indexOf(c) === -1);
+        for (const hand of multiHandList) {
+            cardList = cardList.filter(c => hand.indexOf(c) === -1);
         }
         
-        return cardList;
+        return {
+            instance: new MultiThinking(multiHandList),
+            remainingCardList: cardList
+        };
     }
 
-    _cardStairsDivision(cardList) {
-        this._stairsHandList = [];
-        if (cardList.length === 0) return cardList;
+    _createStairsThinking(cardList) {
+        if (cardList.length === 0) {
+            return {
+                instance: new StairsThinking([]),
+                remainingCardList: cardList
+            };
+        }
+
+        const stairsHandList = [];
         let prevCard = cardList[0];
-        let stairsCard = [prevCard];
+        let hand = [prevCard];
 
         for (let i = 1; i < cardList.length; i++) {
             const card = cardList[i];
             if (prevCard.suit === card.suit && card.power - prevCard.power === 1) {
-                stairsCard.push(card);
-                if (i === cardList.length - 1 && stairsCard.length >= 3) {
-                    this._stairsHandList.push(stairsCard);
+                hand.push(card);
+                if (i === cardList.length - 1 && hand.length >= 3) {
+                    stairsHandList.push(hand);
                 }
             }
-            else if (stairsCard.length >= 3) {
-                this._stairsHandList.push(stairsCard);
-                stairsCard = [card];
+            else if (hand.length >= 3) {
+                stairsHandList.push(hand);
+                hand = [card];
             }
             else {
-                stairsCard = [card];
+                hand = [card];
             }
             prevCard = card;
         }
 
-        for (const stairsCard of this._stairsHandList) {
-            cardList = cardList.filter(c => stairsCard.indexOf(c) === -1);
+        for (const hand of stairsHandList) {
+            cardList = cardList.filter(c => hand.indexOf(c) === -1);
         }
         
-        return cardList;
+        return {
+            instance: new StairsThinking(stairsHandList),
+            remainingCardList: cardList
+        };
     }
 
-    _cardSingleDivision(cardList) {
-        this._singleHandList = cardList.map(c => [c]);
-        return cardList;
+    _createSingleThinking(cardList) {
+        const singleHandList = cardList.map(c => [c]);
+        return {
+            instance: new SingleThinking(singleHandList),
+            remainingCardList: []
+        };
     }
 
     get _strongestCardPower() {
@@ -256,36 +273,36 @@ class Cpu extends Player {
     }
 
     get _maybeLastOutputHand() {
-        if (this._singleHandList.length > 0) {
-            return this._singleHandList[0];
+        if (this._singleThinking.handList.length > 0) {
+            return this._singleThinking.handList[0];
         }
-        else if (this._multiHandList.length > 0) {
-            return this._multiHandList[0];
+        else if (this._multiThinking.handList.length > 0) {
+            return this._multiThinking.handList[0];
         }
-        else if (this._stairsHandList.length > 0) {
-            return this._stairsHandList[0];
+        else if (this._stairsThinking.handList.length > 0) {
+            return this._stairsThinking.handList[0];
         }
         throw new Error("該当なし");
     }
 
     get _handCount() {
-        return this._singleHandList.length + this._multiHandList.length + this._stairsHandList.length;
+        return this._singleThinking.handList.length + this._multiThinking.handList.length + this._stairsThinking.handList.length;
     }
 
     onRevolution() {
         super.onRevolution();
-        this._singleHandList = this._multiHandList = this._stairsHandList = [];
+        this._singleThinking = this._multiThinking = this._stairsThinking = null;
         this._cardDivision();
     }
 
     onGameFinish() {
-        this._singleHandList = this._multiHandList = this._stairsHandList = [];
+        this._singleThinking = this._multiThinking = this._stairsThinking = null;
     }
 
     _shouldRevolution() {
         // 革命できる かつ 弱いカードが大半なら革命すべき
 
-        const revolutionHandList = this._multiHandList.filter(h => h.length === 4);
+        const revolutionHandList = this._multiThinking.handList.filter(h => h.length === 4);
 
         if (revolutionHandList.length === 0) return false;
 

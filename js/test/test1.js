@@ -15,13 +15,13 @@
     
         cpu._cardDivision();
     
-        strictEqual(cpu._singleHandList.length, 4);
-        strictEqual(Common.cardListToString(cpu._singleHandList[0]), "s3");
-        strictEqual(Common.cardListToString(cpu._singleHandList[1]), "c4");
-        strictEqual(Common.cardListToString(cpu._singleHandList[2]), "d5");
-        strictEqual(Common.cardListToString(cpu._singleHandList[3]), "h6");
-        strictEqual(cpu._multiHandList.length, 0);
-        strictEqual(cpu._stairsHandList.length, 0);
+        strictEqual(cpu._singleThinking.handList.length, 4);
+        strictEqual(Common.cardListToString(cpu._singleThinking.handList[0]), "s3");
+        strictEqual(Common.cardListToString(cpu._singleThinking.handList[1]), "c4");
+        strictEqual(Common.cardListToString(cpu._singleThinking.handList[2]), "d5");
+        strictEqual(Common.cardListToString(cpu._singleThinking.handList[3]), "h6");
+        strictEqual(cpu._multiThinking.handList.length, 0);
+        strictEqual(cpu._stairsThinking.handList.length, 0);
     });
     
     test("カードの分割 single", function() {
@@ -29,11 +29,11 @@
     
         cpu._cardDivision();
     
-        strictEqual(cpu._singleHandList.length, 2);
-        strictEqual(Common.cardListToString(cpu._singleHandList[0]), "s3");
-        strictEqual(Common.cardListToString(cpu._singleHandList[1]), "s4");
-        strictEqual(cpu._multiHandList.length, 0);
-        strictEqual(cpu._stairsHandList.length, 0);
+        strictEqual(cpu._singleThinking.handList.length, 2);
+        strictEqual(Common.cardListToString(cpu._singleThinking.handList[0]), "s3");
+        strictEqual(Common.cardListToString(cpu._singleThinking.handList[1]), "s4");
+        strictEqual(cpu._multiThinking.handList.length, 0);
+        strictEqual(cpu._stairsThinking.handList.length, 0);
     });
     
     test("カードの分割 multi", function() {
@@ -41,11 +41,11 @@
     
         cpu._cardDivision();
     
-        strictEqual(cpu._singleHandList.length, 0);
-        strictEqual(cpu._multiHandList.length, 2);
-        strictEqual(Common.cardListToString(cpu._multiHandList[0]), "s4, c4");
-        strictEqual(Common.cardListToString(cpu._multiHandList[1]), "sJ, dJ, hJ");
-        strictEqual(cpu._stairsHandList.length, 0);
+        strictEqual(cpu._singleThinking.handList.length, 0);
+        strictEqual(cpu._multiThinking.handList.length, 2);
+        strictEqual(Common.cardListToString(cpu._multiThinking.handList[0]), "s4, c4");
+        strictEqual(Common.cardListToString(cpu._multiThinking.handList[1]), "sJ, dJ, hJ");
+        strictEqual(cpu._stairsThinking.handList.length, 0);
     });
     
     test("カードの分割 stairs", function() {
@@ -53,11 +53,11 @@
     
         cpu._cardDivision();
     
-        strictEqual(cpu._singleHandList.length, 0);
-        strictEqual(cpu._multiHandList.length, 0);
-        strictEqual(cpu._stairsHandList.length, 2);
-        strictEqual(Common.cardListToString(cpu._stairsHandList[0]), "s4, s5, s6");
-        strictEqual(Common.cardListToString(cpu._stairsHandList[1]), "dJ, dQ, dK, d1");
+        strictEqual(cpu._singleThinking.handList.length, 0);
+        strictEqual(cpu._multiThinking.handList.length, 0);
+        strictEqual(cpu._stairsThinking.handList.length, 2);
+        strictEqual(Common.cardListToString(cpu._stairsThinking.handList[0]), "s4, s5, s6");
+        strictEqual(Common.cardListToString(cpu._stairsThinking.handList[1]), "dJ, dQ, dK, d1");
     });
     
     // memo: ((s|c|d|h)([1-9]|T|J|Q|K))|Joker1|Joker2
@@ -67,15 +67,15 @@
     
         cpu._cardDivision();
     
-        strictEqual(cpu._singleHandList.length, 3);
-        strictEqual(Common.cardListToString(cpu._singleHandList[0]), "d7");
-        strictEqual(Common.cardListToString(cpu._singleHandList[1]), "d8");
-        strictEqual(Common.cardListToString(cpu._singleHandList[2]), "h2");
-        strictEqual(cpu._multiHandList.length, 2);
-        strictEqual(Common.cardListToString(cpu._multiHandList[0]), "s6, c6, d6, h6");
-        strictEqual(Common.cardListToString(cpu._multiHandList[1]), "sJ, cJ");
-        strictEqual(cpu._stairsHandList.length, 1);
-        strictEqual(Common.cardListToString(cpu._stairsHandList[0]), "s3, s4, s5");
+        strictEqual(cpu._singleThinking.handList.length, 3);
+        strictEqual(Common.cardListToString(cpu._singleThinking.handList[0]), "d7");
+        strictEqual(Common.cardListToString(cpu._singleThinking.handList[1]), "d8");
+        strictEqual(Common.cardListToString(cpu._singleThinking.handList[2]), "h2");
+        strictEqual(cpu._multiThinking.handList.length, 2);
+        strictEqual(Common.cardListToString(cpu._multiThinking.handList[0]), "s6, c6, d6, h6");
+        strictEqual(Common.cardListToString(cpu._multiThinking.handList[1]), "sJ, cJ");
+        strictEqual(cpu._stairsThinking.handList.length, 1);
+        strictEqual(Common.cardListToString(cpu._stairsThinking.handList[0]), "s3, s4, s5");
     });
     
     test("最強のカードの強さ", function() {
