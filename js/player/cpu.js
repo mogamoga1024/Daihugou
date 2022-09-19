@@ -129,34 +129,7 @@ class Cpu extends Player {
 
             switch (bfHandKind) {
                 case Hand.Single:
-                    const tmpSingleHandList = this._singleHandList.filter(h =>
-                        h[0].power > battleFieldHand[0].power
-                    );
-                    if (tmpSingleHandList.length === 0) {
-                        selectedHand = [];
-                        break;
-                    }
-
-                    if (
-                        handCount === 2 &&
-                        tmpSingleHandList.last()[0].power === strongestCardPower
-                    ) {
-                        // 2役で最強の役を持っている場合、最強の役をだす
-                        selectedHand = tmpSingleHandList.last();
-                    }
-                    else {
-                        // 2役以外 または 2役で最強の役を持っていない場合
-
-                        const hand = tmpSingleHandList[0]
-                        if (hand[0].power === strongestCardPower) {
-                            // 最強の役しかない場合、応手しない
-                            selectedHand = [];
-                        }
-                        else {
-                            // 弱い役で応手する
-                            selectedHand = hand;
-                        }
-                    }
+                    selectedHand = this._singleThinking.outputHandIfHandInBattleField(battleFieldHand);
                     break;
 
                 case Hand.Multi:
