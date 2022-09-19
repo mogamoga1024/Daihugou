@@ -5,7 +5,7 @@ class MultiThinking extends Thinking {
         return [];
     }
 
-    outputHandIfHandInBattleField(battleFieldHand) {
+    outputHandIfHandInBattleField(battleFieldHand, handCount, strongestCardPower) {
         let selectedHand = [];
 
         const tmpMultiHandList = this._handList.filter(h =>
@@ -17,8 +17,8 @@ class MultiThinking extends Thinking {
             // パスする // TODO 考えもの
         }
         else if (
-            this._player.handCount === 2 &&
-            tmpMultiHandList.last()[0].power === this._player._strongestCardPower
+            handCount === 2 &&
+            tmpMultiHandList.last()[0].power === strongestCardPower
         ) {
             // 2役で最強の役を持っている場合、最強の役をだす
             selectedHand = tmpMultiHandList.last();
@@ -27,7 +27,7 @@ class MultiThinking extends Thinking {
             // 2役以外 または 2役で最強の役を持っていない場合
 
             const hand = tmpMultiHandList[0]
-            if (hand[0].power === this._player._strongestCardPower) {
+            if (hand[0].power === strongestCardPower) {
                 // 最強の役しかない場合、応手しない
             }
             else {

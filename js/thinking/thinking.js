@@ -1,10 +1,8 @@
 
 class Thinking {
-    _player = null;
     _handList = [];
 
     constructor(player, handList) {
-        this._player = player;
         this._handList = handList;
     }
 
@@ -12,7 +10,7 @@ class Thinking {
         return [];
     }
 
-    outputHandIfHandInBattleField(battleField) {
+    outputHandIfHandInBattleField(battleField, handCount, strongestCardPower) {
         return [];
     }
 }

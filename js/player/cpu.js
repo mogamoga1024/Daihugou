@@ -129,11 +129,11 @@ class Cpu extends Player {
 
             switch (bfHandKind) {
                 case Hand.Single:
-                    selectedHand = this._singleThinking.outputHandIfHandInBattleField(battleFieldHand);
+                    selectedHand = this._singleThinking.outputHandIfHandInBattleField(battleFieldHand, handCount, strongestCardPower);
                     break;
 
                 case Hand.Multi:
-                    selectedHand = this._multiThinking.outputHandIfHandInBattleField(battleFieldHand);
+                    selectedHand = this._multiThinking.outputHandIfHandInBattleField(battleFieldHand, handCount, strongestCardPower);
                     break;
 
                 case Hand.Stairs:
