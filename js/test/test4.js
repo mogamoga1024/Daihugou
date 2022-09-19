@@ -3,7 +3,7 @@
     let multiThinking = null;
     
     CardFactory.initCardList();
-    const twoPower = CardFactory.getCardList("s2, c2").power;
+    const twoPower = CardFactory.getCard("s2").power;
     
     module("CPUのAIのテスト4（MultiThinkingクラス）", {
         setup() {
@@ -47,7 +47,7 @@
         const d3h3 = CardFactory.getCardList("d3, h3");
         const s7c7 = CardFactory.getCardList("s7, c7");
         const s2c2 = CardFactory.getCardList("s2, c2");
-        multiThinking = new MultiThinking([s7c7], [s2c2]);
+        multiThinking = new MultiThinking([s7c7, s2c2]);
 
         strictEqual(Common.cardListToString(
             multiThinking.outputHandIfHandInBattleField(d3h3, 2, twoPower)), "s2, c2"
@@ -58,7 +58,7 @@
         const d3h3 = CardFactory.getCardList("d3, h3");
         const s7c7 = CardFactory.getCardList("s7, c7");
         const s1c1 = CardFactory.getCardList("s1, c1");
-        multiThinking = new MultiThinking([s7c7], [s1c1]);
+        multiThinking = new MultiThinking([s7c7, s1c1]);
 
         strictEqual(Common.cardListToString(
             multiThinking.outputHandIfHandInBattleField(d3h3, 2, twoPower)), "s7, c7"
@@ -70,7 +70,7 @@
         const s7c7 = CardFactory.getCardList("s7, c7");
         const s9c9 = CardFactory.getCardList("s9, c9");
         const s2c2 = CardFactory.getCardList("s2, c2");
-        multiThinking = new MultiThinking([s7c7], [s9c9], [s2c2]);
+        multiThinking = new MultiThinking([s7c7, s9c9, s2c2]);
 
         strictEqual(Common.cardListToString(
             multiThinking.outputHandIfHandInBattleField(d3h3, 3, twoPower)), "s7, c7"
@@ -82,7 +82,7 @@
         const s7c7 = CardFactory.getCardList("s7, c7");
         const s9c9 = CardFactory.getCardList("s9, c9");
         const s2c2 = CardFactory.getCardList("s2, c2");
-        multiThinking = new MultiThinking([s7c7], [s9c9], [s2c2]);
+        multiThinking = new MultiThinking([s7c7, s9c9, s2c2]);
 
         strictEqual(Common.cardListToString(
             multiThinking.outputHandIfHandInBattleField(d7h7, 3, twoPower)), "s9, c9"
@@ -94,7 +94,7 @@
         const s7c7 = CardFactory.getCardList("s7, c7");
         const s9c9 = CardFactory.getCardList("s9, c9");
         const s2c2 = CardFactory.getCardList("s2, c2");
-        multiThinking = new MultiThinking([s7c7], [s9c9], [s2c2]);
+        multiThinking = new MultiThinking([s7c7, s9c9, s2c2]);
 
         strictEqual(Common.cardListToString(
             multiThinking.outputHandIfHandInBattleField(d1h1, 3, twoPower)), ""
