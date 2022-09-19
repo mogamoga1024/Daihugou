@@ -1,0 +1,4 @@
+
+class StairsThinking extends Thinking {
+    
+}

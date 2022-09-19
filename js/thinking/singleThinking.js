@@ -1,0 +1,4 @@
+
+class SingleThinking extends MultiThinking {
+    
+}
