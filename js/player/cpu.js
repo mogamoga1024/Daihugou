@@ -33,14 +33,14 @@ class Cpu extends Player {
             // 最後の1役
             // → それをだす
             if (handCount === 1) {
-                if (this._singleThinking.handList.length > 0) {
-                    selectedHand = this._singleThinking.handList[0];
+                if (this._singleThinking.existsHand) {
+                    selectedHand = this._singleThinking.weakestHand;
                 }
-                else if (this._multiThinking.handList.length > 0) {
-                    selectedHand = this._multiThinking.handList[0];
+                else if (this._multiThinking.existsHand) {
+                    selectedHand = this._multiThinking.weakestHand;
                 }
-                else if (this._stairsThinking.handList.length > 0) {
-                    selectedHand = this._stairsThinking.handList[0];
+                else if (this._stairsThinking.existsHand) {
+                    selectedHand = this._stairsThinking.weakestHand;
                 }
             }
             // 最後の2役
@@ -48,57 +48,58 @@ class Cpu extends Player {
                 // 最強の役あり
                 // → 最強の役をだす
                 if (
-                    this._singleThinking.handList.length > 0 &&
-                    this._singleThinking.handList.last()[0].power === strongestCardPower
+                    this._singleThinking.existsHand &&
+                    this._singleThinking.strongestCardPower === strongestCardPower
                 ) {
-                    selectedHand = this._singleThinking.handList.last();
+                    selectedHand = this._singleThinking.strongestHand;
                 }
                 else if (
-                    this._multiThinking.handList.length > 0 &&
-                    this._multiThinking.handList.last()[0].power === strongestCardPower
+                    this._multiThinking.existsHand &&
+                    this._multiThinking.strongestCardPower === strongestCardPower
                 ) {
-                    selectedHand = this._multiThinking.handList.last();
+                    selectedHand = this._multiThinking.strongestHand;
                 }
                 else if (
-                    this._stairsThinking.handList.length > 0 &&
-                    this._stairsThinking.handList.last().last().power === strongestCardPower
+                    this._stairsThinking.existsHand &&
+                    this._stairsThinking.strongestCardPower === strongestCardPower
                 ) {
-                    selectedHand = this._stairsThinking.handList.last();
+                    selectedHand = this._stairsThinking.strongestHand;
                 }
                 // 最強の役なし
                 // → 弱い役をだす
                 else if (
-                    this._singleThinking.handList.length > 0 &&
-                    this._singleThinking.handList[0] === maybeLastOutputHand
+                    this._singleThinking.existsHand &&
+                    this._singleThinking.weakestHand === maybeLastOutputHand
                 ) {
-                    selectedHand = this._singleThinking.handList[0];
+                    selectedHand = this._singleThinking.weakestHand;
                 }
                 else if (
-                    this._multiThinking.handList.length > 0 &&
-                    this._multiThinking.handList[0] === maybeLastOutputHand
+                    this._multiThinking.existsHand &&
+                    this._multiThinking.weakestHand === maybeLastOutputHand
                 ) {
-                    selectedHand = this._multiThinking.handList[0];
+                    selectedHand = this._multiThinking.weakestHand;
                 }
                 else if (
-                    this._stairsThinking.handList.length > 0 &&
-                    this._stairsThinking.handList[0] === maybeLastOutputHand
+                    this._stairsThinking.existsHand &&
+                    this._stairsThinking.weakestHand === maybeLastOutputHand
                 ) {
-                    selectedHand = this._stairsThinking.handList[0];
+                    selectedHand = this._stairsThinking.weakestHand;
                 }
             }
             // 3組以上
-            // → ・基本的に最後に出す役、最強の役以外で最弱の役をだす
+            // → ・基本的に最後に出す予定の役、最強の役以外で最弱の役をだす
             //   ・最強の役を持っていない場合は最後に出す予定の役はさっさと切っていい
             //   ・革命する予定があるなら最強の役はさっさと切っていい
             else {
+                // 最後に出す予定の役、最強の役を取り除く
                 const tmpSingleHandList = this._singleThinking.handList.filter(h => h !== maybeLastOutputHand && h[0].power !== strongestCardPower);
                 const tmpMultiHandList = this._multiThinking.handList.filter(h => h !== maybeLastOutputHand && h[0].power !== strongestCardPower);
                 const tmpStairsHandList = this._stairsThinking.handList.filter(h => h !== maybeLastOutputHand && h.last().power !== strongestCardPower);
 
                 if (
-                    this._singleThinking.handList.length > 0 && this._singleThinking.handList.last()[0].power === strongestCardPower ||
-                    this._multiThinking.handList.length > 0 && this._multiThinking.handList.last()[0].power === strongestCardPower ||
-                    this._stairsThinking.handList.length > 0 && this._stairsThinking.handList.last().last().power === strongestCardPower
+                    this._singleThinking.existsHand && this._singleThinking.strongestCardPower === strongestCardPower ||
+                    this._multiThinking.existsHand && this._multiThinking.strongestCardPower === strongestCardPower ||
+                    this._stairsThinking.existsHand && this._stairsThinking.strongestCardPower === strongestCardPower
                 ) {
                     // 最強の役を持っている場合、最後に出す役、最強の役以外で最弱の役をだす
 
@@ -273,14 +274,14 @@ class Cpu extends Player {
     }
 
     get _maybeLastOutputHand() {
-        if (this._singleThinking.handList.length > 0) {
-            return this._singleThinking.handList[0];
+        if (this._singleThinking.existsHand) {
+            return this._singleThinking.weakestHand;
         }
-        else if (this._multiThinking.handList.length > 0) {
-            return this._multiThinking.handList[0];
+        else if (this._multiThinking.existsHand) {
+            return this._multiThinking.weakestHand;
         }
-        else if (this._stairsThinking.handList.length > 0) {
-            return this._stairsThinking.handList[0];
+        else if (this._stairsThinking.existsHand) {
+            return this._stairsThinking.weakestHand;
         }
         throw new Error("該当なし");
     }
