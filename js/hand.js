@@ -37,4 +37,17 @@ class Hand {
             return this.Stairs;
         }
     }
+
+    static power(hand) {
+        const handKind = this.handKindFrom(hand);
+        switch (handKind) {
+            case this.Single:
+            case this.Multi:
+                return hand[0].power;
+            case this.Stairs:
+                return hand.last().power;
+            default:
+                throw new Error("想定外の役");
+        }
+    }
 }

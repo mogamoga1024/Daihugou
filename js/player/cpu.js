@@ -67,9 +67,9 @@ class Cpu extends Player {
             //   ・革命する予定があるなら最強の役はさっさと切っていい
             else {
                 // 最後に出す予定の役、最強の役を取り除く
-                const tmpSingleHandList = this._singleThinking.handList.filter(h => h !== maybeLastOutputHand && h[0].power !== strongestCardPower);
-                const tmpMultiHandList = this._multiThinking.handList.filter(h => h !== maybeLastOutputHand && h[0].power !== strongestCardPower);
-                const tmpStairsHandList = this._stairsThinking.handList.filter(h => h !== maybeLastOutputHand && h.last().power !== strongestCardPower);
+                const tmpSingleHandList = this._singleThinking.handList.filter(h => h !== maybeLastOutputHand && Hand.power(h) !== strongestCardPower);
+                const tmpMultiHandList  = this._multiThinking.handList.filter(h => h !== maybeLastOutputHand && Hand.power(h) !== strongestCardPower);
+                const tmpStairsHandList = this._stairsThinking.handList.filter(h => h !== maybeLastOutputHand && Hand.power(h) !== strongestCardPower);
 
                 if (
                     this._singleThinking.existsHand && this._singleThinking.strongestCardPower === strongestCardPower ||
