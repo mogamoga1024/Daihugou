@@ -1,11 +1,6 @@
 
 class StairsThinking extends Thinking {
-    outputHandIfNoHandInBattleField() {
-        // TODO
-        return [];
-    }
-
-    outputHandIfHandInBattleField(battleFieldHand, handCount, strongestCardPower) {
+    outputHandIfHandInBattleField(battleFieldHand, handCount, strongestCardPower, shouldRevolution) {
         let selectedHand = [];
 
         const tmpStairsHandList = this._handList.filter(h =>

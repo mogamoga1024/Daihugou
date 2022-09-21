@@ -1,11 +1,6 @@
 
 class MultiThinking extends Thinking {
-    outputHandIfNoHandInBattleField() {
-        // TODO
-        return [];
-    }
-
-    outputHandIfHandInBattleField(battleFieldHand, handCount, strongestCardPower) {
+    outputHandIfHandInBattleField(battleFieldHand, handCount, strongestCardPower, shouldRevolution) {
         let selectedHand = [];
 
         const tmpMultiHandList = this._handList.filter(h =>

@@ -110,7 +110,7 @@ class Cpu extends Player {
                 case Hand.Stairs: thinking = this._stairsThinking; break;
                 default: throw new Error("存在しない役");
             }
-            selectedHand = thinking.outputHandIfHandInBattleField(battleFieldHand, handCount, strongestCardPower);
+            selectedHand = thinking.outputHandIfHandInBattleField(battleFieldHand, handCount, strongestCardPower, this._shouldRevolution());
         }
 
         // 手札の更新
