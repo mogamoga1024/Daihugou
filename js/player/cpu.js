@@ -322,7 +322,7 @@ class Cpu extends Player {
         }
         else {
             if (this._handCount - 1 <= 2) {
-                if (cardList1[0].power - this._weakestCardPower > this._strongestCardPower - cardList1.last().power) {
+                if (cardList1[0].power - this._weakestCardPower >= this._strongestCardPower - cardList1.last().power) {
                     return true;
                 }
                 else {

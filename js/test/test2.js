@@ -139,7 +139,10 @@
     });
 
     test("思考 革命すべきか", function() {
-        cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s9, s2");
+        cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, s2");
+
+        CardFactory.getCard("Joker1").isDead = true;
+        CardFactory.getCard("Joker2").isDead = true;
 
         cpu._cardDivision();
         
@@ -147,7 +150,7 @@
     });
 
     test("思考 革命考慮", function() {
-        cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s9, s2");
+        cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, s2");
         
         CardFactory.getCard("Joker1").isDead = true;
         CardFactory.getCard("Joker2").isDead = true;
@@ -157,12 +160,13 @@
 
         GameManager.revolution();
 
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s5");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s9");
     });
 
     test("思考 革命考慮 応手", function() {
-        cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s9, s2");
+        cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, s2");
         
         CardFactory.getCard("Joker1").isDead = true;
         CardFactory.getCard("Joker2").isDead = true;
@@ -174,6 +178,7 @@
 
         GameManager.revolution();
 
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s5");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s9");
     });
