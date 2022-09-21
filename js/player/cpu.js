@@ -73,7 +73,7 @@ class Cpu extends Player {
                     }
                     // 最強の役なし
                     // → 革命する
-                    return this._multiThinking.filter(h => h.length >= 4).last();
+                    return this._multiThinking.handList.filter(h => h.length >= 4).last();
                 })();
             }
             // 3組以上 かつ 革命すべきでない かつ 最強の役を持っている場合
