@@ -61,11 +61,22 @@ class Cpu extends Player {
                     }
                 })();
             }
-            // 3組以上 かつ 革命すべき
+            // 3組以上 かつ 革命すべき場合
             else if (this._shouldRevolution()) {
-                
+                selectedHand = (() => {
+                    // 最強の役あり
+                    // → 最強の役をだす
+                    for (const thinking of thinkingList) {
+                        if (thinking.existsHand && thinking.strongestCardPower === strongestCardPower) {
+                            return thinking.strongestHand;
+                        }
+                    }
+                    // 最強の役なし
+                    // → 革命する
+                    return this._multiThinking.filter(h => h.length >= 4).last();
+                })();
             }
-            // 3組以上 かつ 革命すべきでない かつ 最強の役を持っている
+            // 3組以上 かつ 革命すべきでない かつ 最強の役を持っている場合
             else if (
                 this._singleThinking.existsHand && this._singleThinking.strongestCardPower === strongestCardPower ||
                 this._multiThinking.existsHand && this._multiThinking.strongestCardPower === strongestCardPower ||
@@ -81,7 +92,7 @@ class Cpu extends Player {
                     }
                 }
             }
-            // 3組以上 かつ 革命すべきでない かつ 最強の役を持っていない
+            // 3組以上 かつ 革命すべきでない かつ 最強の役を持っていない場合
             else {
                 // 最後に出す予定の役をだす
                 selectedHand = maybeLastOutputHand;
