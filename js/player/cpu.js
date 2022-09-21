@@ -65,33 +65,25 @@ class Cpu extends Player {
             // → ・基本的に最後に出す予定の役、最強の役以外で最弱の役をだす
             //   ・最強の役を持っていない場合は最後に出す予定の役はさっさと切っていい
             //   ・革命する予定があるなら最強の役はさっさと切っていい
+            else if (
+                this._singleThinking.existsHand && this._singleThinking.strongestCardPower === strongestCardPower ||
+                this._multiThinking.existsHand && this._multiThinking.strongestCardPower === strongestCardPower ||
+                this._stairsThinking.existsHand && this._stairsThinking.strongestCardPower === strongestCardPower
+            ) {
+                // 最強の役を持っている場合
+                for (const thinking of thinkingList) {
+                    // 最後に出す予定の役、最強の役を取り除く
+                    const tmpHandList = thinking.handList.filter(h => h !== maybeLastOutputHand && Hand.power(h) !== strongestCardPower);
+                    // 最後に出す役、最強の役以外で最弱の役をだす
+                    if (tmpHandList.length > 0) {
+                        selectedHand = tmpHandList[0];
+                        break;
+                    }
+                }
+            }
             else {
-                // 最後に出す予定の役、最強の役を取り除く
-                const tmpSingleHandList = this._singleThinking.handList.filter(h => h !== maybeLastOutputHand && Hand.power(h) !== strongestCardPower);
-                const tmpMultiHandList  = this._multiThinking.handList.filter(h => h !== maybeLastOutputHand && Hand.power(h) !== strongestCardPower);
-                const tmpStairsHandList = this._stairsThinking.handList.filter(h => h !== maybeLastOutputHand && Hand.power(h) !== strongestCardPower);
-
-                if (
-                    this._singleThinking.existsHand && this._singleThinking.strongestCardPower === strongestCardPower ||
-                    this._multiThinking.existsHand && this._multiThinking.strongestCardPower === strongestCardPower ||
-                    this._stairsThinking.existsHand && this._stairsThinking.strongestCardPower === strongestCardPower
-                ) {
-                    // 最強の役を持っている場合、最後に出す役、最強の役以外で最弱の役をだす
-
-                    if (tmpSingleHandList.length > 0) {
-                        selectedHand = tmpSingleHandList[0];
-                    }
-                    else if (tmpMultiHandList.length > 0) {
-                        selectedHand = tmpMultiHandList[0];
-                    }
-                    else if (tmpStairsHandList.length > 0) {
-                        selectedHand = tmpStairsHandList[0];
-                    }
-                }
-                else {
-                    // 最強の役を持っていない場合は最後に出す予定の役をだす
-                    selectedHand = maybeLastOutputHand;
-                }
+                // 最強の役を持っていない場合は最後に出す予定の役をだす
+                selectedHand = maybeLastOutputHand;
             }
         }
         else {
