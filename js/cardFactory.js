@@ -9,11 +9,7 @@ class CardFactory {
 
     static initCardList() {
         this.#isInitialized = true;
-
-        if (this.#cardList.length > 0) {
-            this.#cardList.forEach(c => c.obj.isDead = false);
-            return;
-        }
+        this.#cardList = [];
 
         const imageFolderPath = "./assets/card";
         const suitList = [Suit.Spade, Suit.Club, Suit.Diamond, Suit.Heart];

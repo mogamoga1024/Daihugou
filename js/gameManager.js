@@ -8,6 +8,8 @@ class GameManager {
     static init(playerList, vm) {
         this.#playerList = playerList;
         this.#vm = vm;
+        this.#latestOutputCardPlayer = null;
+        this.#ranking = 1;
     }
 
     static async startGame(leaderIndex) {

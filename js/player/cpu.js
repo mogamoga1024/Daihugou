@@ -299,7 +299,7 @@ class Cpu extends Player {
         this._singleThinking = this._multiThinking = this._stairsThinking = null;
     }
 
-    _shouldRevolution() {
+    _shouldRevolution(debug = false) {
         // 革命できない場合はfalse
         const revolutionHandList = this._multiThinking.handList.filter(h => h.length >= 4);
 
@@ -313,6 +313,11 @@ class Cpu extends Player {
         const centerCardPower = CardFactory.getCard("s9").power;
         const lowerCount = tmpCardList.filter(c => c.power <= centerCardPower).length;
         const upperCount = tmpCardList.length - lowerCount;
+
+        if (debug) {
+            console.log("lowerCount", lowerCount);
+            console.log("upperCount", upperCount);
+        }
 
         // 弱いカードが大半なら革命すべき
         // または革命後、確定であがれるならば革命すべき
