@@ -252,6 +252,26 @@ class Cpu extends Player {
         return strongestCard.power;
     }
 
+    get _weakestCardPower() {
+        let weakestCard = null;
+        for (const card of CardFactory.allCardList) {
+            if (card.obj.isDead) {
+                continue;
+            }
+            if (weakestCard === null) {
+                weakestCard = card.obj;
+                continue;
+            }
+            if (weakestCard.power > card.obj.power) {
+                weakestCard = card.obj;
+            }
+        }
+        if (weakestCard === null) {
+            throw new Error("すでにゲームが終わっている");
+        }
+        return weakestCard.power;
+    }
+
     get _maybeLastOutputHand() {
         if (this._singleThinking.existsHand) {
             return this._singleThinking.weakestHand;
@@ -280,22 +300,38 @@ class Cpu extends Player {
     }
 
     _shouldRevolution() {
-        // 革命できる かつ 弱いカードが大半なら革命すべき
-
-        const revolutionHandList = this._multiThinking.handList.filter(h => h.length === 4);
+        // 革命できない場合はfalse
+        const revolutionHandList = this._multiThinking.handList.filter(h => h.length >= 4);
 
         if (revolutionHandList.length === 0) return false;
 
-        let cardList = this.cardList;
-        for (const hand of revolutionHandList) {
-            cardList = cardList.filter(c => c.power !== hand[0].power);
-        }
+        const cardList1 = this.cardList.filter(c => c.power !== revolutionHandList[0][0].power);
+
+        // 革命の役しかない場合はtrue
+        if (cardList1.length === 0) return true;
 
         const centerCardPower = CardFactory.getCard("s9").power;
-        cardList = cardList.filter(c => c.power !== centerCardPower);
-        const lowerCount = cardList.filter(c => c.power !== centerCardPower).length;
-        const upperCount = cardList.length - lowerCount;
+        const cardList2 = cardList1.filter(c => c.power !== centerCardPower);
+        const lowerCount = cardList2.filter(c => c.power < centerCardPower).length;
+        const upperCount = cardList2.length - lowerCount;
 
-        return lowerCount - upperCount >= 2;
+        // 弱いカードが大半なら革命すべき
+        // または革命後、確定であがれるならば革命すべき
+        if (lowerCount - upperCount >= 2) {
+            return true;
+        }
+        else {
+            if (this._handCount - 1 <= 2) {
+                if (cardList1[0].power - this._weakestCardPower > this._strongestCardPower - cardList1.last().power) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                return false;
+            }
+        }
     }
 }
