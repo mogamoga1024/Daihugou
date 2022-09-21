@@ -305,15 +305,14 @@ class Cpu extends Player {
 
         if (revolutionHandList.length === 0) return false;
 
-        const cardList1 = this.cardList.filter(c => c.power !== revolutionHandList[0][0].power);
+        const tmpCardList = this.cardList.filter(c => c.power !== revolutionHandList[0][0].power);
 
         // 革命の役しかない場合はtrue
-        if (cardList1.length === 0) return true;
+        if (tmpCardList.length === 0) return true;
 
         const centerCardPower = CardFactory.getCard("s9").power;
-        const cardList2 = cardList1.filter(c => c.power !== centerCardPower);
-        const lowerCount = cardList2.filter(c => c.power < centerCardPower).length;
-        const upperCount = cardList2.length - lowerCount;
+        const lowerCount = tmpCardList.filter(c => c.power <= centerCardPower).length;
+        const upperCount = tmpCardList.length - lowerCount;
 
         // 弱いカードが大半なら革命すべき
         // または革命後、確定であがれるならば革命すべき
@@ -322,7 +321,7 @@ class Cpu extends Player {
         }
         else {
             if (this._handCount - 1 <= 2) {
-                if (cardList1[0].power - this._weakestCardPower >= this._strongestCardPower - cardList1.last().power) {
+                if (tmpCardList[0].power - this._weakestCardPower >= this._strongestCardPower - tmpCardList.last().power) {
                     return true;
                 }
                 else {

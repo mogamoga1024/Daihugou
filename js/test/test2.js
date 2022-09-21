@@ -135,7 +135,7 @@
 
         cpu._cardDivision();
         
-        strictEqual(cpu._shouldRevolution(), true);
+        strictEqual(cpu._shouldRevolution(), false);
     });
 
     test("思考 革命すべきか", function() {
