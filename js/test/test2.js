@@ -138,7 +138,7 @@
         strictEqual(cpu._shouldRevolution(), false);
     });
 
-    test("思考 革命すべきか", function() {
+    test("思考 革命すべきか 最強がsingle", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, s2");
         cpu._cardDivision();
 
@@ -148,7 +148,27 @@
         strictEqual(cpu._shouldRevolution(), true);
     });
 
-    test("思考 革命考慮", function() {
+    test("思考 革命すべきか 最強がmulti", function() {
+        cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, s2, c2");
+        cpu._cardDivision();
+
+        CardFactory.getCard("Joker1").isDead = true;
+        CardFactory.getCard("Joker2").isDead = true;
+
+        strictEqual(cpu._shouldRevolution(), true);
+    });
+
+    test("思考 革命すべきか 最強がstairs", function() {
+        cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, sK, s1, s2");
+        cpu._cardDivision();
+
+        CardFactory.getCard("Joker1").isDead = true;
+        CardFactory.getCard("Joker2").isDead = true;
+
+        strictEqual(cpu._shouldRevolution(), true);
+    });
+
+    test("思考 革命考慮 最強がsingle", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, s2");
         cpu._cardDivision();
         
@@ -165,7 +185,41 @@
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s9");
     });
 
-    test("思考 革命考慮 応手 single", function() {
+    test("思考 革命考慮 最強がmulti", function() {
+        cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, s2, c2");
+        cpu._cardDivision();
+        
+        CardFactory.getCard("Joker1").isDead = true;
+        CardFactory.getCard("Joker2").isDead = true;
+
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s2, c2");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s4, c4, d4, h4");
+
+        GameManager.revolution();
+
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s5");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s9");
+    });
+
+    test("思考 革命考慮 最強がstairs", function() {
+        cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, sK, s1, s2");
+        cpu._cardDivision();
+        
+        CardFactory.getCard("Joker1").isDead = true;
+        CardFactory.getCard("Joker2").isDead = true;
+
+        strictEqual(Common.cardListToString(cpu.outputHand(c567)), "sK, s1, s2");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s4, c4, d4, h4");
+
+        GameManager.revolution();
+
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s5");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s9");
+    });
+
+    test("思考 革命考慮 応手 最強がsingle", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, s2");
         cpu._cardDivision();
         
@@ -184,7 +238,7 @@
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s9");
     });
 
-    test("思考 革命考慮 応手 multi", function() {
+    test("思考 革命考慮 応手 最強がmulti", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, s2, c2");
         cpu._cardDivision();
         
@@ -203,7 +257,7 @@
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s9");
     });
 
-    test("思考 革命考慮 応手 stairs", function() {// todo
+    test("思考 革命考慮 応手 最強がstairs", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, sK, s1, s2");
         cpu._cardDivision();
         
