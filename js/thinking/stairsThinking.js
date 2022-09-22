@@ -21,14 +21,14 @@ class StairsThinking extends Thinking {
             // 最強の役を持っていない場合
             else {
                 // 弱い役をだす
-                selectedHand = hand;
+                selectedHand = tmpStairsHandList[0];
             }
         }
         // 残り3役以上
         // 革命すべき場合
         else if (shouldRevolution) {
             // 最強の役をだす
-            selectedHand = tmpStairsHandList[0];
+            selectedHand = tmpStairsHandList.last();
         }
         // 革命すべきでない場合
         else {
@@ -37,7 +37,7 @@ class StairsThinking extends Thinking {
                 // 最強の役しかない場合、パスする
             }
             else {
-                // 弱い役で応手する
+                // 弱い役をだす
                 selectedHand = hand;
             }
         }
