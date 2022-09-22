@@ -165,7 +165,7 @@
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s9");
     });
 
-    test("思考 革命考慮 応手", function() {
+    test("思考 革命考慮 応手 single", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, s2");
         cpu._cardDivision();
         
@@ -175,6 +175,44 @@
         const c5 = CardFactory.getCard("c5");
 
         strictEqual(Common.cardListToString(cpu.outputHand([c5])), "s2");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s4, c4, d4, h4");
+
+        GameManager.revolution();
+
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s5");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s9");
+    });
+
+    test("思考 革命考慮 応手 multi", function() {
+        cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, s2, c2");
+        cpu._cardDivision();
+        
+        CardFactory.getCard("Joker1").isDead = true;
+        CardFactory.getCard("Joker2").isDead = true;
+
+        const s5c5 = CardFactory.getCardList("s5, c5");
+
+        strictEqual(Common.cardListToString(cpu.outputHand(s5c5)), "s2, c2");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s4, c4, d4, h4");
+
+        GameManager.revolution();
+
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s5");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s9");
+    });
+
+    test("思考 革命考慮 応手 stairs", function() {// todo
+        cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, sK, s1, s2");
+        cpu._cardDivision();
+        
+        CardFactory.getCard("Joker1").isDead = true;
+        CardFactory.getCard("Joker2").isDead = true;
+
+        const c567 = CardFactory.getCard("c5, c6, c7");
+
+        strictEqual(Common.cardListToString(cpu.outputHand(c567)), "sK, s1, s2");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s4, c4, d4, h4");
 
         GameManager.revolution();
