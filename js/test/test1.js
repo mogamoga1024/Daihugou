@@ -1,10 +1,11 @@
 (function() {
     let cpu = null;
+    const config = new Config(false);
 
     module("CPUのAIのテスト1", {
         setup() {
             cpu = new Cpu("CPU");
-            CardFactory.initCardList();
+            CardFactory.initCardList(config);
         }
     });
     
@@ -79,19 +80,23 @@
     });
     
     test("最強のカードの強さ", function() {
-        cpu.cardList = CardFactory.getCardList("s3, s4, s5, s6, s7, s8, s9, sT, sJ, sQ, sK, s1, s2, Joker1, Joker2");
+        cpu.cardList = CardFactory.getCardList("s3, s4, s5, s6, s7, s8, s9, sT, sJ, sQ, sK, s1, s2");
+
+        CardFactory.getCard("c2").isDead = true;
+        CardFactory.getCard("d2").isDead = true;
+        CardFactory.getCard("h2").isDead = true;
         
-        CardFactory.getCard("Joker1").isDead = true;
-    
-        strictEqual(cpu._strongestCardPower, CardFactory.getCard("Joker1").power);
+        strictEqual(cpu._strongestCardPower, CardFactory.getCard("s2").power);
     });
     
     test("最強のカードの強さ", function() {
-        cpu.cardList = CardFactory.getCardList("s3, s4, s5, s6, s7, s8, s9, sT, sJ, sQ, sK, s1, s2, Joker1, Joker2");
+        cpu.cardList = CardFactory.getCardList("s3, s4, s5, s6, s7, s8, s9, sT, sJ, sQ, sK, s1, s2");
         
-        CardFactory.getCard("Joker1").isDead = true;
-        CardFactory.getCard("Joker2").isDead = true;
-        
-        strictEqual(cpu._strongestCardPower, CardFactory.getCard("s2").power);
+        CardFactory.getCard("s2").isDead = true;
+        CardFactory.getCard("c2").isDead = true;
+        CardFactory.getCard("d2").isDead = true;
+        CardFactory.getCard("h2").isDead = true;
+
+        strictEqual(cpu._strongestCardPower, CardFactory.getCard("s1").power);
     });    
 })();

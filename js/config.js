@@ -1,4 +1,13 @@
 
-const Config = {};
+class Config {
+    #useJoker = true;
+    get useJoker() {
+        return this.#useJoker;
+    }
 
-Config.useJoker = true;
+    static default = new Config(false);
+
+    constructor(useJoker) {
+        this.#useJoker = useJoker;
+    }
+}
