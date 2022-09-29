@@ -30,8 +30,10 @@ class CardFactory {
             this.#cardList.push({name: `${initial}1`, obj: new Card(suit, "1",  `${initial}1`, 5,   `${imageFolderPath}/${suit.name}/card_${suit.name}_1.png`) });
             this.#cardList.push({name: `${initial}2`, obj: new Card(suit, "2",  `${initial}2`, 6,   `${imageFolderPath}/${suit.name}/card_${suit.name}_2.png`) });
         }
-        this.#cardList.push({name: "Joker1", obj: new Joker("Joker1",  99,  `${imageFolderPath}/card_joker.png`)});
-        this.#cardList.push({name: "Joker2", obj: new Joker("Joker2",  99,  `${imageFolderPath}/card_joker.png`)});
+        if (Config.useJoker) {
+            this.#cardList.push({name: "Joker1", obj: new Joker("Joker1",  99,  `${imageFolderPath}/card_joker.png`)});
+            this.#cardList.push({name: "Joker2", obj: new Joker("Joker2",  99,  `${imageFolderPath}/card_joker.png`)});   
+        }
     }
 
     static getAllCardList() {

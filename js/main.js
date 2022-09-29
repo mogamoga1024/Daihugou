@@ -1,4 +1,6 @@
 
+Config.useJoker = false; // MEMO: jokerの処理の実装に時間がかかりそうなので一旦falseにしておく
+
 const router = VueRouter.createRouter({
     history: VueRouter.createWebHashHistory(),
     routes: [
