@@ -1,14 +1,15 @@
 
 (function() {
     let multiThinking = null;
+    const config = new Config(false);
     
-    CardFactory.initCardList();
+    CardFactory.initCardList(config);
     const twoPower = CardFactory.getCard("s2").power;
     
     module("CPUのAIのテスト4（MultiThinkingクラス）", {
         setup() {
             multiThinking = null;
-            CardFactory.initCardList();
+            CardFactory.initCardList(config);
         }
     });
 

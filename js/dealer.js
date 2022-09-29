@@ -3,7 +3,7 @@ class Dearler {
     static dealCardList(playerList) {
         playerList.forEach(p => p.cardList = []);
 
-        CardFactory.initCardList();
+        CardFactory.initCardList(config);
         const allCardList = CardFactory.getAllCardList();
         const allCardListIndexs = [];
         for (let i = 0; i < allCardList.length; i++) {

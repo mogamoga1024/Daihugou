@@ -1,11 +1,12 @@
 (function() {
     let cpu = null;
+    const config = new Config(false);
 
     module("CPUのAIのテスト2", {
         setup() {
             cpu = new Cpu("CPU1");
             GameManager.init([cpu], {isRevolution: false});
-            CardFactory.initCardList();
+            CardFactory.initCardList(config);
         }
     });
 
@@ -13,9 +14,6 @@
 
     test("思考 single", function() {
         cpu.cardList = CardFactory.getCardList("s3, d7, s2");
-        
-        CardFactory.getCard("Joker1").isDead = true;
-        CardFactory.getCard("Joker2").isDead = true;
 
         strictEqual(Common.cardListToString(cpu.outputHand([])), "d7");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s2");
@@ -24,9 +22,6 @@
 
     test("思考 single multi", function() {
         cpu.cardList = CardFactory.getCardList("s3, d7, sT, dT, s2");
-        
-        CardFactory.getCard("Joker1").isDead = true;
-        CardFactory.getCard("Joker2").isDead = true;
 
         strictEqual(Common.cardListToString(cpu.outputHand([])), "d7");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "sT, dT");
@@ -36,9 +31,6 @@
 
     test("思考 single multi stairs", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, h5, h6, h7, d9, sT, dT, hJ, hQ, hK, h1, s2");
-        
-        CardFactory.getCard("Joker1").isDead = true;
-        CardFactory.getCard("Joker2").isDead = true;
 
         strictEqual(Common.cardListToString(cpu.outputHand([])), "d9");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s4, c4");
@@ -51,9 +43,6 @@
 
     test("思考 応手で気軽に最強をださない single", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, s2");
-
-        CardFactory.getCard("Joker1").isDead = true;
-        CardFactory.getCard("Joker2").isDead = true;
 
         const s1 = CardFactory.getCard("s1");
 
@@ -68,9 +57,6 @@
 
     test("思考 応手で気軽に最強をださない multi", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, s2, c2");
-
-        CardFactory.getCard("Joker1").isDead = true;
-        CardFactory.getCard("Joker2").isDead = true;
 
         const s1 = CardFactory.getCard("s1");
         const c1 = CardFactory.getCard("c1");
@@ -87,9 +73,6 @@
     test("思考 応手で気軽に最強をださない stairs", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, sK, s1, s2");
 
-        CardFactory.getCard("Joker1").isDead = true;
-        CardFactory.getCard("Joker2").isDead = true;
-
         const cQ = CardFactory.getCard("cQ");
         const cK = CardFactory.getCard("cK");
         const c1 = CardFactory.getCard("c1");
@@ -105,9 +88,6 @@
 
     test("思考 革命中 single multi stairs", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, h5, h6, h7, d9, sT, dT, hJ, hQ, hK, h1, s2");
-        
-        CardFactory.getCard("Joker1").isDead = true;
-        CardFactory.getCard("Joker2").isDead = true;
 
         GameManager.revolution();
 
@@ -142,18 +122,12 @@
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, s2");
         cpu._cardDivision();
 
-        CardFactory.getCard("Joker1").isDead = true;
-        CardFactory.getCard("Joker2").isDead = true;
-
         strictEqual(cpu._shouldRevolution(), true);
     });
 
     test("思考 革命すべきか 最強がmulti", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, s2, c2");
         cpu._cardDivision();
-
-        CardFactory.getCard("Joker1").isDead = true;
-        CardFactory.getCard("Joker2").isDead = true;
 
         strictEqual(cpu._shouldRevolution(), true);
     });
@@ -162,18 +136,12 @@
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, sK, s1, s2");
         cpu._cardDivision();
 
-        CardFactory.getCard("Joker1").isDead = true;
-        CardFactory.getCard("Joker2").isDead = true;
-
         strictEqual(cpu._shouldRevolution(), true);
     });
 
     test("思考 革命考慮 最強がsingle", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, s2");
         cpu._cardDivision();
-        
-        CardFactory.getCard("Joker1").isDead = true;
-        CardFactory.getCard("Joker2").isDead = true;
 
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s2");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s4, c4, d4, h4");
@@ -188,9 +156,6 @@
     test("思考 革命考慮 最強がmulti", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, s2, c2");
         cpu._cardDivision();
-        
-        CardFactory.getCard("Joker1").isDead = true;
-        CardFactory.getCard("Joker2").isDead = true;
 
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s2, c2");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s4, c4, d4, h4");
@@ -205,9 +170,6 @@
     test("思考 革命考慮 最強がstairs", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, sK, s1, s2");
         cpu._cardDivision();
-        
-        CardFactory.getCard("Joker1").isDead = true;
-        CardFactory.getCard("Joker2").isDead = true;
 
         strictEqual(Common.cardListToString(cpu.outputHand(c567)), "sK, s1, s2");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s4, c4, d4, h4");
@@ -222,9 +184,6 @@
     test("思考 革命考慮 応手 最強がsingle", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, s2");
         cpu._cardDivision();
-        
-        CardFactory.getCard("Joker1").isDead = true;
-        CardFactory.getCard("Joker2").isDead = true;
 
         const c5 = CardFactory.getCard("c5");
 
@@ -241,9 +200,6 @@
     test("思考 革命考慮 応手 最強がmulti", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, s2, c2");
         cpu._cardDivision();
-        
-        CardFactory.getCard("Joker1").isDead = true;
-        CardFactory.getCard("Joker2").isDead = true;
 
         const s5c5 = CardFactory.getCardList("s5, c5");
 
@@ -260,9 +216,6 @@
     test("思考 革命考慮 応手 最強がstairs", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, sK, s1, s2");
         cpu._cardDivision();
-        
-        CardFactory.getCard("Joker1").isDead = true;
-        CardFactory.getCard("Joker2").isDead = true;
 
         const c567 = CardFactory.getCard("c5, c6, c7");
 

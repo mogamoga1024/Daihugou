@@ -1,14 +1,15 @@
 
 (function() {
     let stairsThinking = null;
+    const config = new Config(false);
     
-    CardFactory.initCardList();
+    CardFactory.initCardList(config);
     const twoPower = CardFactory.getCard("s2").power;
     
     module("CPUのAIのテスト5（StairsThinkingクラス）", {
         setup() {
             stairsThinking = null;
-            CardFactory.initCardList();
+            CardFactory.initCardList(config);
         }
     });
 

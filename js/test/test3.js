@@ -1,14 +1,15 @@
 
 (function() {
     let singleThinking = null;
+    const config = new Config(false);
     
-    CardFactory.initCardList();
+    CardFactory.initCardList(config);
     const twoPower = CardFactory.getCard("s2").power;
     
     module("CPUのAIのテスト3（SingleThinkingクラス）", {
         setup() {
             singleThinking = null;
-            CardFactory.initCardList();
+            CardFactory.initCardList(config);
         }
     });
 
