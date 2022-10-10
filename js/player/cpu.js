@@ -305,6 +305,7 @@ class Cpu extends Player {
 
         if (revolutionHandList.length === 0) return false;
 
+        // 革命のカードを取り除く
         const tmpCardList = this.cardList.filter(c => c.power !== revolutionHandList[0][0].power);
 
         // 革命の役しかない場合はtrue
@@ -320,6 +321,7 @@ class Cpu extends Player {
             return true;
         }
         else {
+            // 革命するから-1している
             if (this._handCount - 1 <= 2) {
                 if (tmpCardList[0].power - this._weakestCardPower >= this._strongestCardPower - tmpCardList.last().power) {
                     return true;
