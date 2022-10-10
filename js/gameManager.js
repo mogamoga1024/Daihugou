@@ -19,7 +19,7 @@ class GameManager {
 
         for (const player of this.#playerList) {
             // debug用
-            log(`%c${player.name} 初期手札: ${Common.cardListToString(player.cardList)}`, "color: crimson");
+            log(`%c${player.name}	初期手札: ${Common.cardListToString(player.cardList)}`, "color: crimson");
         }
 
         while (this.#playerList.filter(p => !p.isRankDecided).length > 1) {
@@ -56,7 +56,7 @@ class GameManager {
         const hand = await player.outputHand(this.#vm.battleFieldHand);
 
         if (hand.length > 0) {
-            log(`${player.name} 場に出したカード: ${Common.cardListToString(hand)}`);
+            log(`${player.name}	場に出したカード: ${Common.cardListToString(hand)}`);
 
             // TODO Joker未考慮
             // 革命判定
@@ -66,7 +66,7 @@ class GameManager {
                 hand[1].power === hand[2].power &&
                 hand[2].power === hand[3].power
             ) {
-                log(`${player.name} 革命！`);
+                log(`${player.name}	革命！`);
                 this.revolution();
             }
 
@@ -76,14 +76,14 @@ class GameManager {
             hand.forEach(c => c.isDead = true);
 
             if (player.cardList.length === 0) {
-                log(`${player.name} あがり`);
+                log(`${player.name}	あがり`);
                 player.rank = Rank.getRank(this.#ranking++);
                 player.isRankDecided = true;
                 this.#playerList.forEach(p => p.isNowPass = false);
             }
         }
         else {
-            log(`${player.name} パス`);
+            log(`${player.name}	パス`);
             player.isNowPass = true;
         }
 
