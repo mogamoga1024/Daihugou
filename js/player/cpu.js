@@ -24,7 +24,7 @@ class Cpu extends Player {
 
         let selectedHand = [];
         const handCount = this._handCount;
-        const strongestCardPower = this._strongestCardPower;
+        const strongestCardPower = CardFactory.getStrongestCardPower();
         const maybeLastOutputHand = this._maybeLastOutputHand;
         
         if (battleFieldHand.length === 0) {
@@ -232,46 +232,6 @@ class Cpu extends Player {
         };
     }
 
-    get _strongestCardPower() {
-        let strongestCard = null;
-        for (const card of CardFactory.allCardList) {
-            if (card.obj.isDead) {
-                continue;
-            }
-            if (strongestCard === null) {
-                strongestCard = card.obj;
-                continue;
-            }
-            if (strongestCard.power < card.obj.power) {
-                strongestCard = card.obj;
-            }
-        }
-        if (strongestCard === null) {
-            throw new Error("すでにゲームが終わっている");
-        }
-        return strongestCard.power;
-    }
-
-    get _weakestCardPower() {
-        let weakestCard = null;
-        for (const card of CardFactory.allCardList) {
-            if (card.obj.isDead) {
-                continue;
-            }
-            if (weakestCard === null) {
-                weakestCard = card.obj;
-                continue;
-            }
-            if (weakestCard.power > card.obj.power) {
-                weakestCard = card.obj;
-            }
-        }
-        if (weakestCard === null) {
-            throw new Error("すでにゲームが終わっている");
-        }
-        return weakestCard.power;
-    }
-
     get _maybeLastOutputHand() {
         if (this._singleThinking.existsHand) {
             return this._singleThinking.weakestHand;
@@ -323,7 +283,7 @@ class Cpu extends Player {
         else {
             // 革命するから-1している
             if (this._handCount - 1 <= 2) {
-                if (tmpCardList[0].power - this._weakestCardPower >= this._strongestCardPower - tmpCardList.last().power) {
+                if (tmpCardList[0].power - CardFactory.getWeakestCardPower() >= CardFactory.getStrongestCardPower() - tmpCardList.last().power) {
                     return true;
                 }
                 else {

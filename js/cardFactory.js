@@ -67,4 +67,44 @@ class CardFactory {
         const cardList = nameList.map(name => this.getCard(name));
         return Common.sortCardList(cardList);
     }
+
+    static getWeakestCardPower() {
+        let weakestCard = null;
+        for (const card of CardFactory.allCardList) {
+            if (card.obj.isDead) {
+                continue;
+            }
+            if (weakestCard === null) {
+                weakestCard = card.obj;
+                continue;
+            }
+            if (weakestCard.power > card.obj.power) {
+                weakestCard = card.obj;
+            }
+        }
+        if (weakestCard === null) {
+            throw new Error("すでにゲームが終わっている");
+        }
+        return weakestCard.power;
+    }
+
+    static getStrongestCardPower() {
+        let strongestCard = null;
+        for (const card of CardFactory.allCardList) {
+            if (card.obj.isDead) {
+                continue;
+            }
+            if (strongestCard === null) {
+                strongestCard = card.obj;
+                continue;
+            }
+            if (strongestCard.power < card.obj.power) {
+                strongestCard = card.obj;
+            }
+        }
+        if (strongestCard === null) {
+            throw new Error("すでにゲームが終わっている");
+        }
+        return strongestCard.power;
+    }
 }

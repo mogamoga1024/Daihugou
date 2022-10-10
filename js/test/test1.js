@@ -86,7 +86,7 @@
         CardFactory.getCard("d2").isDead = true;
         CardFactory.getCard("h2").isDead = true;
         
-        strictEqual(cpu._strongestCardPower, CardFactory.getCard("s2").power);
+        strictEqual(CardFactory.getStrongestCardPower(), CardFactory.getCard("s2").power);
     });
     
     test("最強のカードの強さ", function() {
@@ -97,6 +97,6 @@
         CardFactory.getCard("d2").isDead = true;
         CardFactory.getCard("h2").isDead = true;
 
-        strictEqual(cpu._strongestCardPower, CardFactory.getCard("s1").power);
+        strictEqual(CardFactory.getStrongestCardPower(), CardFactory.getCard("s1").power);
     });    
 })();
