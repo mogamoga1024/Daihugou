@@ -272,10 +272,28 @@ class Cpu extends Player {
         if (tmpCardList.length === 0) return true;
 
         const centerCardPower = CardFactory.getCenterCardPower();
-        // const lowerCount = tmpCardList.filter(c => c.power <= centerCardPower).length;
-        // const upperCount = tmpCardList.length - lowerCount;
+        let lowerCount = 0;
+        let upperCount = 0;
+        let myWeakestHandPower = Number.MAX_SAFE_INTEGER;
+        let myStrongestHandPower = Number.MIN_SAFE_INTEGER;
 
-        
+        for (const handList of [this._singleThinking.handList, this._multiThinking.handList, this._stairsThinking.handList]) {
+            for (const hand of handList) {
+                const handPower = Hand.power(hand);
+                if (handPower <= centerCardPower) {
+                    lowerCount++;
+                }
+                else {
+                    upperCount++;
+                }
+                if (handPower < myWeakestHandPower) {
+                    myWeakestHandPower = handPower;
+                }
+                if (handPower > myStrongestHandPower) {
+                    myStrongestHandPower = handPower;
+                }
+            }
+        }
 
         // 弱いカードが大半なら革命すべき
         // または革命後、確定であがれるならば革命すべき
@@ -285,7 +303,7 @@ class Cpu extends Player {
         else {
             // 革命するから-1している
             if (this._handCount - 1 <= 2) {
-                if (tmpCardList[0].power - CardFactory.getWeakestCardPower() >= CardFactory.getStrongestCardPower() - tmpCardList.last().power) {
+                if (myWeakestHandPower - CardFactory.getWeakestCardPower() >= CardFactory.getStrongestCardPower() - myStrongestHandPower) {
                     return true;
                 }
                 else {
