@@ -45,7 +45,12 @@ class Hand {
             case this.Multi:
                 return hand[0].power;
             case this.Stairs:
-                return hand.last().power;
+                if (hand[0].power === CardFactory.getWeakestCardPower()) {
+                    return hand[0].power;
+                }
+                else {
+                    return hand.last().power;
+                }
             default:
                 throw new Error("想定外の役");
         }
