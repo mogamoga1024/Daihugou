@@ -271,7 +271,7 @@ class Cpu extends Player {
         // 革命の役しかない場合はtrue
         if (tmpCardList.length === 0) return true;
 
-        const centerCardPower = CardFactory.getCard("s9").power;
+        const centerCardPower = CardFactory.getCenterCardPower();
         const lowerCount = tmpCardList.filter(c => c.power <= centerCardPower).length;
         const upperCount = tmpCardList.length - lowerCount;
 

@@ -70,7 +70,7 @@ class CardFactory {
 
     static getWeakestCardPower() {
         let weakestCard = null;
-        for (const card of CardFactory.allCardList) {
+        for (const card of this.allCardList) {
             if (card.obj.isDead) {
                 continue;
             }
@@ -90,7 +90,7 @@ class CardFactory {
 
     static getStrongestCardPower() {
         let strongestCard = null;
-        for (const card of CardFactory.allCardList) {
+        for (const card of this.allCardList) {
             if (card.obj.isDead) {
                 continue;
             }
@@ -106,5 +106,9 @@ class CardFactory {
             throw new Error("すでにゲームが終わっている");
         }
         return strongestCard.power;
+    }
+
+    static getCenterCardPower() {
+        return this.getCard("s9").power;
     }
 }
