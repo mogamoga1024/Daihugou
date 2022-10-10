@@ -171,7 +171,7 @@
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, sK, s1, s2");
         cpu._cardDivision();
 
-        strictEqual(Common.cardListToString(cpu.outputHand(c567)), "sK, s1, s2");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "sK, s1, s2");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s4, c4, d4, h4");
 
         GameManager.revolution();
@@ -217,7 +217,7 @@
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, sK, s1, s2");
         cpu._cardDivision();
 
-        const c567 = CardFactory.getCard("c5, c6, c7");
+        const c567 = CardFactory.getCardList("c5, c6, c7");
 
         strictEqual(Common.cardListToString(cpu.outputHand(c567)), "sK, s1, s2");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s4, c4, d4, h4");
