@@ -40,6 +40,6 @@ class Thinking {
     }
 
     get strongestCardPower() {
-        throw new Error("継承先で処理を書くこと");
+        return Hand.power(this.strongestHand);
     }
 }

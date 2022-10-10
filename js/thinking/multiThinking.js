@@ -43,8 +43,4 @@ class MultiThinking extends Thinking {
         }
         return selectedHand;
     }
-
-    get strongestCardPower() {
-        return this.strongestHand[0].power;
-    }
 }

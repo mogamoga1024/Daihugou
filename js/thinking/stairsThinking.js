@@ -44,8 +44,4 @@ class StairsThinking extends Thinking {
 
         return selectedHand;
     }
-
-    get strongestCardPower() {
-        return this.strongestHand.last().power;
-    }
 }

@@ -272,8 +272,10 @@ class Cpu extends Player {
         if (tmpCardList.length === 0) return true;
 
         const centerCardPower = CardFactory.getCenterCardPower();
-        const lowerCount = tmpCardList.filter(c => c.power <= centerCardPower).length;
-        const upperCount = tmpCardList.length - lowerCount;
+        // const lowerCount = tmpCardList.filter(c => c.power <= centerCardPower).length;
+        // const upperCount = tmpCardList.length - lowerCount;
+
+        
 
         // 弱いカードが大半なら革命すべき
         // または革命後、確定であがれるならば革命すべき
