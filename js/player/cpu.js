@@ -302,7 +302,11 @@ class Cpu extends Player {
         }
         else {
             // 革命するから-1している
-            if (this._handCount - 1 <= 2) {
+            if (this._handCount - 1 === 1) {
+                // 革命後、残り1役になるなら革命するべき
+                return true;
+            }
+            else if (this._handCount - 1 <= 2) {
                 if (myWeakestHandPower - CardFactory.getWeakestCardPower() >= CardFactory.getStrongestCardPower() - myStrongestHandPower) {
                     return true;
                 }
