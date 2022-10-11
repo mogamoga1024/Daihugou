@@ -9,22 +9,19 @@ module.exports = {
                 new Cpu("CPU2"),
                 new Cpu("CPU3"),
             ],
-            battleFieldHand: [
-                // CardFactory.getCard("d3"),
-                // //CardFactory.getCard("s3"),
-                // CardFactory.getCard("d4"),
-                // CardFactory.getCard("d5"),
-            ],
+            battleFieldHand: [],
             isRevolution: false
         }
     },
     created() {
         Dearler.dealCardList(this.playerList());
 
-        // debug ((s|c|d|h)([1-9]|T|J|Q|K))|Joker1|Joker2
-        //this.player.cardList = CardFactory.getCardList("s3, s4, s5, s6, s9, sT, dJ, dQ, dK, d1");
-        //this.player.cardList = CardFactory.getCardList("Joker1");
-        //this.player.cardList = CardFactory.getCardList("s4, c4, d4, h4, s9, sT, dJ, dQ, dK, d1");
+        // debug
+        // CardFactory.initCardList();
+        // this.player.cardList = CardFactory.getCardList("d3, h3, s4, s5, d5, s6, s7, h8, sJ, cJ, sK, c1, d1");
+        // this.anotherPlayerList[0].cardList = CardFactory.getCardList("c5, h7, d8, c9, sQ, cQ, dQ, hQ, cK, dK, s1, h1, s2");
+        // this.anotherPlayerList[1].cardList = CardFactory.getCardList("c3, c4, h6, s8, c8, s9, h9, sT, cT, hT, dJ, hK, d2");
+        // this.anotherPlayerList[2].cardList = CardFactory.getCardList("s3, d4, h4, h5, c6, d6, c7, d7, d9, dT, hJ, c2, h2");
     },
     async mounted() {
         //const leaderIndex = Common.randomInt(this.playerList().length);
