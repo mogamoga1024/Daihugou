@@ -14,23 +14,7 @@ module.exports = {
             canGoToNextGame: false
         }
     },
-    created() {
-        //Dearler.dealCardList(this.playerList());
-
-        // debug
-        // CardFactory.initCardList();
-        // this.player.cardList = CardFactory.getCardList("d3, h3, s4, s5, d5, s6, s7, h8, sJ, cJ, sK, c1, d1");
-        // this.anotherPlayerList[0].cardList = CardFactory.getCardList("c5, h7, d8, c9, sQ, cQ, dQ, hQ, cK, dK, s1, h1, s2");
-        // this.anotherPlayerList[1].cardList = CardFactory.getCardList("c3, c4, h6, s8, c8, s9, h9, sT, cT, hT, dJ, hK, d2");
-        // this.anotherPlayerList[2].cardList = CardFactory.getCardList("s3, d4, h4, h5, c6, d6, c7, d7, d9, dT, hJ, c2, h2");
-
-        // debug ゲーム進行確認用
-        CardFactory.initCardList();
-        this.player.cardList = CardFactory.getCardList("d3");
-        this.anotherPlayerList[0].cardList = CardFactory.getCardList("d4");
-        this.anotherPlayerList[1].cardList = CardFactory.getCardList("d5");
-        this.anotherPlayerList[2].cardList = CardFactory.getCardList("d6");
-    },
+    created() {},
     async mounted() {
         //const leaderIndex = Common.randomInt(this.playerList().length);
         const leaderIndex = 0; // TODO
@@ -78,8 +62,8 @@ module.exports = {
         async goToNextGame() {
             this.canGoToNextGame = false;
             this.isRevolution = false;
+            this.battleFieldHand = [];
 
-            Dearler.dealCardList(this.playerList());
             const leaderIndex = 0; // TODO
             await GameManager.startGame(leaderIndex);
         }

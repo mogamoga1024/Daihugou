@@ -262,6 +262,7 @@ class Cpu extends Player {
     }
 
     onGameFinish() {
+        super.onGameFinish();
         this._singleThinking = this._multiThinking = this._stairsThinking = null;
     }
 

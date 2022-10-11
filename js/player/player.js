@@ -28,5 +28,12 @@ class Player {
         Common.sortCardList(this.cardList);
     }
 
+    onGameStart() {
+        this.cardList = [];
+        this.isTurn = false;
+        this.isNowPass = false;
+        this.isRankDecided = false;
+    }
+
     onGameFinish() {}
 }
