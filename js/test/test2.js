@@ -139,6 +139,13 @@
         strictEqual(cpu._shouldRevolution(), true);
     });
 
+    test("思考 革命すべきか", function() {
+        cpu.cardList = CardFactory.getCardList("c5, sQ, cQ, dQ, hQ");
+        cpu._cardDivision();
+
+        strictEqual(cpu._shouldRevolution(), true);
+    });
+
     test("思考 革命考慮 最強がsingle", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, s2");
         cpu._cardDivision();
@@ -227,5 +234,15 @@
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s5");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s9");
+    });
+
+    test("思考 革命考慮", function() {
+        cpu.cardList = CardFactory.getCardList("c5, sQ, cQ, dQ, hQ, s2");
+        cpu._cardDivision();
+
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s2");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "sQ, cQ, dQ, hQ");
+        GameManager.revolution();
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "c5");
     });
 })();
