@@ -10,7 +10,8 @@ module.exports = {
                 new Cpu("CPU3"),
             ],
             battleFieldHand: [],
-            isRevolution: false
+            isRevolution: false,
+            canGoToNextGame: false
         }
     },
     created() {

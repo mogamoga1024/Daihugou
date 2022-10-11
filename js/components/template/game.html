@@ -22,8 +22,11 @@
         <div>
             <span :class="{turn: player.isTurn}">{{player.name}}</span><span class="rank">{{player.isNowPass ? "パス" : player.rank}}</span>
             <div id="player-button-container">
-                <button @click="pass">パス</button>
-                <button :disabled="!canOutputHand" @click="outputHand">カードを出す</button>
+                <button v-if="canGoToNextGame">次のゲームへ</button>
+                <template v-else>
+                    <button @click="pass">パス</button>
+                    <button :disabled="!canOutputHand" @click="outputHand">カードを出す</button>
+                </template>
             </div>
         </div>
         <div id="player-card-list">

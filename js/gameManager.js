@@ -34,6 +34,7 @@ class GameManager {
         log("【ゲーム終了】");
 
         this.#playerList.forEach(p => p.onGameFinish());
+        this.#vm.canGoToNextGame = true;
     }
 
     static async startTurn(playerIndex) {
