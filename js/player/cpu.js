@@ -54,9 +54,15 @@ class Cpu extends Player {
                     }
                     // 最強の役なし
                     // → 弱い役をだす
-                    for (const thinking of thinkingList) {
-                        if (thinking.existsHand && thinking.weakestHand === maybeLastOutputHand) {
-                            return thinking.weakestHand;
+                    // ただし革命できる場合は革命する
+                    if (this._shouldRevolution()) {
+                        return this._multiThinking.handList.last();
+                    }
+                    else {
+                        for (const thinking of thinkingList) {
+                            if (thinking.existsHand && thinking.weakestHand === maybeLastOutputHand) {
+                                return thinking.weakestHand;
+                            }
                         }
                     }
                 })();
