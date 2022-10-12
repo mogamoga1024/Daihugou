@@ -106,11 +106,9 @@ class GameManager {
             player.isNowPass = true;
         }
 
-        await Common.sleep();
-
-        // TODO
-
         player.isTurn = false;
+
+        await Common.sleep();
 
         return this.#nextPlayerIndex(playerIndex);
     }

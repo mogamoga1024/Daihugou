@@ -27,7 +27,7 @@
             <div id="player-button-container">
                 <button v-if="canGoToNextGame" @click="goToNextGame">次のゲームへ</button>
                 <template v-else>
-                    <button @click="pass">パス</button>
+                    <button :disabled="!player.isTurn" @click="pass">パス</button>
                     <button :disabled="!canOutputHand" @click="outputHand">カードを出す</button>
                 </template>
             </div>
