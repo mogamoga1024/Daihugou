@@ -1,6 +1,7 @@
 
 class Dearler {
-    static dealCardList(playerList) {
+    static dealCardList(_playerList) {
+        const playerList = Array.from(_playerList);
         playerList.forEach(p => p.cardList = []);
 
         CardFactory.initCardList();
