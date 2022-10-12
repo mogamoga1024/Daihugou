@@ -22,7 +22,7 @@
         <div>
             <span :class="{turn: player.isTurn}">{{player.name}}</span><span class="rank">{{player.isNowPass ? "パス" : player.rank}}</span>
             <label id="high-speed-checkbox-container">
-                高速化<input type="checkbox" id="high-speed-checkbox">
+                高速化<input type="checkbox" id="high-speed-checkbox" v-model="isHighSpeed">
             </label>
             <div id="player-button-container">
                 <button v-if="canGoToNextGame" @click="goToNextGame">次のゲームへ</button>

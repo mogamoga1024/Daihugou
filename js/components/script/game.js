@@ -10,6 +10,7 @@ module.exports = {
                 new Cpu("CPU3"),
             ],
             battleFieldHand: [],
+            isHighSpeed: EnvConfig.isHighSpeed,
             isRevolution: false,
             canGoToNextGame: false
         }
@@ -20,6 +21,11 @@ module.exports = {
         const leaderIndex = 0; // TODO
         GameManager.init(this.playerList, this);
         await GameManager.startGame(leaderIndex);
+    },
+    watch: {
+        isHighSpeed(val) {
+            EnvConfig.isHighSpeed = val;
+        }
     },
     computed: {
         battleFieldCardContainerWidth() {
