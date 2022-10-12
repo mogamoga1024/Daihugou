@@ -106,10 +106,17 @@ class GameManager {
             player.isNowPass = true;
         }
 
-        player.isTurn = false;
-
-        await Common.sleep();
-
+        if (player.constructor === Human) {
+            // パスボタンを非活性にするため、ターン終了後にwait
+            player.isTurn = false;
+            await Common.sleep();
+        }
+        else {
+            // CPUの名前を赤色にするため、wait後にターン終了
+            await Common.sleep();
+            player.isTurn = false;
+        }
+        
         return this.#nextPlayerIndex(playerIndex);
     }
 
