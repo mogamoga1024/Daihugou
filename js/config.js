@@ -1,13 +1,19 @@
 
-class Config {
+class RuleConfig {
     #useJoker = true;
     get useJoker() {
         return this.#useJoker;
     }
 
-    static default = new Config(false);
+    static default = new RuleConfig(false);
 
     constructor(useJoker) {
         this.#useJoker = useJoker;
     }
 }
+
+const EnvConfig = {
+    isHighSpeed: false,
+    normalSpeed: 1000,
+    highSpeed: 500
+};

@@ -1,11 +1,11 @@
 (function() {
     let cpu = null;
-    const config = new Config(false);
+    const ruleConfig = new RuleConfig(false);
 
     module("CPUのAIのテスト1", {
         setup() {
             cpu = new Cpu("CPU");
-            CardFactory.initCardList(config);
+            CardFactory.initCardList(ruleConfig);
         }
     });
     
