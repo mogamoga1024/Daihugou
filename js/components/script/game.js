@@ -16,15 +16,18 @@ module.exports = {
     },
     created() {},
     async mounted() {
-        //const leaderIndex = Common.randomInt(this.playerList().length);
+        //const leaderIndex = Common.randomInt(this.playerList.length);
         const leaderIndex = 0; // TODO
-        GameManager.init(this.playerList(), this);
+        GameManager.init(this.playerList, this);
         await GameManager.startGame(leaderIndex);
     },
     computed: {
         battleFieldCardContainerWidth() {
             // 値はテキトー
             return Math.min(100 + 80 * (this.battleFieldHand.length - 1), 800);
+        },
+        playerList() {
+            return [this.player, ...this.anotherPlayerList];
         },
         canOutputHand() {
             for (const card of this.player.cardList) {
@@ -54,10 +57,6 @@ module.exports = {
                 c.isSelected = false;
             });
             this.player.outputCardListFromUI(this.battleFieldHand);
-        },
-        playerList() {
-            // computedのほうだと順番が狂った。謎
-            return [this.player, ...this.anotherPlayerList];
         },
         async goToNextGame() {
             this.canGoToNextGame = false;
