@@ -17,7 +17,7 @@ class Common {
         });
     }
 
-    static sleep(time = 1000) {
+    static sleep(time = EnvConfig.isHighSpeed ? EnvConfig.highSpeed : EnvConfig.normalSpeed) {
         return new Promise(resolve => setTimeout(resolve, time));
     }
 
