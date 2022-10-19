@@ -258,4 +258,15 @@
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s7, d7");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s6, d6, h6");
     });
+
+    test("思考 役の分割", function() {
+        cpu.cardList = CardFactory.getCardList("s3, s2, c2");
+        cpu._cardDivision();
+
+        const s1 = CardFactory.getCard("s1");
+
+        strictEqual(Common.cardListToString(cpu.outputHand([s1])), "s2");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "c2");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
+    });
 })();
