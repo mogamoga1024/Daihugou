@@ -269,4 +269,40 @@
         strictEqual(Common.cardListToString(cpu.outputHand([])), "c2");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
     });
+
+    test("思考 ほぼあがれるだろう multi", function() {
+        cpu.cardList = CardFactory.getCardList("s3, s1, c1");
+        cpu._cardDivision();
+
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s1, c1");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
+    });
+
+    test("思考 ほぼあがれるだろう stairs", function() {
+        cpu.cardList = CardFactory.getCardList("s3, sQ, sK, s1");
+        cpu._cardDivision();
+
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "sQ, sK, s1");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
+    });
+
+    test("思考 ほぼあがれるだろう multi 応手", function() {
+        cpu.cardList = CardFactory.getCardList("s3, s1, c1");
+        cpu._cardDivision();
+
+        const sKcK = CardFactory.getCardList("sK, cK");
+
+        strictEqual(Common.cardListToString(cpu.outputHand(sKcK)), "s1, c1");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
+    });
+
+    test("思考 ほぼあがれるだろう stairs 応手", function() {
+        cpu.cardList = CardFactory.getCardList("s3, sQ, sK, s1");
+        cpu._cardDivision();
+
+        const cJQK = CardFactory.getCardList("cJ, cQ, cK");
+
+        strictEqual(Common.cardListToString(cpu.outputHand(cJQK)), "sQ, sK, s1");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
+    });
 })();
