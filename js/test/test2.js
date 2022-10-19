@@ -245,4 +245,17 @@
         GameManager.revolution();
         strictEqual(Common.cardListToString(cpu.outputHand([])), "c5");
     });
+
+    test("思考 革命時", function() {
+        cpu.cardList = CardFactory.getCardList("s6, d6, h6, s7, d7, dJ, cK, dK, h2");
+        cpu._cardDivision();
+
+        GameManager.revolution();
+
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "h2");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "dJ");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "cK, dK");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s7, d7");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s6, d6, h6");
+    });
 })();
