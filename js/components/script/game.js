@@ -25,10 +25,8 @@ module.exports = {
         }
     },
     async mounted() {
-        //const leaderIndex = Common.randomInt(this.playerList.length);
-        const leaderIndex = 0; // TODO
         GameManager.init(this.playerList, this);
-        await GameManager.startGame(leaderIndex);
+        await GameManager.startGame();
     },
     watch: {
         isHighSpeed(val) {
@@ -77,8 +75,7 @@ module.exports = {
             this.isRevolution = false;
             this.battleFieldHand = [];
 
-            const leaderIndex = 0; // TODO
-            await GameManager.startGame(leaderIndex);
+            await GameManager.startGame();
         }
     }
 };

@@ -4,6 +4,7 @@ class GameManager {
     static #vm = null;
     static #latestOutputCardPlayer = null;
     static #ranking = 1;
+    static #lastPlayerIndex = 0;
 
     static init(playerList, vm) {
         this.#playerList = playerList;
@@ -12,7 +13,7 @@ class GameManager {
         this.#ranking = 1;
     }
 
-    static async startGame(leaderIndex) {
+    static async startGame(leaderIndex = this.#lastPlayerIndex) {
         let playerIndex = leaderIndex;
 
         log("【ゲーム開始】");
@@ -40,6 +41,12 @@ class GameManager {
             log(`%c${player.name}	初期手札	${Common.cardListToString(player.cardList)}`, "color: crimson");
         }
 
+        // ゲーム開始時、CPUが最初のカードを出す前に少し待つ
+        // 何も出ていない場をユーザーに見せたいため
+        if (this.#playerList[playerIndex].constructor === Cpu) {
+            await Common.sleep();
+        }
+
         while (this.#playerList.filter(p => !p.isRankDecided).length > 1) {
             playerIndex = await this.startTurn(playerIndex);
         }
@@ -48,6 +55,7 @@ class GameManager {
         lastPlayer.rank = Rank.getRank(this.#ranking);
         lastPlayer.isRankDecided = true;
         this.#ranking = 1;
+        this.#lastPlayerIndex = playerIndex;
 
         log("【ゲーム終了】");
 
