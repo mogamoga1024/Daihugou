@@ -5,7 +5,7 @@ class Dearler {
         playerList.forEach(p => p.cardList = []);
 
         CardFactory.initCardList();
-        const allCardList = CardFactory.createAllCardList();
+        const allCardList = CardFactory.getAllCardList();
         const allCardListIndexs = [];
         for (let i = 0; i < allCardList.length; i++) {
             allCardListIndexs.push(i);

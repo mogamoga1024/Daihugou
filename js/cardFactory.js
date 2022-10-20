@@ -36,7 +36,7 @@ class CardFactory {
         }
     }
 
-    static createAllCardList() {
+    static getAllCardList() {
         if (this.#isInitialized === false) {
             throw new Error("CardFactory#initCardListでの初期化処理が必要");
         }
@@ -48,7 +48,7 @@ class CardFactory {
      * @param {string} name 
      * @returns 
      */
-    static createCard(name) {
+    static getCard(name) {
         if (this.#isInitialized === false) {
             throw new Error("CardFactory#initCardListでの初期化処理が必要");
         }
@@ -59,12 +59,12 @@ class CardFactory {
         return cardList[0];
     }
 
-    static createCardList(strNameList) {
+    static getCardList(strNameList) {
         if (this.#isInitialized === false) {
             throw new Error("CardFactory#initCardListでの初期化処理が必要");
         }
         const nameList = strNameList.split(",").map(name => name.trim());
-        const cardList = nameList.map(name => this.createCard(name));
+        const cardList = nameList.map(name => this.getCard(name));
         return Common.sortCardList(cardList);
     }
 
@@ -109,6 +109,6 @@ class CardFactory {
     }
 
     static getCenterCardPower() {
-        return this.createCard("s9").power;
+        return this.getCard("s9").power;
     }
 }

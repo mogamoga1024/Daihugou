@@ -4,7 +4,7 @@
     const ruleConfig = new RuleConfig(false);
     
     CardFactory.initCardList(ruleConfig);
-    const twoPower = CardFactory.createCard("s2").power;
+    const twoPower = CardFactory.getCard("s2").power;
     
     module("CPUのAIのテスト5（StairsThinkingクラス）", {
         setup() {
@@ -16,7 +16,7 @@
     // memo: ((s|c|d|h)([1-9]|T|J|Q|K))|Joker1|Joker2
 
     test("思考 応手 stairs 役なし", function() {
-        const s345 = CardFactory.createCardList("s3, s4, s5");
+        const s345 = CardFactory.getCardList("s3, s4, s5");
         stairsThinking = new StairsThinking([]);
 
         strictEqual(Common.cardListToString(
@@ -25,8 +25,8 @@
     });
 
     test("思考 応手 stairs 役なし", function() {
-        const s567 = CardFactory.createCardList("s5, s6, s7");
-        const sQK1 = CardFactory.createCardList("sQ, sK, s1");
+        const s567 = CardFactory.getCardList("s5, s6, s7");
+        const sQK1 = CardFactory.getCardList("sQ, sK, s1");
         stairsThinking = new StairsThinking([s567]);
 
         strictEqual(Common.cardListToString(
@@ -35,8 +35,8 @@
     });
 
     test("思考 応手 stairs 残り1役", function() {
-        const d345 = CardFactory.createCardList("d3, d4, d5");
-        const s567 = CardFactory.createCardList("s5, s6, s7");
+        const d345 = CardFactory.getCardList("d3, d4, d5");
+        const s567 = CardFactory.getCardList("s5, s6, s7");
         stairsThinking = new StairsThinking([s567]);
 
         strictEqual(Common.cardListToString(
@@ -45,8 +45,8 @@
     });
 
     test("思考 応手 stairs 残り2役 最強あり", function() {
-        const d345 = CardFactory.createCardList("d3, d4, d5");
-        const sK12 = CardFactory.createCardList("sK, s1, s2");
+        const d345 = CardFactory.getCardList("d3, d4, d5");
+        const sK12 = CardFactory.getCardList("sK, s1, s2");
         stairsThinking = new StairsThinking([sK12]);
 
         strictEqual(Common.cardListToString(
@@ -55,9 +55,9 @@
     });
 
     test("思考 応手 stairs 残り2役 最強あり", function() {
-        const d345 = CardFactory.createCardList("d3, d4, d5");
-        const s567 = CardFactory.createCardList("s5, s6, s7");
-        const sK12 = CardFactory.createCardList("sK, s1, s2");
+        const d345 = CardFactory.getCardList("d3, d4, d5");
+        const s567 = CardFactory.getCardList("s5, s6, s7");
+        const sK12 = CardFactory.getCardList("sK, s1, s2");
         stairsThinking = new StairsThinking([s567, sK12]);
 
         strictEqual(Common.cardListToString(
@@ -66,8 +66,8 @@
     });
 
     test("思考 応手 stairs 残り2役 疑似最強あり", function() {
-        const d345 = CardFactory.createCardList("d3, d4, d5");
-        const sQK1 = CardFactory.createCardList("sQ, sK, s1");
+        const d345 = CardFactory.getCardList("d3, d4, d5");
+        const sQK1 = CardFactory.getCardList("sQ, sK, s1");
         stairsThinking = new StairsThinking([sQK1]);
 
         strictEqual(Common.cardListToString(
@@ -76,9 +76,9 @@
     });
 
     test("思考 応手 stairs 残り2役 疑似最強あり", function() {
-        const d345 = CardFactory.createCardList("d3, d4, d5");
-        const s567 = CardFactory.createCardList("s5, s6, s7");
-        const sQK1 = CardFactory.createCardList("sQ, sK, s1");
+        const d345 = CardFactory.getCardList("d3, d4, d5");
+        const s567 = CardFactory.getCardList("s5, s6, s7");
+        const sQK1 = CardFactory.getCardList("sQ, sK, s1");
         stairsThinking = new StairsThinking([s567, sQK1]);
 
         strictEqual(Common.cardListToString(
@@ -87,9 +87,9 @@
     });
 
     test("思考 応手 stairs 残り2役 最強なし", function() {
-        const d345 = CardFactory.createCardList("d3, d4, d5");
-        const s567 = CardFactory.createCardList("s5, s6, s7");
-        const sJQK = CardFactory.createCardList("sJ, sQ, sK");
+        const d345 = CardFactory.getCardList("d3, d4, d5");
+        const s567 = CardFactory.getCardList("s5, s6, s7");
+        const sJQK = CardFactory.getCardList("sJ, sQ, sK");
         stairsThinking = new StairsThinking([s567, sJQK]);
 
         strictEqual(Common.cardListToString(
@@ -98,10 +98,10 @@
     });
 
     test("思考 応手 stairs 残り3役", function() {
-        const d345 = CardFactory.createCardList("d3, d4, d5");
-        const s567 = CardFactory.createCardList("s5, s6, s7");
-        const s9TJ = CardFactory.createCardList("s9, sT, sJ");
-        const sK12 = CardFactory.createCardList("sK, s1, s2");
+        const d345 = CardFactory.getCardList("d3, d4, d5");
+        const s567 = CardFactory.getCardList("s5, s6, s7");
+        const s9TJ = CardFactory.getCardList("s9, sT, sJ");
+        const sK12 = CardFactory.getCardList("sK, s1, s2");
         stairsThinking = new StairsThinking([s567, s9TJ, sK12]);
 
         strictEqual(Common.cardListToString(
@@ -110,10 +110,10 @@
     });
 
     test("思考 応手 stairs 残り3役", function() {
-        const d567 = CardFactory.createCardList("d5, d6, d7");
-        const s567 = CardFactory.createCardList("s5, s6, s7");
-        const s9TJ = CardFactory.createCardList("s9, sT, sJ");
-        const sK12 = CardFactory.createCardList("sK, s1, s2");
+        const d567 = CardFactory.getCardList("d5, d6, d7");
+        const s567 = CardFactory.getCardList("s5, s6, s7");
+        const s9TJ = CardFactory.getCardList("s9, sT, sJ");
+        const sK12 = CardFactory.getCardList("sK, s1, s2");
         stairsThinking = new StairsThinking([s567, s9TJ, sK12]);
 
         strictEqual(Common.cardListToString(
@@ -122,10 +122,10 @@
     });
 
     test("思考 応手 stairs 残り3役", function() {
-        const d1h1 = CardFactory.createCardList("d1, h1");
-        const s567 = CardFactory.createCardList("s5, s6, s7");
-        const s9TJ = CardFactory.createCardList("s9, sT, sJ");
-        const sK12 = CardFactory.createCardList("sK, s1, s2");
+        const d1h1 = CardFactory.getCardList("d1, h1");
+        const s567 = CardFactory.getCardList("s5, s6, s7");
+        const s9TJ = CardFactory.getCardList("s9, sT, sJ");
+        const sK12 = CardFactory.getCardList("sK, s1, s2");
         stairsThinking = new StairsThinking([s567, s9TJ, sK12]);
 
         strictEqual(Common.cardListToString(
@@ -134,8 +134,8 @@
     });
 
     test("思考 応手 stairs 残り3役", function() {
-        const d1h1 = CardFactory.createCardList("d1, h1");
-        const sK12 = CardFactory.createCardList("sK, s1, s2");
+        const d1h1 = CardFactory.getCardList("d1, h1");
+        const sK12 = CardFactory.getCardList("sK, s1, s2");
         stairsThinking = new StairsThinking([sK12]);
 
         strictEqual(Common.cardListToString(
