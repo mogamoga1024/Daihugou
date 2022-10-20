@@ -23,17 +23,17 @@ class GameManager {
         
         // debug
         // CardFactory.initCardList();
-        // this.#playerList[0].cardList = CardFactory.getCardList("d3, h3, s4, s5, d5, s6, s7, h8, sJ, cJ, sK, c1, d1");
-        // this.#playerList[1].cardList = CardFactory.getCardList("c5, h7, d8, c9, sQ, cQ, dQ, hQ, cK, dK, s1, h1, s2");
-        // this.#playerList[2].cardList = CardFactory.getCardList("c3, c4, h6, s8, c8, s9, h9, sT, cT, hT, dJ, hK, d2");
-        // this.#playerList[3].cardList = CardFactory.getCardList("s3, d4, h4, h5, c6, d6, c7, d7, d9, dT, hJ, c2, h2");
+        // this.#playerList[0].cardList = CardFactory.createCardList("d3, h3, s4, s5, d5, s6, s7, h8, sJ, cJ, sK, c1, d1");
+        // this.#playerList[1].cardList = CardFactory.createCardList("c5, h7, d8, c9, sQ, cQ, dQ, hQ, cK, dK, s1, h1, s2");
+        // this.#playerList[2].cardList = CardFactory.createCardList("c3, c4, h6, s8, c8, s9, h9, sT, cT, hT, dJ, hK, d2");
+        // this.#playerList[3].cardList = CardFactory.createCardList("s3, d4, h4, h5, c6, d6, c7, d7, d9, dT, hJ, c2, h2");
         
         // debug ゲーム進行確認用
         // CardFactory.initCardList();
-        // this.#playerList[0].cardList = CardFactory.getCardList("d3");
-        // this.#playerList[1].cardList = CardFactory.getCardList("d4");
-        // this.#playerList[2].cardList = CardFactory.getCardList("d5");
-        // this.#playerList[3].cardList = CardFactory.getCardList("d6");
+        // this.#playerList[0].cardList = CardFactory.createCardList("d3");
+        // this.#playerList[1].cardList = CardFactory.createCardList("d4");
+        // this.#playerList[2].cardList = CardFactory.createCardList("d5");
+        // this.#playerList[3].cardList = CardFactory.createCardList("d6");
 
         for (const player of this.#playerList) {
             // debug用
@@ -140,7 +140,7 @@ class GameManager {
 
     static revolution() {
         this.#vm.isRevolution = !this.#vm.isRevolution;
-        const allCardList = CardFactory.getAllCardList();
+        const allCardList = CardFactory.createAllCardList();
         for (const card of allCardList) {
             if (card.constructor === Joker) {
                 continue;

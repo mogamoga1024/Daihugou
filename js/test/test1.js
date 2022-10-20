@@ -12,7 +12,7 @@
     // memo: ((s|c|d|h)([1-9]|T|J|Q|K))|Joker1|Joker2
     
     test("カードの分割 single", function() {
-        cpu.cardList = CardFactory.getCardList("s3, c4, d5, h6");
+        cpu.cardList = CardFactory.createCardList("s3, c4, d5, h6");
     
         cpu._cardDivision();
     
@@ -26,7 +26,7 @@
     });
     
     test("カードの分割 single", function() {
-        cpu.cardList = CardFactory.getCardList("s3, s4");;
+        cpu.cardList = CardFactory.createCardList("s3, s4");;
     
         cpu._cardDivision();
     
@@ -38,7 +38,7 @@
     });
     
     test("カードの分割 multi", function() {
-        cpu.cardList = CardFactory.getCardList("s4, c4, sJ, dJ, hJ");
+        cpu.cardList = CardFactory.createCardList("s4, c4, sJ, dJ, hJ");
     
         cpu._cardDivision();
     
@@ -50,7 +50,7 @@
     });
     
     test("カードの分割 stairs", function() {
-        cpu.cardList = CardFactory.getCardList("s4, s5, s6, dJ, dQ, dK, d1");
+        cpu.cardList = CardFactory.createCardList("s4, s5, s6, dJ, dQ, dK, d1");
     
         cpu._cardDivision();
     
@@ -64,7 +64,7 @@
     // memo: ((s|c|d|h)([1-9]|T|J|Q|K))|Joker1|Joker2
     
     test("カードの分割 複合", function() {
-        cpu.cardList = CardFactory.getCardList("s3, s4, s5, s6, c6, d6, h6, d7, d8, sJ, cJ, h2");
+        cpu.cardList = CardFactory.createCardList("s3, s4, s5, s6, c6, d6, h6, d7, d8, sJ, cJ, h2");
     
         cpu._cardDivision();
     
@@ -80,23 +80,23 @@
     });
     
     test("最強のカードの強さ", function() {
-        cpu.cardList = CardFactory.getCardList("s3, s4, s5, s6, s7, s8, s9, sT, sJ, sQ, sK, s1, s2");
+        cpu.cardList = CardFactory.createCardList("s3, s4, s5, s6, s7, s8, s9, sT, sJ, sQ, sK, s1, s2");
 
-        CardFactory.getCard("c2").isDead = true;
-        CardFactory.getCard("d2").isDead = true;
-        CardFactory.getCard("h2").isDead = true;
+        CardFactory.createCard("c2").isDead = true;
+        CardFactory.createCard("d2").isDead = true;
+        CardFactory.createCard("h2").isDead = true;
         
-        strictEqual(CardFactory.getStrongestCardPower(), CardFactory.getCard("s2").power);
+        strictEqual(CardFactory.getStrongestCardPower(), CardFactory.createCard("s2").power);
     });
     
     test("最強のカードの強さ", function() {
-        cpu.cardList = CardFactory.getCardList("s3, s4, s5, s6, s7, s8, s9, sT, sJ, sQ, sK, s1, s2");
+        cpu.cardList = CardFactory.createCardList("s3, s4, s5, s6, s7, s8, s9, sT, sJ, sQ, sK, s1, s2");
         
-        CardFactory.getCard("s2").isDead = true;
-        CardFactory.getCard("c2").isDead = true;
-        CardFactory.getCard("d2").isDead = true;
-        CardFactory.getCard("h2").isDead = true;
+        CardFactory.createCard("s2").isDead = true;
+        CardFactory.createCard("c2").isDead = true;
+        CardFactory.createCard("d2").isDead = true;
+        CardFactory.createCard("h2").isDead = true;
 
-        strictEqual(CardFactory.getStrongestCardPower(), CardFactory.getCard("s1").power);
+        strictEqual(CardFactory.getStrongestCardPower(), CardFactory.createCard("s1").power);
     });    
 })();
