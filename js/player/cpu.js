@@ -136,7 +136,7 @@ class Cpu extends Player {
                         selectedHand = [mulThi.handList.last()[0]];
                     }
                     else if (
-                        staThi.handList.length >= 0 &&
+                        staThi.handList.length > 0 &&
                         bfHandPower < staThi.strongestHandPower &&
                         staThi.handList.last().length >= 4
                     ) {
@@ -152,7 +152,7 @@ class Cpu extends Player {
                 }
                 else if (bfHandKind === Hand.Stairs) {
                     if (
-                        staThi.handList.length >= 0 &&
+                        staThi.handList.length > 0 &&
                         battleFieldHand[0].power < staThi.handList.last()[0].power &&
                         staThi.handList.last().length >= 4
                     ) {
