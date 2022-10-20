@@ -4,7 +4,6 @@ class Hand {
     static Single = Symbol("Single");
     static Multi = Symbol("Multi");
     static Stairs = Symbol("Stairs");
-    static MaybeStairs = Symbol("MaybeStairs");
 
     static handKindFrom(cardList) {
         if (cardList.length === 0) {
