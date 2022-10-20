@@ -13,8 +13,10 @@ class MultiThinking extends Thinking {
         }
         // 残り2役の場合
         else if (handCount === 2) {
+            const strongestHandPower = tmpMultiHandList.last()[0].power;
             // 最強の役を持っている場合
-            if (tmpMultiHandList.last()[0].power === strongestCardPower) {
+            // ※ 最強の役から1低い役でも最強と見なす
+            if (strongestHandPower === strongestCardPower || strongestHandPower === strongestCardPower - 1) {
                 // 最強の役をだす
                 selectedHand = tmpMultiHandList.last();
             }
@@ -33,8 +35,9 @@ class MultiThinking extends Thinking {
         // 革命すべきでない場合
         else {
             const hand = tmpMultiHandList[0]
-            if (hand[0].power === strongestCardPower) {
+            if (hand[0].power === strongestCardPower || hand[0].power === strongestCardPower - 1) {
                 // 最強の役しかない場合、パスする
+                // ※ 最強の役から1低い役でも最強と見なす
             }
             else {
                 // 弱い役をだす

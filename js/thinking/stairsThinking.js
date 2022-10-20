@@ -13,8 +13,10 @@ class StairsThinking extends Thinking {
         }
         // 残り2役の場合
         else if (handCount === 2) {
+            const strongestHandPower = tmpStairsHandList.last().last().power;
             // 最強の役を持っている場合
-            if (tmpStairsHandList.last().last().power === strongestCardPower) {
+            // ※ 最強の役から1低い役でも最強と見なす
+            if (strongestHandPower === strongestCardPower || strongestHandPower === strongestCardPower - 1) {
                 // 最強の役をだす
                 selectedHand = tmpStairsHandList.last();
             }
@@ -33,8 +35,9 @@ class StairsThinking extends Thinking {
         // 革命すべきでない場合
         else {
             const hand = tmpStairsHandList[0];
-            if (hand.last().power === strongestCardPower) {
+            if (hand.last().power === strongestCardPower || hand.last().power === strongestCardPower - 1) {
                 // 最強の役しかない場合、パスする
+                // ※ 最強の役から1低い役でも最強と見なす
             }
             else {
                 // 弱い役をだす

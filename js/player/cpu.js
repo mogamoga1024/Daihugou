@@ -47,8 +47,9 @@ class Cpu extends Player {
                 selectedHand = (() => {
                     // 最強の役あり
                     // → 最強の役をだす
+                    // ※ 最強の役から1低い役でも最強と見なす
                     for (const thinking of thinkingList) {
-                        if (thinking.existsHand && thinking.strongestCardPower === strongestCardPower) {
+                        if (thinking.existsHand && thinking.existsMaybeStrongestHand(strongestCardPower)) {
                             return thinking.strongestHand;
                         }
                     }
@@ -72,8 +73,9 @@ class Cpu extends Player {
                 selectedHand = (() => {
                     // 最強の役あり
                     // → 最強の役をだす
+                    // ※ 最強の役から1低い役でも最強と見なす
                     for (const thinking of thinkingList) {
-                        if (thinking.existsHand && thinking.strongestCardPower === strongestCardPower) {
+                        if (thinking.existsHand && thinking.existsMaybeStrongestHand(strongestCardPower)) {
                             return thinking.strongestHand;
                         }
                     }
@@ -83,10 +85,11 @@ class Cpu extends Player {
                 })();
             }
             // 3組以上 かつ 革命すべきでない かつ 最強の役を持っている場合
+            // ※ 最強の役から1低い役でも最強と見なす
             else if (
-                this._singleThinking.existsHand && this._singleThinking.strongestCardPower === strongestCardPower ||
-                this._multiThinking.existsHand && this._multiThinking.strongestCardPower === strongestCardPower ||
-                this._stairsThinking.existsHand && this._stairsThinking.strongestCardPower === strongestCardPower
+                this._singleThinking.existsHand && this._singleThinking.existsMaybeStrongestHand(strongestCardPower) ||
+                this._multiThinking.existsHand && this._multiThinking.existsMaybeStrongestHand(strongestCardPower) ||
+                this._stairsThinking.existsHand && this._stairsThinking.existsMaybeStrongestHand(strongestCardPower)
             ) {
                 for (const thinking of thinkingList) {
                     // 最後に出す予定の役、最強の役を取り除く

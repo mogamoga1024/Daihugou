@@ -42,4 +42,8 @@ class Thinking {
     get strongestCardPower() {
         return Hand.power(this.strongestHand);
     }
+
+    existsMaybeStrongestHand(power) {
+        return this.strongestCardPower >= power - 1
+    }
 }
