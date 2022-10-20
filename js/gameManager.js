@@ -35,8 +35,8 @@ class GameManager {
         // this.#playerList[2].cardList = CardFactory.getCardList("d5");
         // this.#playerList[3].cardList = CardFactory.getCardList("d6");
 
+        // debug用
         for (const player of this.#playerList) {
-            // debug用
             log(`%c${player.name}	初期手札	${Common.cardListToString(player.cardList)}`, "color: crimson");
         }
 
@@ -50,6 +50,13 @@ class GameManager {
         this.#ranking = 1;
 
         log("【ゲーム終了】");
+
+        // debug用
+        for (const player of this.#playerList) {
+            if (player.cardList.length > 0) {
+                log(`%c${player.name}	残りの手札	${Common.cardListToString(player.cardList)}`, "color: crimson");
+            }
+        }
 
         this.#playerList.forEach(p => p.onGameFinish());
         this.#vm.canGoToNextGame = true;
