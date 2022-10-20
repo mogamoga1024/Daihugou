@@ -15,7 +15,15 @@ module.exports = {
             canGoToNextGame: false
         }
     },
-    created() {},
+    created() {
+        // カード画像の先読み込み
+        CardFactory.initCardList();
+        const allCardList = CardFactory.getAllCardList();
+        for (const card of allCardList){
+            const img = document.createElement('img');
+            img.src = card.imagePath;
+        }
+    },
     async mounted() {
         //const leaderIndex = Common.randomInt(this.playerList.length);
         const leaderIndex = 0; // TODO
