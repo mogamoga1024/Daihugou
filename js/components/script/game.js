@@ -20,7 +20,7 @@ module.exports = {
         CardFactory.initCardList();
         const allCardList = CardFactory.getAllCardList();
         for (const card of allCardList){
-            const img = document.createElement('img');
+            const img = document.createElement("img");
             img.src = card.imagePath;
         }
     },
