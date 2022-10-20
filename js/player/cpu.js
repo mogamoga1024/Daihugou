@@ -30,6 +30,7 @@ class Cpu extends Player {
         const handCount = this._handCount;
         const strongestCardPower = CardFactory.getStrongestCardPower();
         const maybeLastOutputHand = this._maybeLastOutputHand;
+        let isDivided = false;
         
         if (battleFieldHand.length === 0) {
             // 親番
@@ -131,19 +132,23 @@ class Cpu extends Player {
 
                 if (bfHandKind === Hand.Single) {
                     if (mulThi.handList.length > 0 && bfHandPower < mulThi.strongestHandPower) {
-                        // todo
+                        isDivided = true;
+                        selectedHand = [mulThi.handList.last()[0]];
                     }
                     else if (staThi.handList.length > 0 && bfHandPower < staThi.strongestHandPower) {
+                        isDivided = true;
                         // todo
                     }
                 }
                 else if (bfHandKind === Hand.Multi) {
                     if (mulThi.handList.length > 0 && bfHandPower < mulThi.strongestHandPower) {
-                        // todo
+                        isDivided = true;
+                        selectedHand = mulThi.handList.last().slice(0, battleFieldHand.length);
                     }
                 }
                 else if (bfHandKind === Hand.Stairs) {
                     if (staThi.handList.length > 0 && bfHandPower < staThi.strongestHandPower) {
+                        isDivided = true;
                         // todo
                     }
                 }
@@ -153,14 +158,19 @@ class Cpu extends Player {
         // 手札の更新
         if (selectedHand.length > 0) {
             this.cardList = this.cardList.filter(c => selectedHand.indexOf(c) === -1);
-            let thinking = null;
-            switch (Hand.handKindFrom(selectedHand)) {
-                case Hand.Single: thinking = sinThi; break;
-                case Hand.Multi:  thinking = mulThi; break;
-                case Hand.Stairs: thinking = staThi; break;
-                default: throw new Error("存在しない役");
+            if (isDivided) {
+                this._cardDivision();
             }
-            thinking.removeHand(selectedHand);
+            else {
+                let thinking = null;
+                switch (Hand.handKindFrom(selectedHand)) {
+                    case Hand.Single: thinking = sinThi; break;
+                    case Hand.Multi:  thinking = mulThi; break;
+                    case Hand.Stairs: thinking = staThi; break;
+                    default: throw new Error("存在しない役");
+                }
+                thinking.removeHand(selectedHand);
+            }
         }
 
         return selectedHand;
