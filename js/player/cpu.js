@@ -135,9 +135,13 @@ class Cpu extends Player {
                         isDivided = true;
                         selectedHand = [mulThi.handList.last()[0]];
                     }
-                    else if (staThi.handList.length > 0 && bfHandPower < staThi.strongestHandPower) {
+                    else if (
+                        staThi.handList.length >= 0 &&
+                        bfHandPower < staThi.strongestHandPower &&
+                        staThi.handList.last().length >= 4
+                    ) {
                         isDivided = true;
-                        // todo
+                        selectedHand = [staThi.handList.last().last()];
                     }
                 }
                 else if (bfHandKind === Hand.Multi) {
@@ -147,9 +151,13 @@ class Cpu extends Player {
                     }
                 }
                 else if (bfHandKind === Hand.Stairs) {
-                    if (staThi.handList.length > 0 && bfHandPower < staThi.strongestHandPower) {
+                    if (
+                        staThi.handList.length >= 0 &&
+                        battleFieldHand[0].power < staThi.handList.last()[0].power &&
+                        staThi.handList.last().length >= 4
+                    ) {
                         isDivided = true;
-                        // todo
+                        selectedHand = staThi.handList.last().slice(0, battleFieldHand.length);
                     }
                 }
             }
