@@ -22,6 +22,10 @@ class Cpu extends Player {
             this._cardDivision();
         }
 
+        const sinThi = this._singleThinking;
+        const mulThi = this._multiThinking;
+        const staThi = this._stairsThinking;
+
         let selectedHand = [];
         const handCount = this._handCount;
         const strongestCardPower = CardFactory.getStrongestCardPower();
@@ -30,7 +34,7 @@ class Cpu extends Player {
         if (battleFieldHand.length === 0) {
             // 親番
 
-            const thinkingList = [this._singleThinking, this._multiThinking, this._stairsThinking];
+            const thinkingList = [sinThi, mulThi, staThi];
 
             // 最後の1役
             // → それをだす
@@ -57,7 +61,7 @@ class Cpu extends Player {
                     // → 弱い役をだす
                     // ただし革命できる場合は革命する
                     if (this._shouldRevolution()) {
-                        return this._multiThinking.handList.last();
+                        return mulThi.handList.last();
                     }
                     else {
                         for (const thinking of thinkingList) {
@@ -81,15 +85,15 @@ class Cpu extends Player {
                     }
                     // 最強の役なし
                     // → 革命する
-                    return this._multiThinking.handList.filter(h => h.length >= 4).last();
+                    return mulThi.handList.filter(h => h.length >= 4).last();
                 })();
             }
             // 3組以上 かつ 革命すべきでない かつ 最強の役を持っている場合
             // ※ 最強の役から1低い役でも最強と見なす
             else if (
-                this._singleThinking.existsHand && this._singleThinking.existsMaybeStrongestHand(strongestCardPower) ||
-                this._multiThinking.existsHand && this._multiThinking.existsMaybeStrongestHand(strongestCardPower) ||
-                this._stairsThinking.existsHand && this._stairsThinking.existsMaybeStrongestHand(strongestCardPower)
+                sinThi.existsHand && sinThi.existsMaybeStrongestHand(strongestCardPower) ||
+                mulThi.existsHand && mulThi.existsMaybeStrongestHand(strongestCardPower) ||
+                staThi.existsHand && staThi.existsMaybeStrongestHand(strongestCardPower)
             ) {
                 for (const thinking of thinkingList) {
                     // 最後に出す予定の役、最強の役を取り除く
@@ -114,12 +118,27 @@ class Cpu extends Player {
 
             let thinking = null;
             switch (bfHandKind) {
-                case Hand.Single: thinking = this._singleThinking; break;
-                case Hand.Multi:  thinking = this._multiThinking;  break;
-                case Hand.Stairs: thinking = this._stairsThinking; break;
+                case Hand.Single: thinking = sinThi; break;
+                case Hand.Multi:  thinking = mulThi; break;
+                case Hand.Stairs: thinking = staThi; break;
                 default: throw new Error("存在しない役");
             }
             selectedHand = thinking.outputHandIfHandInBattleField(battleFieldHand, handCount, strongestCardPower, this._shouldRevolution());
+
+            // 役の分割
+            if (selectedHand.length === 0 && handCount <= 2) {
+                const bfHandPower = Hand.power(battleFieldHand);
+
+                if (bfHandKind === Hand.Single) {
+                    if (mulThi.handList.length > 0 && bfHandPower < mulThi.strongestHandPower) {
+                        // todo
+                    }
+                    else if (staThi.handList.length > 0 && bfHandPower < staThi.strongestHandPower) {
+                        // todo
+                    }
+                }
+
+            }
         }
 
         // 手札の更新
@@ -127,9 +146,9 @@ class Cpu extends Player {
             this.cardList = this.cardList.filter(c => selectedHand.indexOf(c) === -1);
             let thinking = null;
             switch (Hand.handKindFrom(selectedHand)) {
-                case Hand.Single: thinking = this._singleThinking; break;
-                case Hand.Multi:  thinking = this._multiThinking;  break;
-                case Hand.Stairs: thinking = this._stairsThinking; break;
+                case Hand.Single: thinking = sinThi; break;
+                case Hand.Multi:  thinking = mulThi; break;
+                case Hand.Stairs: thinking = staThi; break;
                 default: throw new Error("存在しない役");
             }
             thinking.removeHand(selectedHand);
