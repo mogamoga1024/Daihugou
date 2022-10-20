@@ -259,7 +259,7 @@
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s6, d6, h6");
     });
 
-    test("思考 役の分割", function() {
+    test("思考 役の分割 multi", function() {
         cpu.cardList = CardFactory.getCardList("s3, s2, c2");
         cpu._cardDivision();
 
@@ -267,6 +267,17 @@
 
         strictEqual(Common.cardListToString(cpu.outputHand([s1])), "s2");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "c2");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
+    });
+
+    test("思考 役の分割 stairs", function() {
+        cpu.cardList = CardFactory.getCardList("s3, sQ, sK, s1, s2");
+        cpu._cardDivision();
+
+        const c1 = CardFactory.getCard("c1");
+
+        strictEqual(Common.cardListToString(cpu.outputHand([c1])), "s2");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "sQ, sK, s1");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
     });
 
