@@ -65,11 +65,32 @@
         );
     });
 
-    test("思考 応手 stairs 残り2役 最強なし", function() {
+    test("思考 応手 stairs 残り2役 疑似最強あり", function() {
+        const d345 = CardFactory.getCardList("d3, d4, d5");
+        const sQK1 = CardFactory.getCardList("sQ, sK, s1");
+        stairsThinking = new StairsThinking([sQK1]);
+
+        strictEqual(Common.cardListToString(
+            stairsThinking.outputHandIfHandInBattleField(d345, 2, twoPower)), "sQ, sK, s1"
+        );
+    });
+
+    test("思考 応手 stairs 残り2役 疑似最強あり", function() {
         const d345 = CardFactory.getCardList("d3, d4, d5");
         const s567 = CardFactory.getCardList("s5, s6, s7");
         const sQK1 = CardFactory.getCardList("sQ, sK, s1");
         stairsThinking = new StairsThinking([s567, sQK1]);
+
+        strictEqual(Common.cardListToString(
+            stairsThinking.outputHandIfHandInBattleField(d345, 2, twoPower)), "sQ, sK, s1"
+        );
+    });
+
+    test("思考 応手 stairs 残り2役 最強なし", function() {
+        const d345 = CardFactory.getCardList("d3, d4, d5");
+        const s567 = CardFactory.getCardList("s5, s6, s7");
+        const sJQK = CardFactory.getCardList("sJ, sQ, sK");
+        stairsThinking = new StairsThinking([s567, sJQK]);
 
         strictEqual(Common.cardListToString(
             stairsThinking.outputHandIfHandInBattleField(d345, 2, twoPower)), "s5, s6, s7"

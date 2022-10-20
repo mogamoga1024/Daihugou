@@ -65,11 +65,32 @@
         );
     });
 
-    test("思考 応手 multi 残り2役 最強なし", function() {
+    test("思考 応手 multi 残り2役 疑似最強あり", function() {
+        const d3h3 = CardFactory.getCardList("d3, h3");
+        const s1c1 = CardFactory.getCardList("s1, c1");
+        multiThinking = new MultiThinking([s1c1]);
+
+        strictEqual(Common.cardListToString(
+            multiThinking.outputHandIfHandInBattleField(d3h3, 2, twoPower)), "s1, c1"
+        );
+    });
+
+    test("思考 応手 multi 残り2役 疑似最強あり", function() {
         const d3h3 = CardFactory.getCardList("d3, h3");
         const s7c7 = CardFactory.getCardList("s7, c7");
         const s1c1 = CardFactory.getCardList("s1, c1");
         multiThinking = new MultiThinking([s7c7, s1c1]);
+
+        strictEqual(Common.cardListToString(
+            multiThinking.outputHandIfHandInBattleField(d3h3, 2, twoPower)), "s1, c1"
+        );
+    });
+
+    test("思考 応手 multi 残り2役 最強なし", function() {
+        const d3h3 = CardFactory.getCardList("d3, h3");
+        const s7c7 = CardFactory.getCardList("s7, c7");
+        const sKcK = CardFactory.getCardList("sK, cK");
+        multiThinking = new MultiThinking([s7c7, sKcK]);
 
         strictEqual(Common.cardListToString(
             multiThinking.outputHandIfHandInBattleField(d3h3, 2, twoPower)), "s7, c7"

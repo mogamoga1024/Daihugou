@@ -65,11 +65,32 @@
         );
     });
 
-    test("思考 応手 single 残り2役 最強なし", function() {
+    test("思考 応手 single 残り2役 疑似最強あり", function() {
+        const d3 = CardFactory.getCard("d3");
+        const s1 = CardFactory.getCard("s1");
+        singleThinking = new SingleThinking([[s1]]);
+
+        strictEqual(Common.cardListToString(
+            singleThinking.outputHandIfHandInBattleField([d3], 2, twoPower)), "s1"
+        );
+    });
+
+    test("思考 応手 single 残り2役 疑似最強あり", function() {
         const d3 = CardFactory.getCard("d3");
         const s7 = CardFactory.getCard("s7");
         const s1 = CardFactory.getCard("s1");
         singleThinking = new SingleThinking([[s7], [s1]]);
+
+        strictEqual(Common.cardListToString(
+            singleThinking.outputHandIfHandInBattleField([d3], 2, twoPower)), "s1"
+        );
+    });
+
+    test("思考 応手 single 残り2役 最強なし", function() {
+        const d3 = CardFactory.getCard("d3");
+        const s7 = CardFactory.getCard("s7");
+        const sK = CardFactory.getCard("sK");
+        singleThinking = new SingleThinking([[s7], [sK]]);
 
         strictEqual(Common.cardListToString(
             singleThinking.outputHandIfHandInBattleField([d3], 2, twoPower)), "s7"
