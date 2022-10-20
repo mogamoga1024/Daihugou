@@ -137,7 +137,16 @@ class Cpu extends Player {
                         // todo
                     }
                 }
-
+                else if (bfHandKind === Hand.Multi) {
+                    if (mulThi.handList.length > 0 && bfHandPower < mulThi.strongestHandPower) {
+                        // todo
+                    }
+                }
+                else if (bfHandKind === Hand.Stairs) {
+                    if (staThi.handList.length > 0 && bfHandPower < staThi.strongestHandPower) {
+                        // todo
+                    }
+                }
             }
         }
 
