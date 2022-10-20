@@ -338,4 +338,22 @@
         strictEqual(Common.cardListToString(cpu.outputHand(cJQK)), "sQ, sK, s1");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
     });
+
+    test("デバグ", function() {
+        cpu.cardList = CardFactory.getCardList("h3, d7, hT, s1, d1, h1, h2");
+        cpu._cardDivision();
+
+        const sdh6 = CardFactory.getCardList("s6, d6, h6");
+
+        strictEqual(Common.cardListToString(cpu.outputHand(sdh6)), "s1, d1, h1");
+    });
+
+    test("デバグ", function() {
+        cpu.cardList = CardFactory.getCardList("h3, d7, hT, sQ, sK, s1, h2");
+        cpu._cardDivision();
+
+        const cJQK = CardFactory.getCardList("cJ, cQ, cK");
+
+        strictEqual(Common.cardListToString(cpu.outputHand(cJQK)), "sQ, sK, s1");
+    });
 })();

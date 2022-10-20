@@ -9,7 +9,7 @@ class Thinking {
         this._handList = handList;
     }
 
-    outputHandIfHandInBattleField(battleField, handCount, strongestCardPower, shouldRevolution) {
+    outputHandIfHandInBattleField() {
         return [];
     }
 

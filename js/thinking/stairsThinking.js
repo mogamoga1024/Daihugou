@@ -1,6 +1,7 @@
 
 class StairsThinking extends Thinking {
-    outputHandIfHandInBattleField(battleFieldHand, handCount, strongestCardPower, shouldRevolution) {
+    outputHandIfHandInBattleField(battleFieldHand, handCount, myStrongestCardPower, shouldRevolution) {
+        const strongestCardPower = CardFactory.getStrongestCardPower();
         let selectedHand = [];
 
         const tmpStairsHandList = this._handList.filter(h =>
@@ -35,7 +36,10 @@ class StairsThinking extends Thinking {
         // 革命すべきでない場合
         else {
             const hand = tmpStairsHandList[0];
-            if (hand.last().power === strongestCardPower || hand.last().power === strongestCardPower - 1) {
+            if (
+                hand.last().power === strongestCardPower ||
+                hand.last().power === strongestCardPower - 1 && myStrongestCardPower === strongestCardPower - 1
+            ) {
                 // 最強の役しかない場合、パスする
                 // ※ 最強の役から1低い役でも最強と見なす
             }
