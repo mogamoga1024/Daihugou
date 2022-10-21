@@ -42,7 +42,7 @@ module.exports = {
         playerCardListWidth() {
             // カードの幅: 150
             // カード一覧のコンテナの幅: 800
-            return Math.min((this.player.cardList.length - 1) * (150 / 2) + 150, 800);
+            return Math.min((this.player.cardList.length - 1) * (150 / 1.5) + 150, 800);
         },
         playerList() {
             return [this.player, ...this.anotherPlayerList];

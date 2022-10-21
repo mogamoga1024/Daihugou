@@ -37,9 +37,10 @@ class GameManager {
         // this.#playerList[3].cardList = CardFactory.getCardList("d6");
 
         // debug 手札のレイアウト
-        //CardFactory.initCardList(new RuleConfig(true));
-        //this.#playerList[0].cardList = CardFactory.getCardList("s3, s4, s5, s6, s7, s8, s9, sT, sJ, sQ, sK, s1, s2, Joker1");
-        //this.#playerList[0].cardList = CardFactory.getCardList("s3, s4, s5, s6, s7, s8");
+        // CardFactory.initCardList(new RuleConfig(true));
+        // this.#playerList[0].cardList = CardFactory.getCardList("s3, s4, s5, s6, s7, s8, s9, sT, sJ, sQ, sK, s1, s2, Joker1");
+        // this.#playerList[0].cardList = CardFactory.getCardList("s3, s4, s5, s6, s7, s8");
+        // this.#playerList[0].cardList = CardFactory.getCardList("s3, s4");
 
         // debug用
         for (const player of this.#playerList) {
