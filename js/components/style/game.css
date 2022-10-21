@@ -41,15 +41,6 @@
   margin-left: 8px;
 }
 
-#high-speed-checkbox-container {
-  float: right;
-  margin-right: 8px;
-}
-
-#high-speed-checkbox-container #high-speed-checkbox {
-  margin-left: 8px;
-}
-
 .card-back {
   width: 60px;
   vertical-align: text-bottom;
@@ -101,8 +92,21 @@
 }
 
 #player {
-  height: 340px;
+  height: 324px;
   background-color: azure;
+}
+
+#player-info {
+  height: 24px;
+}
+
+#high-speed-checkbox-container {
+  float: right;
+  margin-right: 8px;
+}
+
+#high-speed-checkbox-container #high-speed-checkbox {
+  margin-left: 8px;
 }
 
 #player-button-container {
@@ -124,11 +128,21 @@
   margin: 0 20px;
 }
 
+#player-card-list-container {
+  position: relative;
+  height: 260px;
+}
+
 #player-card-list {
+  position: absolute;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin-top: 35px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 35px auto 0;
   -ms-flex-pack: distribute;
       justify-content: space-around;
   -webkit-box-align: center;

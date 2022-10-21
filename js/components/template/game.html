@@ -20,10 +20,12 @@
     </div>
     <div id="player">
         <div>
-            <span :class="{turn: player.isTurn}">{{player.name}}</span><span class="rank">{{player.isNowPass ? "パス" : player.rank}}</span>
-            <label id="high-speed-checkbox-container">
-                高速化<input type="checkbox" id="high-speed-checkbox" v-model="isHighSpeed">
-            </label>
+            <div id="player-info">
+                <span :class="{turn: player.isTurn}">{{player.name}}</span><span class="rank">{{player.isNowPass ? "パス" : player.rank}}</span>
+                <label id="high-speed-checkbox-container">
+                    高速化<input type="checkbox" id="high-speed-checkbox" v-model="isHighSpeed">
+                </label>
+            </div>
             <div id="player-button-container">
                 <button v-if="canGoToNextGame" @click="goToNextGame">次のゲームへ</button>
                 <template v-else>
@@ -32,13 +34,15 @@
                 </template>
             </div>
         </div>
-        <div id="player-card-list">
-            <img v-for="(card, index) in player.cardList"
-                :id="'player-card' + index"
-                :src="card.imagePath"
-                :class="{'selected': card.isSelected}"
-                @click="cardClick(index)"
-            >
+        <div id="player-card-list-container">
+            <div id="player-card-list" :style="{width: playerCardListWidth + 'px'}">
+                <img v-for="(card, index) in player.cardList"
+                    :id="'player-card' + index"
+                    :src="card.imagePath"
+                    :class="{'selected': card.isSelected}"
+                    @click="cardClick(index)"
+                >
+            </div>
         </div>
     </div>
 </div>

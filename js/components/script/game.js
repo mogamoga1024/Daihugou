@@ -35,8 +35,14 @@ module.exports = {
     },
     computed: {
         battleFieldCardContainerWidth() {
-            // 値はテキトー
+            // カード一覧のコンテナの幅: 800
+            // 他の値はテキトー
             return Math.min(100 + 80 * (this.battleFieldHand.length - 1), 800);
+        },
+        playerCardListWidth() {
+            // カードの幅: 150
+            // カード一覧のコンテナの幅: 800
+            return Math.min((this.player.cardList.length - 1) * (150 / 2) + 150, 800);
         },
         playerList() {
             return [this.player, ...this.anotherPlayerList];

@@ -34,15 +34,6 @@
     margin-left: 8px;
 }
 
-#high-speed-checkbox-container {
-    float: right;
-    margin-right: 8px;
-
-    #high-speed-checkbox {
-        margin-left: 8px;
-    }
-}
-
 .card-back {
     width: 60px;
     vertical-align: text-bottom;
@@ -63,7 +54,6 @@
     right: 10px;
     font-size: 32px;
     color: red;
-    //background-color: aquamarine;
 }
 
 #battle-field-card-container {
@@ -83,8 +73,21 @@
 }
 
 #player {
-    height: 340px;
+    height: 24px + 40px + 260px;
     background-color: azure;
+}
+
+#player-info {
+    height: 24px;
+}
+
+#high-speed-checkbox-container {
+    float: right;
+    margin-right: 8px;
+
+    #high-speed-checkbox {
+        margin-left: 8px;
+    }
 }
 
 #player-button-container {
@@ -100,9 +103,19 @@
     }
 }
 
+#player-card-list-container {
+    position: relative;
+    height: 260px;
+}
+
 #player-card-list {
+    position: absolute;
     display: flex;
-    margin-top: 35px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 35px auto 0;
     justify-content: space-around;
     align-items: center;
 
