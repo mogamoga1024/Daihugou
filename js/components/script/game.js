@@ -48,6 +48,19 @@ module.exports = {
         playerList() {
             return [this.player, ...this.anotherPlayerList];
         },
+        canExhangeCardList() {
+            if (this.scene === Scene.ExchangeCardList) {
+                if (this.player.rank.name === Rank.Hinmin.name || this.player.rank.name === Rank.Daihinmin.name) {
+                    return true;
+                }
+                else {
+                    return this.player.cardList.filter(c => c.isSelected).length === this.player.rank.exchangeCardCount;
+                }
+            }
+            else {
+                return false;
+            }
+        },
         canOutputHand() {
             for (const card of this.player.cardList) {
                 if (card.isSelected) return true;
@@ -57,11 +70,24 @@ module.exports = {
     },
     methods: {
         clickCard(index) {
-            if (this.canClickCard() === false) {
-                return;
-            }
-
             const card = this.player.cardList[index];
+
+            // カード交換時
+            if (this.scene === Scene.ExchangeCardList) {
+                // ランクが富豪か大富豪か
+                if (this.player.rank.name === Rank.Hugou.name || this.player.rank.name === Rank.Daihugou.name) {
+                    // 交換可能枚数まで選択しているか
+                    if (this.player.cardList.filter(c => c.isSelected).length === this.player.rank.exchangeCardCount) {
+                        // クリックしたカードがまだ選択されていないか
+                        if (card.isSelected === false) {
+                            return;
+                        }
+                    }
+                }
+                else {
+                    return;
+                }
+            }
 
             if (card.isSelected) {
                 this.player.cardList.forEach(c => {
@@ -71,9 +97,6 @@ module.exports = {
             else {
                 card.isSelected = true;
             }
-        },
-        canClickCard() {
-            return !(this.scene === Scene.ExchangeCardList && (this.player.rank.name === Rank.Hinmin.name || this.player.rank.name === Rank.Daihinmin.name));
         },
         async exhangeCardList() {
             this.player.selectExchangeCardListFromUI();

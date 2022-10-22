@@ -172,6 +172,11 @@ class GameManager {
         // this.#playerList[1].rank = Rank.Hinmin;
         // this.#playerList[2].rank = Rank.Hugou;
         // this.#playerList[3].rank = Rank.Daihugou;
+        // debug
+        // this.#playerList[0].rank = Rank.Daihugou;
+        // this.#playerList[1].rank = Rank.Hugou;
+        // this.#playerList[2].rank = Rank.Hinmin;
+        // this.#playerList[3].rank = Rank.Daihinmin;
 
         const human = this.#playerList[0];
         if (human.rank.name === Rank.Hinmin.name || human.rank.name === Rank.Daihinmin.name) {
