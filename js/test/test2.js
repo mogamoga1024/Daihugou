@@ -148,8 +148,7 @@
 
     test("思考 革命考慮 最強がsingle", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, s2");
-        cpu._cardDivision();
-
+        
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s2");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s4, c4, d4, h4");
 
@@ -162,8 +161,7 @@
 
     test("思考 革命考慮 最強がmulti", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, s2, c2");
-        cpu._cardDivision();
-
+        
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s2, c2");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s4, c4, d4, h4");
 
@@ -176,8 +174,7 @@
 
     test("思考 革命考慮 最強がstairs", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, sK, s1, s2");
-        cpu._cardDivision();
-
+        
         strictEqual(Common.cardListToString(cpu.outputHand([])), "sK, s1, s2");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s4, c4, d4, h4");
 
@@ -190,8 +187,7 @@
 
     test("思考 革命考慮 応手 最強がsingle", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, s2");
-        cpu._cardDivision();
-
+        
         const c5 = CardFactory.getCard("c5");
 
         strictEqual(Common.cardListToString(cpu.outputHand([c5])), "s2");
@@ -206,8 +202,7 @@
 
     test("思考 革命考慮 応手 最強がmulti", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, s2, c2");
-        cpu._cardDivision();
-
+        
         const s5c5 = CardFactory.getCardList("s5, c5");
 
         strictEqual(Common.cardListToString(cpu.outputHand(s5c5)), "s2, c2");
@@ -222,8 +217,7 @@
 
     test("思考 革命考慮 応手 最強がstairs", function() {
         cpu.cardList = CardFactory.getCardList("s3, s4, c4, d4, h4, s5, s9, sK, s1, s2");
-        cpu._cardDivision();
-
+        
         const c567 = CardFactory.getCardList("c5, c6, c7");
 
         strictEqual(Common.cardListToString(cpu.outputHand(c567)), "sK, s1, s2");
@@ -238,8 +232,7 @@
 
     test("思考 革命考慮", function() {
         cpu.cardList = CardFactory.getCardList("c5, sQ, cQ, dQ, hQ, s2");
-        cpu._cardDivision();
-
+        
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s2");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "sQ, cQ, dQ, hQ");
         GameManager.revolution();
@@ -248,8 +241,7 @@
 
     test("思考 革命時", function() {
         cpu.cardList = CardFactory.getCardList("s6, d6, h6, s7, d7, dJ, cK, dK, h2");
-        cpu._cardDivision();
-
+        
         GameManager.revolution();
 
         strictEqual(Common.cardListToString(cpu.outputHand([])), "h2");
@@ -261,8 +253,7 @@
 
     test("思考 役の分割 multi", function() {
         cpu.cardList = CardFactory.getCardList("s3, s2, c2");
-        cpu._cardDivision();
-
+        
         const s1 = CardFactory.getCard("s1");
 
         strictEqual(Common.cardListToString(cpu.outputHand([s1])), "s2");
@@ -272,8 +263,7 @@
 
     test("思考 役の分割 multi", function() {
         cpu.cardList = CardFactory.getCardList("s3, s2, c2, d2");
-        cpu._cardDivision();
-
+        
         const s1c1 = CardFactory.getCardList("s1, c1");
 
         strictEqual(Common.cardListToString(cpu.outputHand(s1c1)), "s2, c2");
@@ -283,8 +273,7 @@
 
     test("思考 役の分割 stairs", function() {
         cpu.cardList = CardFactory.getCardList("s3, sQ, sK, s1, s2");
-        cpu._cardDivision();
-
+        
         const c1 = CardFactory.getCard("c1");
 
         strictEqual(Common.cardListToString(cpu.outputHand([c1])), "s2");
@@ -294,8 +283,7 @@
 
     test("思考 役の分割 stairs", function() {
         cpu.cardList = CardFactory.getCardList("s3, sQ, sK, s1, s2");
-        cpu._cardDivision();
-
+        
         const cJQK = CardFactory.getCardList("cJ, cQ, cK");
 
         strictEqual(Common.cardListToString(cpu.outputHand(cJQK)), "sQ, sK, s1");
@@ -305,24 +293,21 @@
 
     test("思考 ほぼあがれるだろう multi", function() {
         cpu.cardList = CardFactory.getCardList("s3, s1, c1");
-        cpu._cardDivision();
-
+    
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s1, c1");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
     });
 
     test("思考 ほぼあがれるだろう stairs", function() {
         cpu.cardList = CardFactory.getCardList("s3, sQ, sK, s1");
-        cpu._cardDivision();
-
+        
         strictEqual(Common.cardListToString(cpu.outputHand([])), "sQ, sK, s1");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
     });
 
     test("思考 ほぼあがれるだろう multi 応手", function() {
         cpu.cardList = CardFactory.getCardList("s3, s1, c1");
-        cpu._cardDivision();
-
+        
         const sKcK = CardFactory.getCardList("sK, cK");
 
         strictEqual(Common.cardListToString(cpu.outputHand(sKcK)), "s1, c1");
@@ -331,8 +316,7 @@
 
     test("思考 ほぼあがれるだろう stairs 応手", function() {
         cpu.cardList = CardFactory.getCardList("s3, sQ, sK, s1");
-        cpu._cardDivision();
-
+        
         const cJQK = CardFactory.getCardList("cJ, cQ, cK");
 
         strictEqual(Common.cardListToString(cpu.outputHand(cJQK)), "sQ, sK, s1");
@@ -341,8 +325,7 @@
 
     test("デバグ", function() {
         cpu.cardList = CardFactory.getCardList("h3, d7, hT, s1, d1, h1, h2");
-        cpu._cardDivision();
-
+        
         const sdh6 = CardFactory.getCardList("s6, d6, h6");
 
         strictEqual(Common.cardListToString(cpu.outputHand(sdh6)), "s1, d1, h1");
@@ -350,8 +333,7 @@
 
     test("デバグ", function() {
         cpu.cardList = CardFactory.getCardList("h3, d7, hT, sQ, sK, s1, h2");
-        cpu._cardDivision();
-
+        
         const cJQK = CardFactory.getCardList("cJ, cQ, cK");
 
         strictEqual(Common.cardListToString(cpu.outputHand(cJQK)), "sQ, sK, s1");
