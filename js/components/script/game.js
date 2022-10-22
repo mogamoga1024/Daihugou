@@ -56,7 +56,11 @@ module.exports = {
         }
     },
     methods: {
-        cardClick(index) {
+        clickCard(index) {
+            if (this.canClickCard() === false) {
+                return;
+            }
+
             const card = this.player.cardList[index];
 
             if (card.isSelected) {
@@ -67,6 +71,9 @@ module.exports = {
             else {
                 card.isSelected = true;
             }
+        },
+        canClickCard() {
+            return !(this.scene === Scene.ExchangeCardList && (this.player.rank.name === Rank.Hinmin.name || this.player.rank.name === Rank.Daihinmin.name));
         },
         async exhangeCardList() {
             this.player.selectExchangeCardListFromUI();

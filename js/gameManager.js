@@ -160,15 +160,19 @@ class GameManager {
     }
 
     static async exchangeCardList() {
+        log("【カード交換開始】");
+        
         this.#vm.scene = Scene.ExchangeCardList;
 
-        // TODO ユーザー 貧民大貧民 自動選択
-        const human = this.#playerList[0];
-        if (human.rank === Rank.Heimin) {
-            
-        }
-        else if (human.rank === Rank.Daihinmin) {
+        // debug
+        this.#playerList[0].rank = Rank.Hinmin;
 
+        const human = this.#playerList[0];
+        if (human.rank.name === Rank.Hinmin.name || human.rank.name === Rank.Daihinmin.name) {
+            const exchangeCardCount = human.rank.exchangeCardCount;
+            for (let i = 0; i < exchangeCardCount; i++) {
+                human.cardList[i].isSelected = true;
+            }
         }
 
         const exchangeCardListList = [];
@@ -180,6 +184,8 @@ class GameManager {
         // TODO
 
         this.#vm.scene = Scene.Game;
+
+        log("【カード交換終了】");
     }
 
     static revolution() {
