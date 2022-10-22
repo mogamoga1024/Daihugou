@@ -4,7 +4,7 @@ class Cpu extends Player {
     _multiThinking = null;
     _stairsThinking = null;
 
-    exchangeCardList() {
+    selectExchangeCardList() {
         // TODO
         return [];
     }

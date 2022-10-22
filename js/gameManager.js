@@ -47,6 +47,10 @@ class GameManager {
             log(`%c${player.name}	初期手札	${Common.cardListToString(player.cardList)}`, "color: crimson");
         }
 
+        // カードの交換
+        // TODO 初回は行わない
+        await this.exchangeCardList();
+
         // ゲーム開始時、CPUが最初のカードを出す前に少し待つ
         // 何も出ていない場をユーザーに見せたいため
         if (this.#playerList[playerIndex].constructor === Cpu) {
@@ -155,8 +159,18 @@ class GameManager {
         return nextPlayerIndex;
     }
 
-    static async exchangeCardListScene() {
+    static async exchangeCardList() {
+        this.#vm.scene = Scene.ExchangeCardList;
+
+        const exchangeCardListList = [];
+        for (const player of this.#playerList) {
+            const cardList = await player.selectExchangeCardList();
+            exchangeCardListList.push(cardList);
+        }
+
         // TODO
+
+        this.#vm.scene = Scene.Game;
     }
 
     static revolution() {

@@ -1,10 +1,18 @@
 
 class Human extends Player {
     resolveOutputCardList = null;
+    resolveSelectExchangeCardList = null;
 
-    exchangeCardList() {
-        // TODO
-        return [];
+    async selectExchangeCardList() {
+        const selectedCardList = await new Promise(resolve => {
+            this.resolveSelectExchangeCardList = resolve;
+        });
+
+        this.cardList.forEach(card => {
+            card.isSelected = false;
+        });
+
+        return selectedCardList;
     }
 
     async outputHand() {
@@ -64,6 +72,13 @@ class Human extends Player {
 
             this.resolveOutputCardList(selectedHand);
             this.resolveOutputCardList = null;
+        }
+    }
+
+    selectExchangeCardListFromUI() {
+        if (this.resolveSelectExchangeCardList !== null) {
+            this.resolveSelectExchangeCardList([]); // TODO 仮
+            this.resolveSelectExchangeCardList = null;
         }
     }
 }

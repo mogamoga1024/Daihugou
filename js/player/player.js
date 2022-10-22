@@ -11,7 +11,7 @@ class Player {
         this.name = name;
     }
 
-    exchangeCardList() {
+    selectExchangeCardList() {
         return [];
     };
 
