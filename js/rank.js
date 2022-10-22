@@ -1,11 +1,20 @@
 
-const Rank = {
-    Daihugou: "大富豪",
-    Hugou: "富豪",
-    Heimin: "平民",
-    Hinmin: "貧民",
-    Daihinmin: "大貧民",
-    getRank: function(ranking) {
+class Rank {
+    static Daihugou = new Rank("大富豪", 2);
+    static Hugou = new Rank("富豪", 1);
+    static Heimin = new Rank("平民", 0);
+    static Hinmin = new Rank("貧民", 1);
+    static Daihinmin = new Rank("大貧民", 2);
+
+    name = "";
+    exchangeCardCount = 0;
+
+    constructor(name, exchangeCardCount) {
+        this.name = name;
+        this.exchangeCardCount = exchangeCardCount;
+    }
+
+    static getRank(ranking) {
         // プレイヤーが四人であることを決め打ちしてランクを返す。
         switch (ranking) {
             case 1: return this.Daihugou;
@@ -15,4 +24,4 @@ const Rank = {
             default: throw new Error("引数が不正");
         }
     }
-};
+}
