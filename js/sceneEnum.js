@@ -1,6 +1,6 @@
 
 const Scene = {
-    Exchange: Symbol("Exchange"),
+    ExchangeCardList: Symbol("ExchangeCardList"),
     Game: Symbol("Game"),
-    GoToNext: Symbol("GoToNext"),
+    GoToNextGame: Symbol("GoToNextGame"),
 };

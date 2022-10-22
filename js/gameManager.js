@@ -73,7 +73,7 @@ class GameManager {
         }
 
         this.#playerList.forEach(p => p.onGameFinish());
-        this.#vm.canGoToNextGame = true;
+        this.#vm.scene = Scene.GoToNextGame;
     }
 
     static async startTurn(playerIndex) {

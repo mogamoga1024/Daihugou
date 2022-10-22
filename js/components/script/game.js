@@ -2,7 +2,8 @@
 module.exports = {
     data() {
         return {
-            scene: Scene.Exchange,
+            Scene: Scene,
+            scene: Scene.Game,
             player: new Human("YOU"),
             // anotherPlayerListのPlayerはユーザー（= 画面の前の君のこと）の次のターン順になっている。
             anotherPlayerList: [
@@ -13,7 +14,6 @@ module.exports = {
             battleFieldHand: [],
             isHighSpeed: EnvConfig.isHighSpeed,
             isRevolution: false,
-            canGoToNextGame: false
         }
     },
     created() {
@@ -81,7 +81,7 @@ module.exports = {
             this.player.outputCardListFromUI(this.battleFieldHand);
         },
         async goToNextGame() {
-            this.canGoToNextGame = false;
+            this.scene = Scene.Game;
             this.isRevolution = false;
             this.battleFieldHand = [];
 
