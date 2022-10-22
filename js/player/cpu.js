@@ -23,12 +23,20 @@ class Cpu extends Player {
             }
         }
         else if (this.rank.name === Rank.Hugou.name || this.rank.name === Rank.Daihugou.name) {
+            let unusedCard = null;
+            let tmpCardList = this.cardList;
             for (let i = 0; i < this.rank.exchangeCardCount; i++) {
-                selectedCardList.push(this.cardList[i]);
+                unusedCard = this.selectExchangeUnusedCard(tmpCardList);
+                tmpCardList = tmpCardList.filter(c => c !== unusedCard);
+                selectedCardList.push(unusedCard);
             }
         }
 
         return selectedCardList;
+    }
+
+    selectExchangeUnusedCard(cardList) {
+        return cardList[0];
     }
 
     outputHand(battleFieldHand) {
