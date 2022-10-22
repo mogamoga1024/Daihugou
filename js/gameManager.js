@@ -1,6 +1,6 @@
 
 class GameManager {
-    static #playerList = [];
+    static #playerList = []; // index:0の要素はHumanクラスであること
     static #vm = null;
     static #latestOutputCardPlayer = null;
     static #ranking = 1;
@@ -161,6 +161,15 @@ class GameManager {
 
     static async exchangeCardList() {
         this.#vm.scene = Scene.ExchangeCardList;
+
+        // TODO ユーザー 貧民大貧民 自動選択
+        const human = this.#playerList[0];
+        if (human.rank === Rank.Heimin) {
+            
+        }
+        else if (human.rank === Rank.Daihinmin) {
+
+        }
 
         const exchangeCardListList = [];
         for (const player of this.#playerList) {

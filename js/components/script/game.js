@@ -69,7 +69,6 @@ module.exports = {
             }
         },
         async exhangeCardList() {
-            // TODO
             this.player.selectExchangeCardListFromUI();
         },
         outputHand() {
