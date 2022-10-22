@@ -2,7 +2,7 @@
     let cpu = null;
     const ruleConfig = new RuleConfig(false);
 
-    module("CPUのAIのテスト2", {
+    module("CPUのAIのテスト2（カードを出す）", {
         setup() {
             cpu = new Cpu("CPU1");
             GameManager.init([cpu], {isRevolution: false});
