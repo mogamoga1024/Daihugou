@@ -2,6 +2,7 @@
 module.exports = {
     data() {
         return {
+            scene: Scene.Exchange,
             player: new Human("YOU"),
             // anotherPlayerListのPlayerはユーザー（= 画面の前の君のこと）の次のターン順になっている。
             anotherPlayerList: [
@@ -66,6 +67,9 @@ module.exports = {
             else {
                 card.isSelected = true;
             }
+        },
+        exhangeCardList() {
+            // todo
         },
         outputHand() {
             this.player.outputCardListFromUI(this.battleFieldHand);
