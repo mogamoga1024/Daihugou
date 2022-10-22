@@ -28,6 +28,7 @@
             </div>
             <div id="player-button-container">
                 <button v-if="scene === Scene.GoToNextGame" @click="goToNextGame">次のゲームへ</button>
+                <button v-else-if="scene === Scene.ExchangeCardList" @click="exhangeCardList">交換する</button>
                 <template v-else>
                     <button :disabled="!player.isTurn" @click="pass">パス</button>
                     <button :disabled="!canOutputHand" @click="outputHand">カードを出す</button>

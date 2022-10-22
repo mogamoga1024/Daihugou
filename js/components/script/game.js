@@ -3,7 +3,7 @@ module.exports = {
     data() {
         return {
             Scene: Scene,
-            scene: Scene.Game,
+            scene: Scene.ExchangeCardList,
             player: new Human("YOU"),
             // anotherPlayerListのPlayerはユーザー（= 画面の前の君のこと）の次のターン順になっている。
             anotherPlayerList: [
@@ -70,6 +70,8 @@ module.exports = {
         },
         exhangeCardList() {
             // todo
+
+            this.scene = Scene.Game;
         },
         outputHand() {
             this.player.outputCardListFromUI(this.battleFieldHand);
