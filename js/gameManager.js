@@ -1,5 +1,6 @@
 
 class GameManager {
+    static #gameCount = 0;
     static #playerList = []; // index:0の要素はHumanクラスであること
     static #vm = null;
     static #latestOutputCardPlayer = null;
@@ -15,9 +16,10 @@ class GameManager {
 
     static async startGame(leaderIndex = this.#lastPlayerIndex) {
         let playerIndex = leaderIndex;
-
+        
         log("【ゲーム開始】");
 
+        this.#gameCount++;
         this.#playerList.forEach(p => p.onGameStart());
 
         Dearler.dealCardList(this.#playerList);
@@ -31,10 +33,10 @@ class GameManager {
         
         // debug ゲーム進行確認用
         // CardFactory.initCardList();
-        // this.#playerList[0].cardList = CardFactory.getCardList("d3");
-        // this.#playerList[1].cardList = CardFactory.getCardList("d4");
-        // this.#playerList[2].cardList = CardFactory.getCardList("d5");
-        // this.#playerList[3].cardList = CardFactory.getCardList("d6");
+        // this.#playerList[0].cardList = CardFactory.getCardList("s3, c3, d3");
+        // this.#playerList[1].cardList = CardFactory.getCardList("s4, c4, d4");
+        // this.#playerList[2].cardList = CardFactory.getCardList("s5, c5, d5");
+        // this.#playerList[3].cardList = CardFactory.getCardList("s6, c6, d6");
 
         // debug 手札のレイアウト
         // CardFactory.initCardList(new RuleConfig(true));
@@ -48,8 +50,9 @@ class GameManager {
         }
 
         // カードの交換
-        // TODO 初回は行わない
-        await this.exchangeCardList();
+        if (this.#gameCount > 1) {
+            await this.exchangeCardList();
+        }
 
         // ゲーム開始時、CPUが最初のカードを出す前に少し待つ
         // 何も出ていない場をユーザーに見せたいため
@@ -165,27 +168,52 @@ class GameManager {
         this.#vm.scene = Scene.ExchangeCardList;
 
         // debug
-        this.#playerList[0].rank = Rank.Hinmin;
+        // this.#playerList[0].rank = Rank.Daihinmin;
+        // this.#playerList[1].rank = Rank.Hinmin;
+        // this.#playerList[2].rank = Rank.Hugou;
+        // this.#playerList[3].rank = Rank.Daihugou;
 
         const human = this.#playerList[0];
         if (human.rank.name === Rank.Hinmin.name || human.rank.name === Rank.Daihinmin.name) {
-            const exchangeCardCount = human.rank.exchangeCardCount;
-            for (let i = 0; i < exchangeCardCount; i++) {
-                human.cardList[i].isSelected = true;
+            for (let i = 0; i < human.rank.exchangeCardCount; i++) {
+                human.cardList[human.cardList.length - 1 - i].isSelected = true;
             }
         }
 
-        const exchangeCardListList = [];
+        let daihugou  = {player: null, exchangeCardList: []};
+        let hugou     = {player: null, exchangeCardList: []};
+        let hinmin    = {player: null, exchangeCardList: []};
+        let daihinmin = {player: null, exchangeCardList: []};
         for (const player of this.#playerList) {
             const cardList = await player.selectExchangeCardList();
-            exchangeCardListList.push(cardList);
+            switch (player.rank.name) {
+                case Rank.Daihugou.name:  daihugou.player  = player; daihugou.exchangeCardList  = cardList; break;
+                case Rank.Hugou.name:     hugou.player     = player; hugou.exchangeCardList     = cardList; break;
+                case Rank.Hinmin.name:    hinmin.player    = player; hinmin.exchangeCardList    = cardList; break;
+                case Rank.Daihinmin.name: daihinmin.player = player; daihinmin.exchangeCardList = cardList; break;
+            }
+            // debug用
+            log(`%c${player.name}	交換するカード	${Common.cardListToString(cardList)}`, "color: crimson");
         }
 
-        // TODO
+        const tmpDaihugouCardList = daihugou.player.cardList.filter(c => daihugou.exchangeCardList.indexOf(c) === -1).concat(daihinmin.exchangeCardList);
+        const tmpHugouCardList = hugou.player.cardList.filter(c => hugou.exchangeCardList.indexOf(c) === -1).concat(hinmin.exchangeCardList);
+        const tmpHinminCardList = hinmin.player.cardList.filter(c => hinmin.exchangeCardList.indexOf(c) === -1).concat(hugou.exchangeCardList);
+        const tmpDaihinminCardList = daihinmin.player.cardList.filter(c => daihinmin.exchangeCardList.indexOf(c) === -1).concat(daihugou.exchangeCardList);
+
+        daihugou.player.cardList = Common.sortCardList(tmpDaihugouCardList);
+        hugou.player.cardList = Common.sortCardList(tmpHugouCardList);
+        hinmin.player.cardList = Common.sortCardList(tmpHinminCardList);
+        daihinmin.player.cardList = Common.sortCardList(tmpDaihinminCardList);
 
         this.#vm.scene = Scene.Game;
 
         log("【カード交換終了】");
+
+        // debug用
+        for (const player of this.#playerList) {
+            log(`%c${player.name}	交換後の手札	${Common.cardListToString(player.cardList)}`, "color: crimson");
+        }
     }
 
     static revolution() {

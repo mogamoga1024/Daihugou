@@ -6,7 +6,22 @@ class Cpu extends Player {
 
     selectExchangeCardList() {
         // TODO
-        return [];
+
+        let selectedCardList = [];
+
+        // とりあえず 弱いの 強いの テキトーに （仮実装）
+        if (this.rank.name === Rank.Hinmin.name || this.rank.name === Rank.Daihinmin.name) {
+            for (let i = 0; i < this.rank.exchangeCardCount; i++) {
+                selectedCardList.unshift(this.cardList[this.cardList.length - 1 - i]);
+            }
+        }
+        else if (this.rank.name === Rank.Hugou.name || this.rank.name === Rank.Daihugou.name) {
+            for (let i = 0; i < this.rank.exchangeCardCount; i++) {
+                selectedCardList.push(this.cardList[i]);
+            }
+        }
+
+        return selectedCardList;
     }
 
     outputHand(battleFieldHand) {

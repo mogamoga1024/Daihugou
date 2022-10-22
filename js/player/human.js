@@ -28,8 +28,6 @@ class Human extends Player {
     }
 
     canOutputHand(battleFieldHand, selectedHand) {
-        // TODO
-
         const bfHandKind = Hand.handKindFrom(battleFieldHand);
         const handKind = Hand.handKindFrom(selectedHand);
 
@@ -77,7 +75,8 @@ class Human extends Player {
 
     selectExchangeCardListFromUI() {
         if (this.resolveSelectExchangeCardList !== null) {
-            this.resolveSelectExchangeCardList([]); // TODO 仮
+            const selectedCardList = this.cardList.filter(c => c.isSelected);
+            this.resolveSelectExchangeCardList(selectedCardList);
             this.resolveSelectExchangeCardList = null;
         }
     }

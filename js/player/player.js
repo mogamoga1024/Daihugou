@@ -12,6 +12,7 @@ class Player {
     }
 
     selectExchangeCardList() {
+        throw new Error("継承先で実装すること");
         return [];
     };
 
