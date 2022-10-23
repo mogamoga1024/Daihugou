@@ -64,9 +64,13 @@ class Cpu extends Player {
         if (singleHandList.length > 0) {
             return singleHandList[0][0];
         }
-        // singleが存在しない
-        else {
-            // todo
+        // multiが存在する
+        else if (multiHandList.length > 0) {
+            return multiHandList[0][0];
+        }
+        // stairsが存在する
+        else if (stairsHandList.length > 0) {
+            return stairsHandList[0][0];
         }
 
         throw new Error("引数のcardListが不正");
