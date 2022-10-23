@@ -64,12 +64,22 @@ class Cpu extends Player {
         if (singleHandList.length > 0) {
             return singleHandList[0][0];
         }
+
+        if (Hand.handKindFrom(weakestHand) === Hand.Single) {
+            if (multiHandList.filter(h => h.length > 2).length > 0) {
+                return weakestHand[0];
+            }
+            if (stairsHandList.filter(h => h.length > 3).length > 0) {
+                return weakestHand[0];
+            }
+        }
+
         // multiが存在する
-        else if (multiHandList.length > 0) {
+        if (multiHandList.length > 0) {
             return multiHandList[0][0];
         }
         // stairsが存在する
-        else if (stairsHandList.length > 0) {
+        if (stairsHandList.length > 0) {
             return stairsHandList[0][0];
         }
 
