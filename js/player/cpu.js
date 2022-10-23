@@ -28,19 +28,20 @@ class Cpu extends Player {
     }
 
     selectExchangeUnusedCard(cardList) {
-        const {singleHandList, multiHandList, stairsHandList} = this._cardDivision(cardList, false);
+        let {singleHandList, multiHandList, stairsHandList} = this._cardDivision(cardList, false);
 
         let weakestHand = [];
         let strongestHand = [];
-        const strongestCardPower = CardFactory.getStrongestCardPower();
-        for (const handList of [singleHandList, multiHandList, stairsHandList]) {
-            if (handList.length > 0) {
-                if (weakestHand.length === 0 || Hand.power(weakestHand) > Hand.power(handList[0])) {
-                    weakestHand = handList[0];
-                }
-                if (Hand.power(handList.last()) === strongestCardPower) {
-                    strongestHand = handList.last();
-                }
+        const handListList = [singleHandList, multiHandList, stairsHandList];
+        for (const handList of handListList) {
+            if (handList.length === 0) {
+                continue;
+            }
+            if (weakestHand.length === 0 || Hand.power(weakestHand) > Hand.power(handList[0])) {
+                weakestHand = handList[0];
+            }
+            if (strongestHand.length === 0 || Hand.power(strongestHand) < Hand.power(handList.last())) {
+                strongestHand = handList.last();
             }
         }
         
@@ -49,35 +50,19 @@ class Cpu extends Player {
             return weakestHand[0];
         }
 
+        // 最強と最弱を取り除く
+        for (let i = 0; i < handListList.length; i++) {
+            const handList = handListList[i];
+            if (handList.length === 0) {
+                continue;
+            }
+            handListList[i] = handList.filter(h => h !== weakestHand).filter(h => h !== strongestHand);
+        }
+        [singleHandList, multiHandList, stairsHandList] = handListList;
+
         // singleが存在する
         if (singleHandList.length > 0) {
-            // 最弱がsingle
-            if (weakestHand === singleHandList[0]) {
-                // singleが1組より多い
-                if (singleHandList.length > 1) {
-                    return singleHandList[1][0];
-                }
-                // singleが1組のみ
-                else {
-                    // todo
-                }
-            }
-            // 最弱がmulti
-            else if (weakestHand === multiHandList[0]) {
-                const card = singleHandList[0][0];
-                // カードが最強
-                if (card.power === strongestCardPower) {
-                    return this.selectExchangeUnusedCard(cardList.filter(c => c !== card));
-                }
-                // カードが最強でない
-                else {
-                    return card;
-                }
-            }
-            // 最弱がstairs
-            else if (weakestHand === stairsHandList[0]) {
-                // todo
-            }
+            return singleHandList[0][0];
         }
         // singleが存在しない
         else {
