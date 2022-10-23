@@ -65,13 +65,40 @@ class Cpu extends Player {
             return singleHandList[0][0];
         }
 
-        if (Hand.handKindFrom(weakestHand) === Hand.Single) {
-            if (multiHandList.filter(h => h.length > 2).length > 0) {
+        const weakestHandKind = Hand.handKindFrom(weakestHand);
+        const strongestHandKind = Hand.handKindFrom(strongestHand);
+
+        if (weakestHandKind === Hand.Single) {
+            if (multiHandList.length > 0) {
                 return weakestHand[0];
             }
             if (stairsHandList.filter(h => h.length > 3).length > 0) {
                 return weakestHand[0];
             }
+        }
+
+        if (multiHandList.length === 0 && weakestHandKind === Hand.Multi) {
+            multiHandList.push(weakestHand);
+        }
+        if (multiHandList.length === 0 && strongestHandKind === Hand.Multi) {
+            multiHandList.push(strongestHand);
+        }
+        if (stairsHandList.length === 0 && weakestHandKind === Hand.Stairs) {
+            stairsHandList.push(weakestHand);
+        }
+        if (stairsHandList.length === 0 && strongestHandKind === Hand.Stairs) {
+            stairsHandList.push(strongestHand);
+        }
+
+        // 4枚以上構成のstairsが存在する
+        const tmpStairsHandList = stairsHandList.filter(h => h.length > 3);
+        if (tmpStairsHandList.length > 0) {
+            return tmpStairsHandList[0][0];
+        }
+        // 3枚以上構成のmultiが存在する
+        const tmpMultiHandList = multiHandList.filter(h => h.length > 2);
+        if (tmpMultiHandList.length > 0) {
+            return tmpMultiHandList[0][0];
         }
 
         // multiが存在する

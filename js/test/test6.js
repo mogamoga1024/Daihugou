@@ -54,7 +54,7 @@
     });
 
     test("交換 multi", function() {
-        cpu.cardList = CardFactory.getCardList("s3, s4, c4, sT, cT, s2");
+        cpu.cardList = CardFactory.getCardList("s3, c3, s4, c4, sT, cT, s2");
         cpu.rank = Rank.Daihugou;
 
         strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "s4, c4");
