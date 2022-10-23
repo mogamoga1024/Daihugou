@@ -31,19 +31,16 @@ class Cpu extends Player {
         const {singleHandList, multiHandList, stairsHandList} = this._cardDivision(cardList, false);
 
         let weakestHand = [];
+        let strongestHand = [];
         const strongestCardPower = CardFactory.getStrongestCardPower();
-        
-        if (singleHandList.length > 0) {
-            weakestHand = singleHandList[0];
-        }
-        if (multiHandList.length > 0) {
-            if (weakestHand.length === 0 || Hand.power(weakestHand) > Hand.power(multiHandList[0])) {
-                weakestHand = multiHandList[0];
-            }
-        }
-        if (stairsHandList.length > 0) {
-            if (weakestHand.length === 0 || Hand.power(weakestHand) > Hand.power(stairsHandList[0])) {
-                weakestHand = stairsHandList[0];
+        for (const handList of [singleHandList, multiHandList, stairsHandList]) {
+            if (handList.length > 0) {
+                if (weakestHand.length === 0 || Hand.power(weakestHand) > Hand.power(handList[0])) {
+                    weakestHand = handList[0];
+                }
+                if (Hand.power(handList.last()) === strongestCardPower) {
+                    strongestHand = handList.last();
+                }
             }
         }
         
