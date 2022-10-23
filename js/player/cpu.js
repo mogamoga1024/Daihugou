@@ -5,14 +5,6 @@ class Cpu extends Player {
     _stairsThinking = null;
 
     selectExchangeCardList() {
-        if (
-            this._singleThinking === null ||
-            this._multiThinking  === null ||
-            this._stairsThinking === null
-        ) {
-            this._cardDivision();
-        }
-
         let selectedCardList = [];
 
         // TODO
@@ -36,6 +28,10 @@ class Cpu extends Player {
     }
 
     selectExchangeUnusedCard(cardList) {
+        const [singleHandList, multiHandList, stairsHandList] = this._cardDivision(false);
+
+
+
         return cardList[0];
     }
 
@@ -218,7 +214,7 @@ class Cpu extends Player {
         return selectedHand;
     }
 
-    _cardDivision() {
+    _cardDivision(shouldCreateThinking = true) {
         // とりあえず multi → stairs → single の順で分割する。
         // 本当は組数が最小になるように分割したいが…
 
@@ -228,15 +224,23 @@ class Cpu extends Player {
         const createStairsThinkingResult = this._createStairsThinking(createMultiThinkingResult.remainingCardList);
         const createSingleThinkingResult = this._createSingleThinking(createStairsThinkingResult.remainingCardList);
 
-        this._singleThinking = createSingleThinkingResult.instance;
-        this._multiThinking = createMultiThinkingResult.instance;
-        this._stairsThinking = createStairsThinkingResult.instance;
+        if (shouldCreateThinking) {
+            this._singleThinking = new SingleThinking(createSingleThinkingResult.handList);
+            this._multiThinking = new MultiThinking(createMultiThinkingResult.handList);
+            this._stairsThinking = new StairsThinking(createStairsThinkingResult.handList);
+        }
+        
+        return {
+            singleHandList: createSingleThinkingResult.handList,
+            multiHandList: createMultiThinkingResult.handList,
+            stairsHandList: createStairsThinkingResult.handList
+        };
     }
 
     _createMultiThinking(cardList) {
         if (cardList.length === 0) {
             return {
-                instance: new MultiThinking([]),
+                handList: [],
                 remainingCardList: cardList
             }
         };
@@ -268,7 +272,7 @@ class Cpu extends Player {
         }
         
         return {
-            instance: new MultiThinking(multiHandList),
+            handList: multiHandList,
             remainingCardList: cardList
         };
     }
@@ -276,7 +280,7 @@ class Cpu extends Player {
     _createStairsThinking(cardList) {
         if (cardList.length === 0) {
             return {
-                instance: new StairsThinking([]),
+                handList: [],
                 remainingCardList: cardList
             };
         }
@@ -308,7 +312,7 @@ class Cpu extends Player {
         }
         
         return {
-            instance: new StairsThinking(stairsHandList),
+            handList: stairsHandList,
             remainingCardList: cardList
         };
     }
@@ -316,7 +320,7 @@ class Cpu extends Player {
     _createSingleThinking(cardList) {
         const singleHandList = cardList.map(c => [c]);
         return {
-            instance: new SingleThinking(singleHandList),
+            handList: singleHandList,
             remainingCardList: []
         };
     }
