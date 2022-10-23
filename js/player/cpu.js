@@ -47,7 +47,7 @@ class Cpu extends Player {
         
         const normalPower = CardFactory.getCard("s7").power;
         if (weakestHand.last().power >= normalPower) {
-            return weakestHand[0];
+            weakestHand = [];
         }
 
         // 最強と最弱を取り除く

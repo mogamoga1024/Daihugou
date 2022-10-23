@@ -32,6 +32,13 @@
         strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "s7, sT");
     });
 
+    test("交換 7より弱いカードがなければ最弱を渡す single優先", function() {
+        cpu.cardList = CardFactory.getCardList("s7, c7, sT, cJ, sQ, sK");
+        cpu.rank = Rank.Daihugou;
+
+        strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "sT, cJ");
+    });
+
     test("交換 single優先", function() {
         cpu.cardList = CardFactory.getCardList("s3, c3, s5, s6, d6, s8, s9, sT, cJ, sQ");
         cpu.rank = Rank.Daihugou;
