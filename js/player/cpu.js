@@ -45,6 +45,11 @@ class Cpu extends Player {
             }
         }
         
+        const normalPower = CardFactory.getCard("s7").power;
+        if (weakestHand.last().power >= normalPower) {
+            return weakestHand[0];
+        }
+
         if (singleHandList.length > 0) {
             if (weakestHand === singleHandList[0]) {
                 if (singleHandList.length > 1) {
