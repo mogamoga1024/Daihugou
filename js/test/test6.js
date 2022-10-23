@@ -67,29 +67,43 @@
         strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "c4, c5");
     });
 
-    test("交換 stairs 変則", function() {
-        cpu.cardList = CardFactory.getCardList("s3, c4, c5, c6, s9, sT, sJ, sQ, sK");
+    test("交換 変則 stairs崩し", function() {
+        cpu.cardList = CardFactory.getCardList("s3,  d4, h4,  s9, sT, sJ, sQ");
         cpu.rank = Rank.Daihugou;
 
-        strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "s9, sT");
+        strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "s3, s9");
+    });
+
+    test("交換 変則 multi崩し", function() {
+        cpu.cardList = CardFactory.getCardList("s3,  c4, d4, h4,  s9, sT, sJ");
+        cpu.rank = Rank.Daihugou;
+
+        strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "s3, c4");
+    });
+
+    test("交換 multi 変則", function() {
+        cpu.cardList = CardFactory.getCardList("s3,  c4, d4, h4,  sT, cT, dT");
+        cpu.rank = Rank.Daihugou;
+
+        strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "s3, c4");
     });
 
     test("交換 stairs 変則", function() {
-        cpu.cardList = CardFactory.getCardList("s3, s4, s5, c6, s7, s8, s9, cT, dT, c2");
+        cpu.cardList = CardFactory.getCardList("s3,  c4, c5, c6,  s9, sT, sJ, sQ, sK");
         cpu.rank = Rank.Daihugou;
 
-        strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "s3, cT");
+        strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "s3, s9");
     });
 
     test("交換 stairs 変則", function() {
-        cpu.cardList = CardFactory.getCardList("s3, s4, s5, c6, s7, s8, s9, cT, dT");
+        cpu.cardList = CardFactory.getCardList("s3, s4, s5,  c6, s7, s8, s9,  cT, dT,  c2");
         cpu.rank = Rank.Daihugou;
 
-        strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "s3, s4");
+        strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "c6, cT");
     });
 
     test("交換 stairs 変則", function() {
-        cpu.cardList = CardFactory.getCardList("s3, s4, s5, c6, s7, s8, s9");
+        cpu.cardList = CardFactory.getCardList("s3, s4, s5, c6, s7, s8, s9,  cT, dT");
         cpu.rank = Rank.Daihugou;
 
         strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "s3, s4");
