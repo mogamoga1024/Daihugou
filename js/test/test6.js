@@ -60,7 +60,14 @@
         strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "s4, c4");
     });
 
-    test("交換 stairs", function() {
+    test("交換 stairs 富豪", function() {
+        cpu.cardList = CardFactory.getCardList("s3, c4, c5, c6, s7, s8, s9");
+        cpu.rank = Rank.Hugou;
+
+        strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "s3");
+    });
+
+    test("交換 stairs 大富豪", function() {
         cpu.cardList = CardFactory.getCardList("s3, c4, c5, c6, s7, s8, s9");
         cpu.rank = Rank.Daihugou;
 
@@ -92,7 +99,7 @@
         cpu.cardList = CardFactory.getCardList("s3,  c4, c5, c6,  s9, sT, sJ, sQ, sK");
         cpu.rank = Rank.Daihugou;
 
-        strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "s3, s9");
+        strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "s9, sT");
     });
 
     test("交換 stairs 変則", function() {

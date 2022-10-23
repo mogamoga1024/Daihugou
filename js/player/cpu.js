@@ -18,16 +18,16 @@ class Cpu extends Player {
             let unusedCard = null;
             let tmpCardList = this.cardList;
             for (let i = 0; i < this.rank.exchangeCardCount; i++) {
-                unusedCard = this.selectExchangeUnusedCard(tmpCardList);
+                unusedCard = this.selectExchangeUnusedCard(tmpCardList, this.rank.exchangeCardCount);
                 tmpCardList = tmpCardList.filter(c => c !== unusedCard);
                 selectedCardList.push(unusedCard);
             }
         }
 
-        return selectedCardList;
+        return Common.sortCardList(selectedCardList);
     }
 
-    selectExchangeUnusedCard(cardList) {
+    selectExchangeUnusedCard(cardList, exchangeCardCount) {
         let {singleHandList, multiHandList, stairsHandList} = this._cardDivision(cardList, false);
 
         let weakestHand = [];
@@ -69,10 +69,10 @@ class Cpu extends Player {
         const strongestHandKind = Hand.handKindFrom(strongestHand);
 
         if (weakestHandKind === Hand.Single) {
-            if (multiHandList.length > 0) {
+            if (stairsHandList.filter(h => h.length === 3).length > 0 && exchangeCardCount === 1) {
                 return weakestHand[0];
             }
-            if (stairsHandList.filter(h => h.length > 3).length > 0) {
+            if (multiHandList.length > 0) {
                 return weakestHand[0];
             }
         }
