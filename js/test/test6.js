@@ -11,18 +11,18 @@
     });
 
     test("交換 大貧民", function() {
-        cpu.cardList = CardFactory.getCardList("s3, s4, s5, s6");
+        cpu.cardList = CardFactory.getCardList("s3, s5, s7, s9");
         cpu.rank = Rank.Daihinmin;
 
-        strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "s5, s6");
+        strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "s7, s9");
     });
 
 
     test("交換 基本、最弱は渡さない", function() {
-        cpu.cardList = CardFactory.getCardList("s3, s4, s5, s6");
+        cpu.cardList = CardFactory.getCardList("s3, s5, s7, s9");
         cpu.rank = Rank.Daihugou;
 
-        strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "s4, s5");
+        strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "s5, s7");
     });
 
     test("交換 7より弱いカードがなければ最弱を渡す", function() {

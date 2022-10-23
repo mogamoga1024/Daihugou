@@ -28,11 +28,41 @@ class Cpu extends Player {
     }
 
     selectExchangeUnusedCard(cardList) {
-        const [singleHandList, multiHandList, stairsHandList] = this._cardDivision(false);
+        const {singleHandList, multiHandList, stairsHandList} = this._cardDivision(cardList, false);
 
+        let weakestHand = [];
+        if (singleHandList.length > 0) {
+            weakestHand = singleHandList[0];
+        }
+        if (multiHandList.length > 0) {
+            if (weakestHand.length === 0 || Hand.power(weakestHand) > Hand.power(multiHandList[0])) {
+                weakestHand = multiHandList[0];
+            }
+        }
+        if (stairsHandList.length > 0) {
+            if (weakestHand.length === 0 || Hand.power(weakestHand) > Hand.power(stairsHandList[0])) {
+                weakestHand = stairsHandList[0];
+            }
+        }
+        
+        if (singleHandList.length > 0) {
+            if (weakestHand === singleHandList[0]) {
+                if (singleHandList.length > 1) {
+                    return singleHandList[1][0];
+                }
+                else {
+                    // todo
+                }
+            }
+            else {
+                // todo
+            }
+        }
+        else {
+            // todo
+        }
 
-
-        return cardList[0];
+        throw new Error("引数のcardListが不正");
     }
 
     outputHand(battleFieldHand) {
@@ -214,13 +244,13 @@ class Cpu extends Player {
         return selectedHand;
     }
 
-    _cardDivision(shouldCreateThinking = true) {
+    _cardDivision(cardList = this.cardList, shouldCreateThinking = true) {
         // とりあえず multi → stairs → single の順で分割する。
         // 本当は組数が最小になるように分割したいが…
 
         // TODO 一旦、Jokerは考慮しない
 
-        const createMultiThinkingResult = this._createMultiThinking(this.cardList);
+        const createMultiThinkingResult = this._createMultiThinking(cardList);
         const createStairsThinkingResult = this._createStairsThinking(createMultiThinkingResult.remainingCardList);
         const createSingleThinkingResult = this._createSingleThinking(createStairsThinkingResult.remainingCardList);
 
