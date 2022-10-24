@@ -338,4 +338,12 @@
 
         strictEqual(Common.cardListToString(cpu.outputHand(cJQK)), "sQ, sK, s1");
     });
+
+    test("デバグ", function() {
+        cpu.cardList = CardFactory.getCardList("d3,  c4, d4, h4,  c1");
+        
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "c4, d4, h4");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "c1");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "d3");
+    });
 })();
