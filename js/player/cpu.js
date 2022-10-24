@@ -50,18 +50,18 @@ class Cpu extends Player {
             weakestHand = [];
         }
 
-        // 最強と最弱を取り除く
+        // 最弱を取り除く
         for (let i = 0; i < handListList.length; i++) {
             const handList = handListList[i];
             if (handList.length === 0) {
                 continue;
             }
-            handListList[i] = handList.filter(h => h !== weakestHand).filter(h => h !== strongestHand);
+            handListList[i] = handList.filter(h => h !== weakestHand);
         }
         [singleHandList, multiHandList, stairsHandList] = handListList;
 
-        // singleが存在する
-        if (singleHandList.length > 0) {
+        // 最強以外のsingleが存在する
+        if (singleHandList.filter(h => h !== strongestHand).length > 0) {
             return singleHandList[0][0];
         }
 
@@ -76,17 +76,11 @@ class Cpu extends Player {
             }
         }
 
-        if (multiHandList.length === 0 && weakestHandKind === Hand.Multi) {
-            multiHandList.push(weakestHand);
+        if (weakestHandKind === Hand.Multi) {
+            multiHandList.unshift(weakestHand);
         }
-        if (multiHandList.length === 0 && strongestHandKind === Hand.Multi) {
-            multiHandList.push(strongestHand);
-        }
-        if (stairsHandList.length === 0 && weakestHandKind === Hand.Stairs) {
-            stairsHandList.push(weakestHand);
-        }
-        if (stairsHandList.length === 0 && strongestHandKind === Hand.Stairs) {
-            stairsHandList.push(strongestHand);
+        if (weakestHandKind === Hand.Stairs) {
+            stairsHandList.unshift(weakestHand);
         }
 
         // 4枚以上構成のstairsが存在する
@@ -100,8 +94,8 @@ class Cpu extends Player {
             return tmpMultiHandList[0][0];
         }
 
-        // multiが存在する
-        if (multiHandList.length > 0) {
+        // multiが存在する かつ 最強がmultiでない
+        if (multiHandList.length > 0 && strongestHandKind !== Hand.Multi) {
             return multiHandList[0][0];
         }
         // stairsが存在する

@@ -50,14 +50,15 @@
         cpu.cardList = CardFactory.getCardList("s3, c3, s5, s6, d6, s8, s9, sT, cJ");
         cpu.rank = Rank.Daihugou;
 
-        strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "s5, s6");
+        strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "s3, s5");
     });
 
     test("交換 multi", function() {
         cpu.cardList = CardFactory.getCardList("s3, c3, s4, c4, sT, cT, s2");
         cpu.rank = Rank.Daihugou;
 
-        strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "s4, c4");
+        // MEMO: s4, c4のほうがいいのかな？
+        strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "s3, c3");
     });
 
     test("交換 stairs 富豪", function() {
@@ -103,14 +104,21 @@
     });
 
     test("交換 stairs 変則", function() {
-        cpu.cardList = CardFactory.getCardList("s3, s4, s5,  c6, s7, s8, s9,  cT, dT,  c2");
+        cpu.cardList = CardFactory.getCardList("s3, s4, s5,  c6,  s7, s8, s9,  cT, dT,  c2");
         cpu.rank = Rank.Daihugou;
 
         strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "c6, cT");
     });
 
-    test("交換 stairs 変則", function() {
-        cpu.cardList = CardFactory.getCardList("s3, s4, s5, c6, s7, s8, s9,  cT, dT");
+    test("交換 stairs 変則 富豪", function() {
+        cpu.cardList = CardFactory.getCardList("s3, s4, s5,  c6,  s7, s8, s9,  cT, dT");
+        cpu.rank = Rank.Hugou;
+
+        strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "c6");
+    });
+
+    test("交換 stairs 変則 大富豪", function() {
+        cpu.cardList = CardFactory.getCardList("s3, s4, s5,  c6,  s7, s8, s9,  cT, dT");
         cpu.rank = Rank.Daihugou;
 
         strictEqual(Common.cardListToString(cpu.selectExchangeCardList()), "s3, s4");
