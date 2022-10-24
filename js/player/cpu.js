@@ -7,8 +7,6 @@ class Cpu extends Player {
     selectExchangeCardList() {
         let selectedCardList = [];
 
-        // TODO
-        // とりあえず 弱いの 強いの テキトーに （仮実装）
         if (this.rank.name === Rank.Hinmin.name || this.rank.name === Rank.Daihinmin.name) {
             for (let i = 0; i < this.rank.exchangeCardCount; i++) {
                 selectedCardList.unshift(this.cardList[this.cardList.length - 1 - i]);
@@ -19,6 +17,10 @@ class Cpu extends Player {
             let tmpCardList = this.cardList;
             for (let i = 0; i < this.rank.exchangeCardCount; i++) {
                 unusedCard = this.selectExchangeUnusedCard(tmpCardList, this.rank.exchangeCardCount);
+                if (Array.isArray(unusedCard)) {
+                    selectedCardList = unusedCard;
+                    break;
+                }
                 tmpCardList = tmpCardList.filter(c => c !== unusedCard);
                 selectedCardList.push(unusedCard);
             }
@@ -60,13 +62,25 @@ class Cpu extends Player {
         }
         [singleHandList, multiHandList, stairsHandList] = handListList;
 
-        // 最強以外のsingleが存在する
-        if (singleHandList.filter(h => h !== strongestHand).length > 0) {
-            return singleHandList[0][0];
-        }
-
         const weakestHandKind = Hand.handKindFrom(weakestHand);
         const strongestHandKind = Hand.handKindFrom(strongestHand);
+
+        // 最強以外のsingleが存在する
+        const tmpSingleHandList = singleHandList.filter(h => h !== strongestHand);
+        if (tmpSingleHandList.length > 0) {
+            if (
+                weakestHandKind === Hand.Stairs &&
+                strongestHandKind !== Hand.Single &&
+                exchangeCardCount >= 2 &&
+                tmpSingleHandList.length === 1
+            ) {
+                // 最弱のstairsを分解して返す
+                return weakestHand.slice(0, exchangeCardCount);
+            }
+            else {
+                return singleHandList[0][0];
+            }
+        }
 
         if (weakestHandKind === Hand.Single) {
             if (stairsHandList.filter(h => h.length > 3).length === 0) {
