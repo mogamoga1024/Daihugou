@@ -69,11 +69,10 @@ class Cpu extends Player {
         const strongestHandKind = Hand.handKindFrom(strongestHand);
 
         if (weakestHandKind === Hand.Single) {
-            if (stairsHandList.filter(h => h.length === 3).length > 0 && exchangeCardCount === 1) {
-                return weakestHand[0];
-            }
-            if (multiHandList.length > 0) {
-                return weakestHand[0];
+            if (stairsHandList.filter(h => h.length > 3).length === 0) {
+                if (exchangeCardCount === 1 || multiHandList.length > 0) {
+                    return weakestHand[0];
+                }
             }
         }
 
