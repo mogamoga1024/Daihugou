@@ -1,6 +1,6 @@
 
 class GameManager {
-    static #gameCount = 10;
+    static #gameCount = 0;
     static #playerList = []; // index:0の要素はHumanクラスであること
     static #vm = null;
     static #latestOutputCardPlayer = null;
@@ -173,10 +173,10 @@ class GameManager {
         // this.#playerList[2].rank = Rank.Hugou;
         // this.#playerList[3].rank = Rank.Daihugou;
         // debug
-        this.#playerList[0].rank = Rank.Daihugou;
-        this.#playerList[1].rank = Rank.Hugou;
-        this.#playerList[2].rank = Rank.Hinmin;
-        this.#playerList[3].rank = Rank.Daihinmin;
+        // this.#playerList[0].rank = Rank.Daihugou;
+        // this.#playerList[1].rank = Rank.Hugou;
+        // this.#playerList[2].rank = Rank.Hinmin;
+        // this.#playerList[3].rank = Rank.Daihinmin;
 
         const human = this.#playerList[0];
         if (human.rank.name === Rank.Hinmin.name || human.rank.name === Rank.Daihinmin.name) {
@@ -211,9 +211,25 @@ class GameManager {
         hinmin.player.cardList = Common.sortCardList(tmpHinminCardList);
         daihinmin.player.cardList = Common.sortCardList(tmpDaihinminCardList);
 
+        let humanReceivedCardList = [];
+        switch (human.rank.name) {
+            case Rank.Daihugou.name:  humanReceivedCardList = daihinmin.exchangeCardList; break;
+            case Rank.Hugou.name:     humanReceivedCardList = hinmin.exchangeCardList;    break;
+            case Rank.Hinmin.name:    humanReceivedCardList = hugou.exchangeCardList;     break;
+            case Rank.Daihinmin.name: humanReceivedCardList = daihugou.exchangeCardList;  break;
+        }
+
         this.#vm.scene = Scene.ExchangeCardListResult;
 
+        human.cardList.forEach(c => {
+            if (humanReceivedCardList.indexOf(c) !== -1) {
+                c.isSelected = true;
+            }
+        });
+
         await human.exhangeCardListResultConfirm();
+
+        human.cardList.forEach(c => c.isSelected = false);
 
         this.#vm.scene = Scene.Game;
 
