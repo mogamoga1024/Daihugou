@@ -88,6 +88,9 @@ module.exports = {
                     return;
                 }
             }
+            else if (this.scene === Scene.ExchangeCardListResult) {
+                return;
+            }
 
             if (card.isSelected) {
                 this.player.cardList.forEach(c => {
@@ -100,6 +103,9 @@ module.exports = {
         },
         async exhangeCardList() {
             this.player.selectExchangeCardListFromUI();
+        },
+        async exhangeCardListResultConfirm() {
+            this.player.exhangeCardListResultConfirmFromUI();
         },
         outputHand() {
             this.player.outputCardListFromUI(this.battleFieldHand);

@@ -1,6 +1,6 @@
 
 class GameManager {
-    static #gameCount = 0;
+    static #gameCount = 10;
     static #playerList = []; // index:0の要素はHumanクラスであること
     static #vm = null;
     static #latestOutputCardPlayer = null;
@@ -173,10 +173,10 @@ class GameManager {
         // this.#playerList[2].rank = Rank.Hugou;
         // this.#playerList[3].rank = Rank.Daihugou;
         // debug
-        // this.#playerList[0].rank = Rank.Daihugou;
-        // this.#playerList[1].rank = Rank.Hugou;
-        // this.#playerList[2].rank = Rank.Hinmin;
-        // this.#playerList[3].rank = Rank.Daihinmin;
+        this.#playerList[0].rank = Rank.Daihugou;
+        this.#playerList[1].rank = Rank.Hugou;
+        this.#playerList[2].rank = Rank.Hinmin;
+        this.#playerList[3].rank = Rank.Daihinmin;
 
         const human = this.#playerList[0];
         if (human.rank.name === Rank.Hinmin.name || human.rank.name === Rank.Daihinmin.name) {
@@ -210,6 +210,10 @@ class GameManager {
         hugou.player.cardList = Common.sortCardList(tmpHugouCardList);
         hinmin.player.cardList = Common.sortCardList(tmpHinminCardList);
         daihinmin.player.cardList = Common.sortCardList(tmpDaihinminCardList);
+
+        this.#vm.scene = Scene.ExchangeCardListResult;
+
+        await human.exhangeCardListResultConfirm();
 
         this.#vm.scene = Scene.Game;
 

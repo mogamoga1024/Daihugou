@@ -1,7 +1,8 @@
 
 class Human extends Player {
-    resolveOutputCardList = null;
     resolveSelectExchangeCardList = null;
+    resolveExhangeCardListResultConfirm = null;
+    resolveOutputCardList = null;
 
     async selectExchangeCardList() {
         const selectedCardList = await new Promise(resolve => {
@@ -13,6 +14,12 @@ class Human extends Player {
         });
 
         return selectedCardList;
+    }
+
+    async exhangeCardListResultConfirm() {
+        await new Promise(resolve => {
+            this.resolveExhangeCardListResultConfirm = resolve;
+        });
     }
 
     async outputHand() {
@@ -47,6 +54,21 @@ class Human extends Player {
         }
     }
 
+    selectExchangeCardListFromUI() {
+        if (this.resolveSelectExchangeCardList !== null) {
+            const selectedCardList = this.cardList.filter(c => c.isSelected);
+            this.resolveSelectExchangeCardList(selectedCardList);
+            this.resolveSelectExchangeCardList = null;
+        }
+    }
+
+    exhangeCardListResultConfirmFromUI() {
+        if (this.resolveExhangeCardListResultConfirm !== null) {
+            this.resolveExhangeCardListResultConfirm();
+            this.resolveExhangeCardListResultConfirm = null;
+        }
+    }
+
     outputCardListFromUI(battleFieldHand) {
         if (this.resolveOutputCardList !== null) {
             const selectedHand = [];
@@ -70,14 +92,6 @@ class Human extends Player {
 
             this.resolveOutputCardList(selectedHand);
             this.resolveOutputCardList = null;
-        }
-    }
-
-    selectExchangeCardListFromUI() {
-        if (this.resolveSelectExchangeCardList !== null) {
-            const selectedCardList = this.cardList.filter(c => c.isSelected);
-            this.resolveSelectExchangeCardList(selectedCardList);
-            this.resolveSelectExchangeCardList = null;
         }
     }
 }
