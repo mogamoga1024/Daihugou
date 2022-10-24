@@ -93,9 +93,9 @@
 
         strictEqual(Common.cardListToString(cpu.outputHand([])), "d9");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "sT, dT");
-        strictEqual(Common.cardListToString(cpu.outputHand([])), "s4, c4");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "h1, hK, hQ, hJ");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "h7, h6, h5");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s4, c4");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s2");
     });
@@ -358,10 +358,20 @@
     });
 
     test("デバグ", function() {
-        cpu.cardList = CardFactory.getCardList("s3,  hJ, hQ, hK, h1,  s2");
+        cpu.cardList = CardFactory.getCardList("s3,  hQ, hK, h1,  s2");
         
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "hQ, hK, h1");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s2");
-        strictEqual(Common.cardListToString(cpu.outputHand([])), "hJ, hQ, hK, h1");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
+    });
+
+    test("デバグ", function() {
+        cpu.cardList = CardFactory.getCardList("s3,  hQ, hK, h1,  s2");
+
+        const cJQK = CardFactory.getCardList("cJ, cQ, cK");
+        
+        strictEqual(Common.cardListToString(cpu.outputHand(cJQK)), "hQ, hK, h1");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s2");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
     });
 })();
