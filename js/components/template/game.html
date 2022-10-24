@@ -2,7 +2,8 @@
     <div id="another-player-container">
         <div class="another-player" v-for="player in anotherPlayerList">
             <div>
-                <span :class="{turn: player.isTurn}">{{player.name}}</span><span class="rank">{{player.isNowPass ? "パス" : player.rank.name}}</span>
+                <span :class="{turn: player.isTurn}">{{player.name}}</span><!--
+                --><span class="rank" :class="{'rank-decided': player.isRankDecided}">{{player.isNowPass ? "パス" : player.rank.name}}</span>
             </div>
             <div>
                 <img class="card-back" src="./assets/card/card_back.png">×{{player.cardList.length}}
@@ -21,7 +22,8 @@
     <div id="player">
         <div>
             <div id="player-info">
-                <span :class="{turn: player.isTurn}">{{player.name}}</span><span class="rank">{{player.isNowPass ? "パス" : player.rank.name}}</span>
+                <span :class="{turn: player.isTurn}">{{player.name}}</span><!--
+                --><span class="rank" :class="{'rank-decided': player.isRankDecided}">{{player.isNowPass ? "パス" : player.rank.name}}</span>
                 <label id="high-speed-checkbox-container">
                     高速化<input type="checkbox" id="high-speed-checkbox" v-model="isHighSpeed">
                 </label>

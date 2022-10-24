@@ -32,6 +32,11 @@
   color: red;
 }
 
+.rank-decided {
+  font-weight: bold;
+  color: blue;
+}
+
 .another-player {
   width: 120px;
   background-color: azure;

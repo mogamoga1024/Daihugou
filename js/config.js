@@ -13,7 +13,7 @@ class RuleConfig {
 }
 
 const EnvConfig = {
-    isHighSpeed: false,
+    isHighSpeed: true,
     normalSpeed: 1000,
     highSpeed: 500
 };
