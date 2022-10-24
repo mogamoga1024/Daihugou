@@ -95,7 +95,7 @@ class GameManager {
         ) {
             this.#vm.battleFieldHand = [];
             this.#playerList.forEach(p => p.isNowPass = false);
-            await Common.sleep();
+            await Common.sleep(this.#vm.shouldSkip ? EnvConfig.superHighSpeed : EnvConfig.currentSpeed);
         }
 
         player.isNowPass = false;
@@ -141,7 +141,7 @@ class GameManager {
         }
         else {
             // CPUの名前を赤色にするため、wait後にターン終了
-            await Common.sleep();
+            await Common.sleep(this.#vm.shouldSkip ? EnvConfig.superHighSpeed : EnvConfig.currentSpeed);
             player.isTurn = false;
         }
         

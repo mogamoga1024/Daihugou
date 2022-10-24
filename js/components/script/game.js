@@ -12,8 +12,9 @@ module.exports = {
                 new Cpu("CPU3"),
             ],
             battleFieldHand: [],
-            isHighSpeed: EnvConfig.isHighSpeed,
+            isHighSpeed: EnvConfig.currentSpeed === EnvConfig.highSpeed,
             isRevolution: false,
+            shouldSkip: false,
         }
     },
     created() {
@@ -31,7 +32,13 @@ module.exports = {
     },
     watch: {
         isHighSpeed(val) {
-            EnvConfig.isHighSpeed = val;
+            this.isHighSpeed = val;
+            if (val) {
+                EnvConfig.currentSpeed = EnvConfig.highSpeed;
+            }
+            else {
+                EnvConfig.currentSpeed = EnvConfig.normalSpeed;
+            }
         }
     },
     computed: {
@@ -116,10 +123,14 @@ module.exports = {
             });
             this.player.outputCardListFromUI(this.battleFieldHand);
         },
+        skip() {
+            this.shouldSkip = true;
+        },
         async goToNextGame() {
             this.scene = Scene.Game;
-            this.isRevolution = false;
             this.battleFieldHand = [];
+            this.isRevolution = false;
+            this.shouldSkip = false;
 
             await GameManager.startGame();
         }

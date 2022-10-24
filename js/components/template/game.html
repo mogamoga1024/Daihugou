@@ -32,10 +32,11 @@
                 <button v-if="scene === Scene.GoToNextGame" @click="goToNextGame">次のゲームへ</button>
                 <button v-else-if="scene === Scene.ExchangeCardList" :disabled="!canExhangeCardList" @click="exhangeCardList">交換する</button>
                 <button v-else-if="scene === Scene.ExchangeCardListResult" @click="exhangeCardListResultConfirm">OK</button>
-                <template v-else-if="scene === Scene.Game">
+                <template v-else-if="scene === Scene.Game && !player.isRankDecided">
                     <button :disabled="!player.isTurn" @click="pass">パス</button>
                     <button :disabled="!canOutputHand" @click="outputHand">カードを出す</button>
                 </template>
+                <button v-else-if="scene === Scene.Game && player.isRankDecided" :disabled="shouldSkip" @click="skip">スキップ</button>
             </div>
         </div>
         <div id="player-card-list-container">

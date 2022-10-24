@@ -17,7 +17,7 @@ class Common {
         });
     }
 
-    static sleep(time = EnvConfig.isHighSpeed ? EnvConfig.highSpeed : EnvConfig.normalSpeed) {
+    static sleep(time = EnvConfig.currentSpeed) {
         return new Promise(resolve => setTimeout(resolve, time));
     }
 
