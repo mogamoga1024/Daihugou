@@ -346,4 +346,22 @@
         strictEqual(Common.cardListToString(cpu.outputHand([])), "c1");
         strictEqual(Common.cardListToString(cpu.outputHand([])), "d3");
     });
+
+    test("デバグ", function() {
+        cpu.cardList = CardFactory.getCardList("d3,  c4, d4, h4,  c1");
+
+        const s3c3h3 = CardFactory.getCardList("s3, c3, h3");
+        
+        strictEqual(Common.cardListToString(cpu.outputHand(s3c3h3)), "c4, d4, h4");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "c1");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "d3");
+    });
+
+    test("デバグ", function() {
+        cpu.cardList = CardFactory.getCardList("s3,  hJ, hQ, hK, h1,  s2");
+        
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s2");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "hJ, hQ, hK, h1");
+        strictEqual(Common.cardListToString(cpu.outputHand([])), "s3");
+    });
 })();

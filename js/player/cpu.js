@@ -209,7 +209,11 @@ class Cpu extends Player {
             ) {
                 for (const thinking of thinkingList) {
                     // 最後に出す予定の役、最強の役を取り除く
-                    const tmpHandList = thinking.handList.filter(h => h !== maybeLastOutputHand && Hand.power(h) !== strongestCardPower);
+                    const tmpHandList = thinking.handList.filter(h => 
+                        h !== maybeLastOutputHand &&
+                        Hand.power(h) !== strongestCardPower &&
+                        Hand.power(h) !== strongestCardPower - 1
+                    );
                     // 最後に出す役、最強の役以外で最弱の役をだす
                     if (tmpHandList.length > 0) {
                         selectedHand = tmpHandList[0];
